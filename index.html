@@ -3,200 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنصة التعليمية الشاملة | 2026</title>
+    <title>منصة العباقرة الشاملة | رياضيات 3ع - ترم 2</title>
     <style>
-        :root { --main: #2c3e50; --accent: #3498db; --gold: #f39c12; --bg: #f4f7f6; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); margin: 0; direction: rtl; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
-        
-        /* تصميم الكروت */
-        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        :root { --primary: #1a237e; --secondary: #3498db; --success: #27ae60; --danger: #e74c3c; --gold: #c5a059; --dark: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; direction: rtl; }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border-top: 6px solid var(--primary); }
+        .btn { padding: 15px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; width: 100%; margin: 5px 0; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-gold { background: var(--gold); color: white; }
+        .btn-back { background: #607d8b; color: white; width: auto; padding: 8px 20px; font-size: 0.9rem; }
         .hidden { display: none; }
-        
-        /* الأزرار */
-        .btn { padding: 15px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; width: 100%; margin: 10px 0; font-size: 1.1rem; }
-        .btn-main { background: var(--main); color: white; }
-        .btn-accent { background: var(--accent); color: white; }
-        .btn-back { background: #95a5a6; color: white; width: auto; padding: 8px 20px; margin-bottom: 15px; }
-        .btn-test { background: white; border: 2px solid var(--accent); color: var(--accent); }
-        .btn-test:hover { background: var(--accent); color: white; }
-
-        /* منطقة الأسئلة */
-        .option { padding: 15px; border: 2px solid #ddd; border-radius: 10px; margin: 10px 0; cursor: pointer; text-align: right; width: 100%; display: block; background: white; font-size: 1rem; }
-        .correct { background: #d4edda !important; border-color: #28a745 !important; }
-        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
-        
-        /* القوانين والتريكات */
-        .info-box { background: #fffcf0; border-right: 5px solid var(--gold); padding: 15px; margin: 10px 0; line-height: 1.8; }
-        .progress-bar { width: 100%; height: 10px; background: #eee; border-radius: 5px; margin: 15px 0; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
-
-        /* الشهادة */
-        .cert-box { border: 10px double var(--gold); padding: 40px; text-align: center; background: #fff; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .lesson-box { text-align: right; background: #fdfdfd; border-right: 4px solid var(--secondary); padding: 15px; margin: 10px 0; }
+        .law-highlight { color: var(--danger); font-weight: bold; background: #fff5f5; padding: 2px 5px; }
+        .certificate { border: 10px double var(--gold); padding: 30px; background: #fffcf5; }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div id="screen-home" class="card">
-        <h1 style="color:var(--main); text-align:center;">🎓 منصة العباقرة المتكاملة</h1>
-        <p style="text-align:center;">مرحبًا بك في واجهة المراجعة والاختبارات</p>
-        <input type="text" id="userName" placeholder="أدخل اسمك الثلاثي" style="width:100%; padding:15px; border-radius:10px; border:1px solid #ccc; margin:20px 0;">
-        <button class="btn btn-main" onclick="goToMenu()">دخول المنصة</button>
+        <h1 style="color:var(--primary)">🎓 منصة العباقرة الاحترافية</h1>
+        <p>المنهج الكامل للرياضيات - الصف الثالث الإعدادي</p>
+        <input type="text" id="user-name" style="padding:15px; width:80%; border:2px solid #ddd; border-radius:10px; text-align:center;" placeholder="أدخل اسمك الثلاثي">
+        <button class="btn btn-primary" onclick="goTo('screen-main-menu')" style="margin-top:20px;">دخول المنصة</button>
     </div>
 
-    <div id="screen-menu" class="card hidden">
-        <button class="btn btn-back" onclick="showScreen('screen-home')">⬅️ تسجيل خروج</button>
+    <div id="screen-main-menu" class="card hidden">
+        <button class="btn btn-back" onclick="goTo('screen-home')">⬅️ خروج</button>
         <h2>القائمة الرئيسية</h2>
-        <button class="btn btn-accent" onclick="showScreen('screen-tests')">📝 قائمة الاختبارات المتاحة</button>
-        <button class="btn btn-test" onclick="showScreen('screen-laws')">📚 بنك القوانين الشامل</button>
-        <button class="btn btn-test" onclick="showScreen('screen-tricks')">💡 تريكات وحيل الامتحانات</button>
-    </div>
-
-    <div id="screen-tests" class="card hidden">
-        <button class="btn btn-back" onclick="showScreen('screen-menu')">⬅️ عودة</button>
-        <h2>الاختبارات المتوفرة</h2>
-        <p>اختر الاختبار الذي ترغب في أدائه:</p>
-        <button class="btn btn-test" onclick="startTest('free')">🔓 اختبار تجريبي سريع (5 أسئلة)</button>
-        <button class="btn btn-test" onclick="startTest('full')">🏆 الاختبار النهائي الشامل (50 سؤال)</button>
-        <button class="btn btn-test" onclick="alert('سيوفر المدرس الرابط قريباً')">📅 اختبار شهر مارس (قريباً)</button>
-    </div>
-
-    <div id="screen-laws" class="card hidden">
-        <button class="btn btn-back" onclick="showScreen('screen-menu')">⬅️ عودة</button>
-        <h2>📚 بنك القوانين الشامل</h2>
-        <div class="info-box">
-            <h3>📐 قوانين الهندسة</h3>
-            <ul>
-                <li><b>الزاوية المركزية:</b> تساوي قياس القوس المقابل لها.</li>
-                <li><b>الزاوية المحيطية:</b> تساوي نصف قياس المركزية المشتركة معها في القوس.</li>
-                <li><b>الرباعي الدائري:</b> كل زاويتين متقابلتين مجموع قياسهما 180 درجة.</li>
-                <li><b>المماس:</b> يكون عمودياً على نصف القطر المرسوم من نقطة التماس.</li>
-            </ul>
-        </div>
-        <div class="info-box">
-            <h3>📊 قوانين الجبر</h3>
-            <ul>
-                <li><b>القانون العام:</b> س = [-ب ± √(ب² - 4أج)] / 2أ</li>
-                <li><b>المجال:</b> ح - {مجموعة أصفار المقام}.</li>
-                <li><b>الاحتمال:</b> ل(أ ∪ ب) = ل(أ) + ل(ب) - ل(أ ∩ ب).</li>
-            </ul>
+        <div class="grid">
+            <button class="btn btn-primary" onclick="goTo('screen-units')">📖 شرح الدروس والقوانين</button>
+            <button class="btn btn-gold" onclick="goTo('screen-exam-menu')">📝 بنك الاختبارات الشامل</button>
         </div>
     </div>
 
-    <div id="screen-tricks" class="card hidden">
-        <button class="btn btn-back" onclick="showScreen('screen-menu')">⬅️ عودة</button>
-        <h2>💡 تريكات وحيل الامتحانات</h2>
-        <div class="info-box">
-            <p>✅ <b>تريكة 1:</b> أي عدد أس صفر يساوي 1 (ما عدا الصفر).</p>
-            <p>✅ <b>تريكة 2:</b> أصفار الدالة د(س)=س²+9 هي فاي (∅) لأن المربع لا يعطي سالباً في ح.</p>
-            <p>✅ <b>تريكة 3:</b> المستقيمان س=3 وص=5 يتقاطعان في النقطة (3، 5) وهما متعامدان.</p>
-            <p>✅ <b>تريكة 4:</b> المحيطية المرسومة في نصف دائرة تكون قائمة (90 درجة) دائماً.</p>
+    <div id="screen-units" class="card hidden">
+        <button class="btn btn-back" onclick="goTo('screen-main-menu')">⬅️ عودة</button>
+        <h2>اختر الوحدة للشرح</h2>
+        <button class="btn btn-outline" style="border:1px solid var(--primary)" onclick="showUnit('algebra')">📊 وحدة الجبر (المعادلات والدوال)</button>
+        <button class="btn btn-outline" style="border:1px solid var(--primary)" onclick="showUnit('geometry')">📐 وحدة الهندسة (الدائرة)</button>
+        <button class="btn btn-outline" style="border:1px solid var(--primary)" onclick="showUnit('prob')">🎲 وحدة الاحتمالات</button>
+    </div>
+
+    <div id="screen-content" class="card hidden">
+        <button class="btn btn-back" onclick="goTo('screen-units')">⬅️ عودة للوحدات</button>
+        <div id="unit-data" style="text-align: right;"></div>
+    </div>
+
+    <div id="screen-exam-menu" class="card hidden">
+        <button class="btn btn-back" onclick="goTo('screen-main-menu')">⬅️ عودة</button>
+        <h2>اختر نوع الاختبار</h2>
+        <div class="grid">
+            <button class="btn btn-primary" onclick="startTest('month1')">📅 اختبار شهر فبراير</button>
+            <button class="btn btn-primary" onclick="startTest('month2')">📅 اختبار شهر مارس</button>
+            <button class="btn btn-gold" onclick="startTest('final')">🏆 امتحان نهائي شامل</button>
         </div>
     </div>
 
     <div id="screen-quiz" class="card hidden">
-        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
-        <h3 id="q-text"></h3>
-        <div id="options-box"></div>
-        <div id="hint-box" class="info-box hidden" style="border-right-color: #27ae60;"></div>
-        <button id="next-btn" class="btn btn-main hidden" onclick="nextQuestion()">السؤال التالي ⬅️</button>
+        <div id="quiz-header" style="display:flex; justify-content:space-between; font-weight:bold;">
+            <span id="quiz-timer"></span>
+            <span id="quiz-progress"></span>
+        </div>
+        <hr>
+        <h3 id="question-text" style="min-height:80px;"></h3>
+        <div id="options-container"></div>
+        <div id="quiz-feedback" class="hidden" style="padding:10px; margin-top:10px; border-radius:5px;"></div>
+        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">السؤال التالي</button>
     </div>
 
-    <div id="screen-cert" class="card hidden">
-        <div class="cert-box">
-            <h1 style="color:var(--gold);">شهادة إنجاز</h1>
-            <p>يشهد الموقع بأن الطالب/ة:</p>
-            <h2 id="cert-name"></h2>
-            <p>قد اجتاز الاختبار بنجاح بنسبة:</p>
-            <h1 id="cert-score" style="color:var(--accent);"></h1>
-            <p id="cert-date"></p>
+    <div id="screen-result" class="card hidden">
+        <div class="certificate">
+            <h1 style="color:var(--gold)">شهادة إنجاز</h1>
+            <p>نفيد بأن الطالب: <strong id="res-name"></strong></p>
+            <p>قد أكمل بنجاح: <strong id="res-test-type"></strong></p>
+            <h2 style="color:var(--success)">الدرجة النهائية: <span id="res-score"></span></h2>
+            <p id="res-date"></p>
         </div>
-        <button class="btn btn-main" onclick="showScreen('screen-menu')">العودة للقائمة الرئيسية</button>
+        <button class="btn btn-primary" onclick="goTo('screen-main-menu')">العودة للرئيسية</button>
     </div>
 </div>
 
 <script>
-    let allQuestions = [];
-    let currentQuestions = [];
-    let currentIdx = 0;
+    // بيانات المنهج الكاملة
+    const curriculum = {
+        algebra: {
+            title: "وحدة الجبر: المعادلات والدوال الكسرية",
+            lessons: [
+                { t: "حل معادلتين من الدرجة الأولى", c: "جبرياً: باستخدام التعويض أو الحذف. بيانياً: نقطة تقاطع المستقيمين هي الحل. إذا توازى المستقيمان، مجموعة الحل فاي (∅)." },
+                { t: "القانون العام لدرجة الثانية", c: "س = [-ب ± √(ب² - 4أج)] / 2أ. المميز (ب² - 4أج) يحدد عدد الحلول: موجب (حلان)، صفر (حل وحيد)، سالب (لا يوجد حل في ح)." },
+                { t: "أصفار ومجال الدالة الكسرية", c: "المجال = ح - {أصفار المقام}. أصفار الدالة ن(س) = أصفار البسط - أصفار المقام." }
+            ]
+        },
+        geometry: {
+            title: "وحدة الهندسة: الدائرة",
+            lessons: [
+                { t: "مفاهيم الدائرة", c: "نصف القطر عمودي على المماس عند نقطة التماس. خط المركزين لدائرتين متماستين يمر بنقطة التماس." },
+                { t: "الزوايا والأقواس", c: "المحيطية = ½ المركزية المشتركة معها في القوس. المحيطية المرسومة في نصف دائرة قائمة (90°)." },
+                { t: "الرباعي الدائري", c: "كل زاويتين متقابلتين متكاملتان (180°). الزاوية الخارجة تساوي المقابلة للمجاورة لها." }
+            ]
+        }
+    };
+
+    // بيانات الأسئلة (نماذج عينة شاملة)
+    const exams = {
+        month1: [
+            { q: "مجموعة حل المعادلتين س=3 ، ص=4 هي:", opts: ["{(3,4)}", "{(4,3)}", "{7}", "∅"], ans: 0, hint: "الحل هو الزوج المرتب س أولاً ثم ص." },
+            { q: "المميز يكون سالباً إذا كان عدد الحلول في ح يساوي:", opts: ["1", "2", "صفر", "عدد لا نهائي"], ans: 2, hint: "المميز السالب يعني عدم وجود تقاطع مع محور س." }
+        ],
+        final: [
+            { q: "الزاوية المحيطية المرسومة في نصف دائرة تكون:", opts: ["حادة", "قائمة", "منفرجة", "منعكسة"], ans: 1, hint: "نظرية ثابتة: قياسها دائماً 90 درجة." },
+            { q: "المجال المشترك للكسرين 3/(س-2) ، 5/(س+1) هو ح - :", opts: ["{2}", "{-1}", "{2, -1}", "∅"], ans: 2, hint: "المجال هو ح فرق جميع أصفار المقامات." }
+        ]
+    };
+
+    let currentTest = [];
+    let testIdx = 0;
     let score = 0;
 
-    function showScreen(id) {
+    function goTo(id) {
+        if(id === 'screen-main-menu' && document.getElementById('user-name').value.length < 3) {
+            alert("يرجى إدخال الاسم الثلاثي أولاً"); return;
+        }
         document.querySelectorAll('.container > div').forEach(div => div.classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
     }
 
-    function goToMenu() {
-        if(document.getElementById('userName').value.length < 3) return alert("أدخل اسمك أولاً");
-        showScreen('screen-menu');
-    }
-
-    async function loadQuestions() {
-        try {
-            const res = await fetch('questions.json');
-            allQuestions = await res.json();
-        } catch(e) { console.error("لم يتم العثور على ملف الأسئلة"); }
+    function showUnit(unitKey) {
+        const unit = curriculum[unitKey] || {title: "قريباً", lessons: []};
+        let html = `<h2>${unit.title}</h2>`;
+        unit.lessons.forEach(l => {
+            html += `<div class="lesson-box"><strong>📌 ${l.t}</strong><p>${l.c}</p></div>`;
+        });
+        document.getElementById('unit-data').innerHTML = html;
+        goTo('screen-content');
     }
 
     function startTest(type) {
-        currentQuestions = (type === 'free') ? allQuestions.slice(0, 5) : allQuestions;
-        currentIdx = 0; score = 0;
-        showScreen('screen-quiz');
-        displayQuestion();
+        currentTest = exams[type] || exams['final'];
+        testIdx = 0; score = 0;
+        document.getElementById('quiz-feedback').classList.add('hidden');
+        goTo('screen-quiz');
+        showQuestion();
     }
 
-    function displayQuestion() {
-        const q = currentQuestions[currentIdx];
-        document.getElementById('q-text').innerText = `س${currentIdx+1}: ${q.q}`;
-        const box = document.getElementById('options-box');
-        box.innerHTML = "";
+    function showQuestion() {
+        const q = currentTest[testIdx];
+        document.getElementById('question-text').innerText = q.q;
+        document.getElementById('quiz-progress').innerText = `${testIdx + 1} / ${currentTest.length}`;
+        const container = document.getElementById('options-container');
+        container.innerHTML = "";
         q.opts.forEach((opt, i) => {
             const b = document.createElement('button');
-            b.className = 'option';
+            b.className = "btn btn-outline";
+            b.style.border = "1px solid #ddd";
             b.innerText = opt;
-            b.onclick = () => checkAnswer(i, b);
-            box.appendChild(b);
+            b.onclick = () => check(i, b);
+            container.appendChild(b);
         });
-        document.getElementById('hint-box').classList.add('hidden');
         document.getElementById('next-btn').classList.add('hidden');
-        document.getElementById('progress-fill').style.width = (currentIdx / currentQuestions.length * 100) + "%";
     }
 
-    function checkAnswer(idx, btn) {
-        const q = currentQuestions[currentIdx];
-        const allBtns = document.querySelectorAll('.option');
-        allBtns.forEach(b => b.style.pointerEvents = "none");
+    function check(idx, btn) {
+        const q = currentTest[testIdx];
+        const feed = document.getElementById('quiz-feedback');
+        feed.classList.remove('hidden');
+        document.querySelectorAll('#options-container button').forEach(b => b.disabled = true);
         
         if(idx === q.ans) {
             score++;
-            btn.classList.add('correct');
+            feed.style.background = "#d4edda"; feed.innerHTML = "✅ صح! " + q.hint;
+            btn.style.background = "var(--success)"; btn.style.color = "white";
         } else {
-            btn.classList.add('wrong');
-            allBtns[q.ans].classList.add('correct');
+            feed.style.background = "#f8d7da"; feed.innerHTML = "❌ خطأ. " + q.hint;
+            btn.style.background = "var(--danger)"; btn.style.color = "white";
         }
-        
-        const hint = document.getElementById('hint-box');
-        hint.innerHTML = "💡 <b>توضيح:</b> " + q.hint;
-        hint.classList.remove('hidden');
         document.getElementById('next-btn').classList.remove('hidden');
     }
 
     function nextQuestion() {
-        currentIdx++;
-        if(currentIdx < currentQuestions.length) displayQuestion();
-        else finishQuiz();
+        testIdx++;
+        if(testIdx < currentTest.length) {
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            showQuestion();
+        } else {
+            showResult();
+        }
     }
 
-    function finishQuiz() {
-        showScreen('screen-cert');
-        document.getElementById('cert-name').innerText = document.getElementById('userName').value;
-        document.getElementById('cert-score').innerText = Math.round((score/currentQuestions.length)*100) + "%";
-        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('ar-EG');
+    function showResult() {
+        goTo('screen-result');
+        document.getElementById('res-name').innerText = document.getElementById('user-name').value;
+        document.getElementById('res-score').innerText = `${score} من ${currentTest.length}`;
+        document.getElementById('res-date').innerText = new Date().toLocaleDateString('ar-EG');
     }
-
-    window.onload = loadQuestions;
 </script>
 </body>
 </html>

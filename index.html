@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العباقرة | النظام الديناميكي</title>
+    <title>منصة العباقرة | المراجعة النهائية الشاملة</title>
     <style>
         :root { --primary: #1a237e; --secondary: #3498db; --success: #27ae60; --danger: #e74c3c; --gold: #c5a059; --dark: #2c3e50; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f7f6; margin: 0; direction: rtl; color: #333; }
@@ -18,7 +18,8 @@
         .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-height: 85%; background: white; z-index: 1000; padding: 25px; border-radius: 20px; box-shadow: 0 0 100px rgba(0,0,0,0.5); overflow-y: auto; text-align: right; }
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; }
         .certificate { border: 15px double var(--gold); background: #fffcf5; padding: 30px; position: relative; }
-        #feedback { margin-top: 15px; padding: 15px; border-radius: 10px; text-align: right; }
+        .law-item { background: #f8f9fa; padding: 10px; border-right: 4px solid var(--gold); margin-bottom: 10px; text-align: right; }
+        #feedback { margin-top: 15px; padding: 15px; border-radius: 10px; text-align: right; font-weight: bold; }
         @media (max-width: 600px) { .grid-menu { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -26,47 +27,63 @@
 
 <div class="container">
     <div id="screen-start" class="card">
-        <h1>🎓 منصة العباقرة الرقمية</h1>
-        <p>مرحباً بك في نظام الاختبارات الذكي</p>
-        <input type="text" id="student-name" style="width:90%; padding:15px; border-radius:10px; border:2px solid #ddd; text-align:center;" placeholder="أدخل اسمك الثلاثي">
+        <h1 style="color:var(--primary)">🎓 منصة العباقرة الرقمية</h1>
+        <p>المراجعة النهائية الشاملة 2026</p>
+        <input type="text" id="student-name" style="width:90%; padding:15px; border-radius:10px; border:2px solid #ddd; text-align:center; font-size:1.1rem;" placeholder="أدخل اسمك الثلاثي">
         <button class="btn btn-primary" onclick="loadAndStart()">دخول المنصة</button>
-        <p id="load-status" style="color: var(--danger); font-size: 0.8rem;"></p>
+        <p id="load-status" style="color: var(--danger); font-size: 0.9rem; margin-top:10px;"></p>
     </div>
 
     <div id="screen-menu" class="card hidden">
-        <h2>القائمة الرئيسية</h2>
+        <h2 style="color:var(--dark)">لوحة التحكم الرئيسية</h2>
         <div class="grid-menu">
-            <button class="btn btn-primary" onclick="startQuiz(true)">🔓 تجربة مجانية</button>
-            <button class="btn btn-gold" onclick="startQuiz(false)">🏆 الاختبار الكامل</button>
-            <button class="btn btn-outline" onclick="showModal('laws-modal')">📜 القوانين</button>
+            <button class="btn btn-primary" onclick="startQuiz(true)">🔓 تجربة مجانية (5 أسئلة)</button>
+            <button class="btn btn-gold" onclick="startQuiz(false)">🏆 الاختبار الشامل (50 سؤال)</button>
+            <button class="btn btn-outline" onclick="showModal('laws-modal')">📜 بنك القوانين</button>
+            <button class="btn btn-outline" onclick="showModal('tricks-modal')">💡 تريكات الامتحان</button>
         </div>
     </div>
 
     <div id="screen-quiz" class="card hidden">
         <div id="quiz-area">
-            <h3 id="q-text"></h3>
+            <h3 id="q-text" style="line-height:1.6;"></h3>
             <div id="options-area"></div>
         </div>
         <div id="feedback" style="display:none;"></div>
-        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">السؤال التالي</button>
+        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">السؤال التالي ⬅️</button>
     </div>
 
     <div id="screen-result" class="card hidden">
         <div class="certificate">
-            <h2 style="color:var(--gold)">شهادة إنجاز</h2>
-            <p>الطالب: <strong id="cert-name"></strong></p>
-            <p>النتيجة: <strong id="cert-score"></strong></p>
-            <p id="cert-date"></p>
+            <h1 style="color:var(--gold)">شهادة تفوق وإنجاز</h1>
+            <p>نقر نحن إدارة منصة العباقرة بأن الطالب/ة:</p>
+            <h2 id="cert-name" style="color:var(--primary)"></h2>
+            <p>قد اجتاز اختبار الرياضيات الشامل بنجاح بمعدل:</p>
+            <h1 id="cert-score" style="color:var(--success); font-size:3rem; margin:10px 0;"></h1>
+            <p id="cert-date" style="color:#666;"></p>
         </div>
         <button class="btn btn-primary" onclick="location.reload()">العودة للرئيسية</button>
     </div>
 </div>
 
 <div id="overlay" class="overlay" onclick="hideModals()"></div>
+
 <div id="laws-modal" class="modal">
-    <h2>📜 القوانين</h2>
-    <p>سيتم عرض القوانين هنا...</p>
+    <h2 style="color:var(--primary); border-bottom: 2px solid var(--gold); padding-bottom:10px;">📜 أهم قوانين المنهج</h2>
+    <div class="law-item"><b>الجبر:</b> ل(أ ∪ ب) = ل(أ) + ل(ب) - ل(أ ∩ ب)</div>
+    <div class="law-item"><b>القانون العام:</b> س = [-ب ± √(ب² - 4أج)] / 2أ</div>
+    <div class="law-item"><b>الهندسة:</b> مساحة الدائرة = π نق² | محيط الدائرة = 2 π نق</div>
+    <div class="law-item"><b>الرباعي الدائري:</b> كل زاويتين متقابلتين متكاملتان (180 درجة).</div>
     <button class="btn btn-primary" onclick="hideModals()">إغلاق</button>
+</div>
+
+<div id="tricks-modal" class="modal">
+    <h2 style="color:var(--danger); border-bottom: 2px solid var(--gold); padding-bottom:10px;">💡 تريكات لا يخرج عنها الامتحان</h2>
+    <div class="law-item">⚠️ <b>أصفار الدالة:</b> إذا كانت د(س)=س²+9، فالأصفار هي فاي (∅).</div>
+    <div class="law-item">⚠️ <b>المماس:</b> دائماً يكون عمودياً على نصف القطر عند نقطة التماس.</div>
+    <div class="law-item">⚠️ <b>المحيطية والمركزية:</b> المحيطية نصف المركزية إذا اشتركتا في نفس القوس.</div>
+    <div class="law-item">⚠️ <b>المجال:</b> هو ح - {أصفار المقام}، انتبه دائماً لفرق المجموعة.</div>
+    <button class="btn btn-primary" onclick="hideModals()">فهمت</button>
 </div>
 
 <script>
@@ -75,21 +92,23 @@
     let currentIdx = 0;
     let score = 0;
 
-    // الدالة المسؤولة عن جلب الأسئلة من الملف الخارجي دون لمس الكود
     async function loadAndStart() {
+        const name = document.getElementById('student-name').value;
         const status = document.getElementById('load-status');
+        
+        if(name.length < 3) {
+            alert("من فضلك أدخل اسمك الثلاثي أولاً");
+            return;
+        }
+
         try {
+            status.innerText = "جاري تحميل بنك الأسئلة... ⏳";
             const response = await fetch('questions.json');
-            if (!response.ok) throw new Error('ملف الأسئلة غير موجود');
+            if (!response.ok) throw new Error();
             allQuestions = await response.json();
-            
-            const name = document.getElementById('student-name').value;
-            if(name.length < 3) return alert("أدخل اسمك أولاً");
-            
             switchScreen('screen-menu');
         } catch (error) {
-            status.innerText = "خطأ: تأكد من رفع ملف questions.json في نفس المجلد على GitHub";
-            console.error(error);
+            status.innerText = "❌ خطأ: ملف questions.json غير موجود أو تالف. تأكد من رفعه بجانب هذا الملف.";
         }
     }
 
@@ -100,47 +119,80 @@
 
     function startQuiz(isFree) {
         currentQuestions = isFree ? allQuestions.slice(0, 5) : allQuestions;
-        currentIdx = 0; score = 0;
+        currentIdx = 0;
+        score = 0;
         switchScreen('screen-quiz');
         showQuestion();
     }
 
     function showQuestion() {
         const q = currentQuestions[currentIdx];
-        document.getElementById('q-text').innerText = q.q;
+        document.getElementById('q-text').innerText = `سؤال (${currentIdx + 1}/${currentQuestions.length}): ${q.q}`;
+        
         const area = document.getElementById('options-area');
         area.innerHTML = "";
+        
         q.opts.forEach((o, i) => {
-            area.innerHTML += `<button class="btn btn-outline" onclick="check(${i})">${o}</button>`;
+            const btn = document.createElement('button');
+            btn.className = "btn btn-outline";
+            btn.innerText = o;
+            btn.onclick = () => check(i, btn);
+            area.appendChild(btn);
         });
+
         document.getElementById('feedback').style.display = "none";
         document.getElementById('next-btn').classList.add('hidden');
     }
 
-    function check(i) {
+    function check(userIdx, btnElement) {
         const q = currentQuestions[currentIdx];
         const f = document.getElementById('feedback');
+        
+        document.querySelectorAll('#options-area .btn').forEach(b => b.disabled = true);
         f.style.display = "block";
-        if(i === q.ans) { score++; f.style.background="#d4edda"; f.innerHTML = "✅ صح: " + q.hint; }
-        else { f.style.background="#f8d7da"; f.innerHTML = "❌ خطأ: " + q.hint; }
+
+        if(userIdx === q.ans) {
+            score++;
+            f.style.background = "#d4edda";
+            f.style.color = "#155724";
+            f.innerHTML = "✅ إجابة صحيحة! " + (q.hint || "");
+            btnElement.style.background = "var(--success)";
+            btnElement.style.color = "white";
+        } else {
+            f.style.background = "#f8d7da";
+            f.style.color = "#721c24";
+            f.innerHTML = "❌ إجابة خاطئة. " + (q.hint || "");
+            btnElement.style.background = "var(--danger)";
+            btnElement.style.color = "white";
+        }
         document.getElementById('next-btn').classList.remove('hidden');
     }
 
     function nextQuestion() {
         currentIdx++;
-        if(currentIdx < currentQuestions.length) showQuestion();
-        else endQuiz();
+        if(currentIdx < currentQuestions.length) {
+            showQuestion();
+        } else {
+            endQuiz();
+        }
     }
 
     function endQuiz() {
         switchScreen('screen-result');
         document.getElementById('cert-name').innerText = document.getElementById('student-name').value;
         document.getElementById('cert-score').innerText = `${score} من ${currentQuestions.length}`;
-        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('ar-EG');
+        document.getElementById('cert-date').innerText = "تاريخ الإصدار: " + new Date().toLocaleDateString('ar-EG');
     }
 
-    function showModal(id) { document.getElementById(id).style.display = 'block'; document.getElementById('overlay').style.display = 'block'; }
-    function hideModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); document.getElementById('overlay').style.display = 'none'; }
+    function showModal(id) {
+        document.getElementById(id).style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function hideModals() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+        document.getElementById('overlay').style.display = 'none';
+    }
 </script>
 </body>
 </html>

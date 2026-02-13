@@ -22,7 +22,6 @@
             --success: #4caf50;
             --error: #f44336;
             --warning: #ff9800;
-            --info: #2196f3;
         }
 
         body {
@@ -51,9 +50,6 @@
         .nav-title {
             font-size: 1.4em;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .back-btn {
@@ -83,11 +79,12 @@
             padding: 100px 20px 40px;
             max-width: 1200px;
             margin: 0 auto;
-            animation: fadeIn 0.5s ease;
+            min-height: 100vh;
         }
 
         .screen.active {
             display: block;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
@@ -95,10 +92,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Main Menu - Fixed Interactive Cards */
+        /* Home Screen */
         .hero-section {
             text-align: center;
             margin-bottom: 50px;
+            padding-top: 20px;
         }
 
         .hero-title {
@@ -116,9 +114,10 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            padding: 20px 0;
+            margin-top: 40px;
         }
 
+        /* CRITICAL FIX: Menu Card with proper click handling */
         .menu-card {
             background: var(--white);
             border-radius: 20px;
@@ -126,56 +125,31 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             border: 3px solid transparent;
             position: relative;
-            overflow: hidden;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            /* Ensure the card captures all clicks */
+            z-index: 10;
         }
 
-        /* تأثير hover قوي */
         .menu-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(26, 35, 126, 0.25);
             border-color: var(--gold);
-            background: linear-gradient(135deg, var(--white) 0%, #fff9e6 100%);
         }
 
-        /* تأثير active (عند النقر) */
         .menu-card:active {
             transform: translateY(-5px) scale(0.98);
-            box-shadow: 0 15px 30px rgba(26, 35, 126, 0.3);
         }
 
-        /* خط ذهبي علوي */
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .menu-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* أيقونة ثابتة - لا تتداخل مع النقر */
+        /* CRITICAL FIX: Icon doesn't block clicks */
         .menu-icon {
             font-size: 4em;
             margin-bottom: 20px;
             display: block;
-            pointer-events: none; /* منع الأيقونة من اعتراض النقر */
-            transition: transform 0.3s ease;
-        }
-
-        .menu-card:hover .menu-icon {
-            transform: scale(1.1) rotate(5deg);
+            /* Prevent icon from capturing clicks */
+            pointer-events: none;
+            user-select: none;
         }
 
         .menu-title {
@@ -192,27 +166,25 @@
             pointer-events: none;
         }
 
-        /* زر وهمي داخل البطاقة للوضوح */
-        .menu-btn-hint {
+        .menu-action {
             margin-top: 20px;
             padding: 10px 25px;
-            background: linear-gradient(135deg, var(--royal-blue), var(--royal-light));
+            background: var(--royal-blue);
             color: var(--white);
             border-radius: 25px;
-            font-size: 0.9em;
+            display: inline-block;
             opacity: 0;
             transform: translateY(10px);
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: all 0.3s;
             pointer-events: none;
         }
 
-        .menu-card:hover .menu-btn-hint {
+        .menu-card:hover .menu-action {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Encyclopedia Styles */
+        /* Encyclopedia */
         .encyclopedia-container {
             background: var(--white);
             border-radius: 20px;
@@ -236,11 +208,6 @@
             cursor: pointer;
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
-            position: relative;
-        }
-
-        .tab-btn:hover {
-            background: rgba(26, 35, 126, 0.05);
         }
 
         .tab-btn.active {
@@ -290,7 +257,6 @@
             font-size: 1.1em;
             direction: ltr;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .concept-list {
@@ -304,6 +270,7 @@
             margin: 10px 0;
             padding-right: 20px;
             position: relative;
+            list-style: none;
         }
 
         .concept-list li::before {
@@ -321,7 +288,7 @@
             font-weight: bold;
         }
 
-        /* Test Selection - Fixed Interactive Items */
+        /* Test Selection */
         .test-categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -343,67 +310,44 @@
             border-bottom: 3px solid var(--gold);
         }
 
+        /* CRITICAL FIX: Test item with proper click handling */
         .test-item {
             background: var(--gray-bg);
             margin: 12px 0;
             padding: 18px 20px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-right: 4px solid transparent;
             position: relative;
-            overflow: hidden;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            z-index: 10;
         }
 
         .test-item:hover {
-            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+            background: #e8eaf6;
             border-right-color: var(--royal-blue);
-            transform: translateX(-8px);
-            box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+            transform: translateX(-5px);
         }
 
         .test-item:active {
-            transform: translateX(-4px) scale(0.98);
-        }
-
-        /* تأثير الوميض عند النقر */
-        .test-item::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(26, 35, 126, 0.1);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .test-item:active::after {
-            width: 300px;
-            height: 300px;
+            transform: translateX(-3px) scale(0.98);
         }
 
         .test-text {
-            font-weight: 500;
             pointer-events: none;
         }
 
         .test-badge {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            background: var(--gold);
             color: var(--white);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: bold;
             pointer-events: none;
-            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
         }
 
         /* Quiz Interface */
@@ -413,11 +357,6 @@
             border-radius: 15px;
             margin-bottom: 25px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .quiz-info h3 {
@@ -432,16 +371,8 @@
             border-radius: 12px;
             font-size: 1.3em;
             font-weight: bold;
-        }
-
-        .timer-box.warning {
-            background: linear-gradient(135deg, var(--error), #d32f2f);
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            display: inline-block;
+            margin-top: 10px;
         }
 
         .progress-bar {
@@ -480,11 +411,11 @@
             font-size: 1.25em;
             margin-bottom: 25px;
             line-height: 1.8;
-            color: var(--text-dark);
         }
 
         .options-container {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
 
@@ -500,14 +431,11 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            position: relative;
-            overflow: hidden;
         }
 
         .option-btn:hover {
             background: #e3f2fd;
             border-color: var(--royal-blue);
-            transform: translateX(-5px);
         }
 
         .option-btn.selected {
@@ -552,11 +480,6 @@
             margin-bottom: 15px;
         }
 
-        .written-answer:focus {
-            outline: none;
-            border-color: var(--royal-blue);
-        }
-
         .feedback-box {
             background: #fff8e1;
             border-right: 5px solid var(--warning);
@@ -580,9 +503,6 @@
             color: var(--warning);
             font-weight: bold;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .nav-controls {
@@ -599,8 +519,6 @@
             cursor: pointer;
             transition: all 0.3s;
             font-weight: bold;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-primary {
@@ -628,11 +546,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        /* Results & Certificate */
+        /* Results */
         .results-container {
             background: var(--white);
             padding: 40px;
@@ -805,7 +719,6 @@
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 1.05em;
-            transition: border-color 0.3s;
         }
 
         .form-group input:focus, .form-group select:focus {
@@ -828,46 +741,20 @@
 
         .alert.show {
             display: block;
-            animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Utility Classes */
         .hidden {
             display: none !important;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .menu-grid, .test-categories { 
-                grid-template-columns: 1fr; 
-            }
-            .stats-grid { 
-                grid-template-columns: 1fr; 
-            }
-            .hero-title { 
-                font-size: 1.8em; 
-            }
-            .certificate { 
-                padding: 30px 20px; 
-            }
-            .cert-footer { 
-                flex-direction: column; 
-                gap: 20px; 
-            }
-            .menu-card {
-                padding: 30px 20px;
-            }
-            .test-item {
-                padding: 15px;
-            }
+            .menu-grid, .test-categories { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 1.8em; }
+            .certificate { padding: 30px 20px; }
+            .cert-footer { flex-direction: column; gap: 20px; }
         }
 
-        /* Print Styles */
         @media print {
             body * { visibility: hidden; }
             .certificate, .certificate * { visibility: visible; }
@@ -879,28 +766,13 @@
                 margin: 0;
             }
         }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: var(--white);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
     <nav class="nav-bar">
-        <div class="nav-title">🎓 منصة العباقرة الرقمية</div>
+        <div class="nav-title">منصة العباقرة الرقمية</div>
         <button class="back-btn" id="backBtn" onclick="goBack()">← عودة للقائمة السابقة</button>
     </nav>
 
@@ -912,20 +784,20 @@
         </div>
 
         <div class="menu-grid">
-            <!-- بطاقة الموسوعة التعليمية -->
-            <div class="menu-card" onclick="showScreen('encyclopedia')" role="button" tabindex="0" aria-label="الموسوعة التعليمية">
+            <!-- Card 1: Encyclopedia -->
+            <div class="menu-card" onclick="navigateTo('encyclopedia')">
                 <span class="menu-icon">📚</span>
                 <h3 class="menu-title">الموسوعة التعليمية</h3>
                 <p class="menu-desc">شرح شامل لمنهج الجبر والهندسة</p>
-                <span class="menu-btn-hint">اضغط للدخول</span>
+                <span class="menu-action">اضغط للدخول</span>
             </div>
 
-            <!-- بطاقة الاختبارات الذكية -->
-            <div class="menu-card" onclick="showScreen('testSelection')" role="button" tabindex="0" aria-label="الاختبارات الذكية">
+            <!-- Card 2: Tests -->
+            <div class="menu-card" onclick="navigateTo('testSelection')">
                 <span class="menu-icon">📝</span>
                 <h3 class="menu-title">الاختبارات الذكية</h3>
                 <p class="menu-desc">اختبارات شهور ونماذج نهائية</p>
-                <span class="menu-btn-hint">اضغط للدخول</span>
+                <span class="menu-action">اضغط للدخول</span>
             </div>
         </div>
     </div>
@@ -941,83 +813,52 @@
             <!-- Algebra Content -->
             <div id="algebra" class="tab-content active">
                 
-                <!-- Lesson 1: Solving Two Equations -->
+                <!-- Lesson 1 -->
                 <div class="lesson-section">
-                    <h3 class="lesson-title">حل معادلتين من الدرجة الأولى في مجهولين</h3>
-                    
-                    <p><strong>التعريف:</strong> المعادلة من الدرجة الأولى في مجهولين هي المعادلة التي يكون فيها أس كل من المتغيرين (س، ص) يساوي الواحد الصحيح.</p>
-                    
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">طرق الحل:</h4>
+                    <h3 class="lesson-title">حل معادلتين من الدرجة الأولى</h3>
+                    <p><strong>التعريف:</strong> المعادلة من الدرجة الأولى في مجهولين: أ س + ب ص = ج</p>
                     
                     <div class="concept-list">
-                        <p><strong>1. الطريقة البيانية:</strong></p>
-                        <ul>
-                            <li>نرسم المستقيم الأول بإيجاد نقطتين عليه</li>
-                            <li>نرسم المستقيم الثاني بنفس الطريقة</li>
-                            <li>نقطة التقاطع تمثل الحل</li>
-                        </ul>
-                    </div>
-
-                    <div class="concept-list">
-                        <p><strong>2. طريقة الحذف:</strong></p>
-                        <ul>
-                            <li>نضرب المعادلتين في أعداد مناسبة لجعل معاملات أحد المتغيرين متساوية في القيمة المطلقة</li>
-                            <li>نجمع المعادلتين أو نطرحهما لحذف هذا المتغير</li>
-                            <li>نعوض لإيجاد المتغير الثاني</li>
-                        </ul>
+                        <li><strong>الطريقة البيانية:</strong> رسم المستقيمين وإيجاد نقطة التقاطع</li>
+                        <li><strong>طريقة الحذف:</strong> جعل معامل أحد المتغيرين متساوياً ثم الجمع/الطرح</li>
+                        <li><strong>طريقة التعويض:</strong> التعبير عن أحد المتغيرين والتعويض في المعادلة الأخرى</li>
                     </div>
 
                     <div class="formula-box">
-                        معامل س₁ / معامل س₂ ≠ معامل ص₁ / معامل ص₂ → حل واحد (تقاطع)<br>
-                        معامل س₁ / معامل س₂ = معامل ص₁ / معامل ص₂ ≠ الحد المطلق₁ / الحد المطلق₂ → لا حل (توازي)<br>
-                        معامل س₁ / معامل س₂ = معامل ص₁ / معامل ص₂ = الحد المطلق₁ / الحد المطلق₂ → حلول لا نهائية (تطابق)
+                        حالات الحل:<br>
+                        معاملات غير متناسبة → حل واحد (تقاطع)<br>
+                        معاملات متناسبة ≠ حدود مطلقة → لا حل (توازي)<br>
+                        الكل متناسب → حلول لا نهائية (تطابق)
                     </div>
                 </div>
 
-                <!-- Lesson 2: Quadratic Equations -->
+                <!-- Lesson 2 -->
                 <div class="lesson-section">
-                    <h3 class="lesson-title">حل معادلة الدرجة الثانية بالقانون العام</h3>
-                    
+                    <h3 class="lesson-title">القانون العام للمعادلة التربيعية</h3>
                     <div class="formula-box">
                         س = (-ب ± √(ب² - 4أج)) / 2أ
                     </div>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">المميز (Δ) = ب² - 4أج</h4>
-                    
+                    <p><strong>المميز Δ = ب² - 4أج</strong></p>
                     <div class="concept-list">
-                        <ul>
-                            <li><span class="highlight">Δ > 0:</span> حلان حقيقيان مختلفان</li>
-                            <li><span class="highlight">Δ = 0:</span> حل واحد مكرر</li>
-                            <li><span class="highlight">Δ < 0:</span> لا حل حقيقي</li>
-                        </ul>
+                        <li><span class="highlight">Δ > 0:</span> حلان حقيقيان مختلفان</li>
+                        <li><span class="highlight">Δ = 0:</span> حل واحد مكرر</li>
+                        <li><span class="highlight">Δ < 0:</span> لا حل حقيقي</li>
                     </div>
                 </div>
 
-                <!-- Lesson 3: Rational Functions -->
+                <!-- Lesson 3 -->
                 <div class="lesson-section">
                     <h3 class="lesson-title">الدوال الكسرية</h3>
-                    
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">أصفار الدالة:</h4>
-                    <p>قيم س التي تجعل البسط = 0 (مع شرط أن المقام ≠ 0)</p>
-                    
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">مجال الدالة:</h4>
+                    <p><strong>أصفار الدالة:</strong> قيم س التي تجعل البسط = 0 (مع شرط المقام ≠ 0)</p>
                     <div class="formula-box">
-                        المجال = ℝ - {قيم س التي تجعل المقام = 0}
+                        مجال الدالة = ℝ - {قيم س التي تجعل المقام = 0}
                     </div>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">العمليات على الكسور:</h4>
-                    <div class="formula-box">
-                        الجمع/الطرح: نوحد المقامات<br>
-                        الضرب: (أ/ب) × (ج/د) = (أ×ج)/(ب×د)<br>
-                        القسمة: (أ/ب) ÷ (ج/د) = (أ×د)/(ب×ج)<br>
-                        المعكوس الضربي لـ (أ/ب) = (ب/أ)
-                    </div>
+                    <p><strong>المعكوس الضربي:</strong> مقلوب الكسر (ب/أ) هو المعكوس الضربي لـ (أ/ب)</p>
                 </div>
 
-                <!-- Lesson 4: Probability -->
+                <!-- Lesson 4 -->
                 <div class="lesson-section">
                     <h3 class="lesson-title">الاحتمالات</h3>
-                    
                     <div class="formula-box">
                         ل(أ ∪ ب) = ل(أ) + ل(ب) - ل(أ ∩ ب)<br>
                         ل(أ') = 1 - ل(أ)<br>
@@ -1029,109 +870,47 @@
             <!-- Geometry Content -->
             <div id="geometry" class="tab-content">
                 
-                <!-- Lesson 1: Circle Basics -->
+                <!-- Lesson 1 -->
                 <div class="lesson-section">
-                    <h3 class="lesson-title">الدائرة: التعاريف والمفاهيم الأساسية</h3>
-                    
+                    <h3 class="lesson-title">الدائرة والأوتار</h3>
                     <div class="concept-list">
-                        <p><strong>العناصر الأساسية:</strong></p>
-                        <ul>
-                            <li><span class="highlight">الوتر:</span> القطعة المستقيمة الواصلة بين نقطتين على الدائرة</li>
-                            <li><span class="highlight">القطر:</span> وتر يمر بمركز الدائرة (أطول أوتر)</li>
-                            <li><span class="highlight">القوس:</span> جزء من محيط الدائرة محصور بين نقطتين</li>
-                            <li><span class="highlight">نصف القطر:</span> القطعة المستقيمة من المركز إلى أي نقطة على الدائرة</li>
-                        </ul>
+                        <li><strong>الوتر:</strong> القطعة المستقيمة بين نقطتين على الدائرة</li>
+                        <li><strong>القطر:</strong> وتر يمر بالمركز (أطول أوتر)</li>
+                        <li><strong>نصف القطر:</strong> من المركز إلى أي نقطة على الدائرة</li>
                     </div>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">وضع النقطة بالنسبة للدائرة:</h4>
-                    <div class="concept-list">
-                        <ul>
-                            <li>داخل الدائرة: البعد عن المركز < نصف القطر</li>
-                            <li>على الدائرة: البعد عن المركز = نصف القطر</li>
-                            <li>خارج الدائرة: البعد عن المركز > نصف القطر</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Lesson 2: Chords -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الأوتار وأبعادها</h3>
-                    
-                    <div class="concept-list">
-                        <p><strong>النظريات:</strong></p>
-                        <ul>
-                            <li>الأوتار المتساوية في الطول تتساوى في بعدها عن المركز</li>
-                            <li>كلما زاد بعد الوتر عن المركز، قل طوله</li>
-                            <li>القطر يعامد الوتر وينصفه (والعكس صحيح)</li>
-                        </ul>
-                    </div>
-
                     <div class="formula-box">
-                        إذا كان طول الوتر = ل، وبعده عن المركز = ع، ونصف القطر = نق<br>
+                        إذا كان طول الوتر = ل، وبعده عن المركز = ع<br>
                         (ل/2)² + ع² = نق²
                     </div>
                 </div>
 
-                <!-- Lesson 3: Angles -->
+                <!-- Lesson 2 -->
                 <div class="lesson-section">
                     <h3 class="lesson-title">الزوايا في الدائرة</h3>
-                    
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">الزاوية المركزية:</h4>
-                    <p>رأسها في المركز، وتساوي قياس القوس الذي تقطعه</p>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">الزاوية المحيطية:</h4>
                     <div class="formula-box">
-                        الزاوية المحيطية = ½ × الزاوية المركزية المشتركة معها في القوس<br>
-                        الزاوية المحيطية في نصف دائرة = 90° (قائمة)
-                    </div>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">الزاوية المماسية:</h4>
-                    <div class="formula-box">
-                        الزاوية بين مماس ووتر = الزاوية المحيطية في القوس البديل
+                        الزاوية المحيطية = ½ × الزاوية المركزية<br>
+                        الزاوية في نصف دائرة = 90°<br>
+                        زاوية المماس والوتر = الزاوية المحيطية في القوس البديل
                     </div>
                 </div>
 
-                <!-- Lesson 4: Cyclic Quadrilateral -->
+                <!-- Lesson 3 -->
                 <div class="lesson-section">
                     <h3 class="lesson-title">الرباعي الدائري</h3>
-                    
-                    <p><strong>التعريف:</strong> رباعي يمكن إدراجه في دائرة (رؤوسه على محيط واحد)</p>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">الخواص:</h4>
+                    <p><strong>التعريف:</strong> رباعي يمكن إدراجه في دائرة</p>
                     <div class="concept-list">
-                        <ul>
-                            <li>مجموع زاويتين متقابلتين = 180°</li>
-                            <li>الزاوية الخارجية = الزاوية الداخلية المتقابلة</li>
-                            <li>الزوايا المتساوية في قوس واحد متساوية</li>
-                        </ul>
-                    </div>
-
-                    <h4 style="color: var(--royal-blue); margin: 15px 0;">شروط الإثبات:</h4>
-                    <div class="concept-list">
-                        <ul>
-                            <li>إذا كان مجموع زاويتين متقابلتين يساوي 180°</li>
-                            <li>إذا كانت الزاوية الخارجية تساوي الزاوية الداخلية المتقابلة</li>
-                        </ul>
+                        <li>مجموع زاويتين متقابلتين = 180°</li>
+                        <li>الزاوية الخارجية = الزاوية الداخلية المتقابلة</li>
                     </div>
                 </div>
 
-                <!-- Lesson 5: Tangents -->
+                <!-- Lesson 4 -->
                 <div class="lesson-section">
-                    <h3 class="lesson-title">المماسات والقطع المماسية</h3>
-                    
+                    <h3 class="lesson-title">المماسات</h3>
                     <div class="concept-list">
-                        <p><strong>خصائص المماس:</strong></p>
-                        <ul>
-                            <li>المماس عمودي على نصف القطر في نقطة التماس</li>
-                            <li>من نقطة خارجية يمكن رسم مماسين للدائرة</li>
-                            <li>طولا المماسين من نقطة خارجية متساويان</li>
-                            <li>خط الواصل بين النقطة الخارجية والمركز ينصف زاوية المماسين</li>
-                        </ul>
-                    </div>
-
-                    <div class="formula-box">
-                        إذا قاطع مستقيم خارجي دائرة في أ، ب وماساً في ج<br>
-                        فإن: ط²(المماس) = أب × أج
+                        <li>المماس عمودي على نصف القطر في نقطة التماس</li>
+                        <li>طولا المماسين من نقطة خارجية متساويان</li>
+                        <li>خط الواصل بين النقطة الخارجية والمركز ينصف زاوية المماسين</li>
                     </div>
                 </div>
             </div>
@@ -1140,23 +919,23 @@
 
     <!-- Screen 3: Test Selection -->
     <div id="testSelection" class="screen">
-        <h1 style="color: var(--royal-blue); text-align: center; margin-bottom: 30px;">📝 اختيار الاختبار</h1>
+        <h1 style="color: var(--royal-blue); text-align: center; margin-bottom: 30px;">اختيار الاختبار</h1>
         
         <div class="test-categories">
             <div class="category-card">
                 <h3 class="category-title">📅 اختبارات الشهور</h3>
                 
-                <div class="test-item" onclick="startTest('feb', 'امتحان فبراير - المعادلات', 10)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('feb', 'امتحان فبراير - المعادلات', 10)">
                     <span class="test-text">امتحان فبراير: حل المعادلات</span>
                     <span class="test-badge">10 أسئلة</span>
                 </div>
                 
-                <div class="test-item" onclick="startTest('mar', 'امتحان مارس - الدوال الكسرية', 10)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('mar', 'امتحان مارس - الدوال الكسرية', 10)">
                     <span class="test-text">امتحان مارس: الدوال الكسرية</span>
                     <span class="test-badge">10 أسئلة</span>
                 </div>
                 
-                <div class="test-item" onclick="startTest('apr', 'امتحان أبريل - الهندسة', 10)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('apr', 'امتحان أبريل - الهندسة', 10)">
                     <span class="test-text">امتحان أبريل: هندسة الدائرة</span>
                     <span class="test-badge">10 أسئلة</span>
                 </div>
@@ -1165,17 +944,17 @@
             <div class="category-card">
                 <h3 class="category-title">🎓 نماذج الامتحانات النهائية</h3>
                 
-                <div class="test-item" onclick="startTest('final1', 'نموذج امتحان نهائي أول', 15)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('final1', 'نموذج امتحان نهائي أول', 15)">
                     <span class="test-text">نموذج امتحان محافظة أول</span>
                     <span class="test-badge">15 سؤالاً</span>
                 </div>
                 
-                <div class="test-item" onclick="startTest('final2', 'نموذج امتحان نهائي ثانٍ', 15)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('final2', 'نموذج امتحان نهائي ثانٍ', 15)">
                     <span class="test-text">نموذج امتحان محافظة ثانٍ</span>
                     <span class="test-badge">15 سؤالاً</span>
                 </div>
                 
-                <div class="test-item" onclick="startTest('comprehensive', 'اختبار شامل', 20)" role="button" tabindex="0">
+                <div class="test-item" onclick="selectTest('comprehensive', 'اختبار شامل', 20)">
                     <span class="test-text">اختبار شامل على المنهج</span>
                     <span class="test-badge">20 سؤالاً</span>
                 </div>
@@ -1186,13 +965,13 @@
     <!-- Screen 4: Student Form -->
     <div id="studentForm" class="screen">
         <div class="student-form">
-            <h2 style="color: var(--royal-blue); text-align: center; margin-bottom: 25px;">👤 معلومات الطالب</h2>
+            <h2 style="color: var(--royal-blue); text-align: center; margin-bottom: 25px;">معلومات الطالب</h2>
             
             <div id="formAlert" class="alert alert-error"></div>
 
             <div class="form-group">
                 <label for="studentName">الاسم الثلاثي</label>
-                <input type="text" id="studentName" placeholder="أدخل اسمك الثلاثي" autocomplete="name">
+                <input type="text" id="studentName" placeholder="أدخل اسمك الثلاثي">
             </div>
 
             <div class="form-group">
@@ -1208,7 +987,7 @@
                 <input type="text" id="testTypeDisplay" readonly style="background: #f5f5f5;">
             </div>
 
-            <button class="btn btn-primary" onclick="confirmStartTest()" style="width: 100%;">
+            <button class="btn btn-primary" onclick="startTest()" style="width: 100%;">
                 بدء الاختبار الآن
             </button>
         </div>
@@ -1270,7 +1049,7 @@
 
             <div class="nav-controls">
                 <button class="btn btn-gold" onclick="showCertificate()">عرض الشهادة 🏆</button>
-                <button class="btn btn-primary" onclick="returnToMenu()">القائمة الرئيسية</button>
+                <button class="btn btn-primary" onclick="goToMenu()">القائمة الرئيسية</button>
             </div>
         </div>
     </div>
@@ -1301,354 +1080,442 @@
 
         <div class="nav-controls" style="margin-top: 30px;">
             <button class="btn btn-primary" onclick="printCertificate()">🖨️ طباعة الشهادة</button>
-            <button class="btn btn-success" onclick="returnToMenu()">اختبار جديد</button>
+            <button class="btn btn-success" onclick="goToMenu()">اختبار جديد</button>
         </div>
     </div>
 
     <script>
         // ==========================================
-        // COMPLETE QUESTION DATABASE (100 Questions)
+        // DATABASE: 50 Questions
         // ==========================================
         
         const questionDB = {
-            // فبراير: الجبر (30 سؤال)
             feb: [
-                {
-                    id: 1,
-                    type: 'mcq',
-                    question: 'إذا كان المستقيمان الممثلان للمعادلتين س + 3ص = 4 ، س + ك ص = 1 متوازيين، فإن ك تساوي:',
-                    options: ['1', '3', '4', '-3'],
-                    correct: 1,
-                    hint: 'في حالة التوازي، معامل س₁/معامل س₂ = معامل ص₁/معامل ص₂. إذن 1/1 = 3/ك، فك = 3'
-                },
-                {
-                    id: 2,
-                    type: 'mcq',
-                    question: 'حل المعادلة: 2س - 5 = 3س + 7',
-                    options: ['-12', '12', '2', '-2'],
-                    correct: 0,
-                    hint: 'نطرح 2س من الطرفين: -5 = س + 7، ثم نطرح 7: س = -12'
-                },
-                {
-                    id: 3,
-                    type: 'mcq',
-                    question: 'أي من التالي يمثل حل النظام: س + ص = 5 ، س - ص = 1',
-                    options: ['(2,3)', '(3,2)', '(4,1)', '(1,4)'],
-                    correct: 1,
-                    hint: 'بجمع المعادلتين: 2س = 6 إذن س = 3، بالتعويض: 3 + ص = 5 إذن ص = 2'
-                },
-                {
-                    id: 4,
-                    type: 'mcq',
-                    question: 'المعادلة س² - 5س + 6 = 0 لها:',
-                    options: ['حل واحد', 'حلان حقيقيان', 'لا حل', 'حلان مركبان'],
-                    correct: 1,
-                    hint: 'المميز = 25 - 24 = 1 > 0، إذن للمعادلة حلان حقيقيان مختلفان'
-                },
-                {
-                    id: 5,
-                    type: 'mcq',
-                    question: 'حل المعادلة: س² - 9 = 0',
-                    options: ['3 فقط', '-3 فقط', '3 و -3', '9'],
-                    correct: 2,
-                    hint: 'س² = 9، إذن س = ±√9 = ±3 (الموجب والسالب)'
-                },
-                {
-                    id: 6,
-                    type: 'mcq',
-                    question: 'إذا كان حل المعادلة أ س² + ب س + ج = 0 هو س = 2 أو س = 3، فإن مجموع الجذرين يساوي:',
-                    options: ['5', '6', '-5', '1'],
-                    correct: 0,
-                    hint: 'مجموع الجذرين = -ب/أ = 2 + 3 = 5'
-                },
-                {
-                    id: 7,
-                    type: 'mcq',
-                    question: 'منتصف القطعة المستقيمة الواصلة بين (2, 4) و (6, 8) هو:',
-                    options: ['(4, 6)', '(8, 12)', '(3, 4)', '(4, 4)'],
-                    correct: 0,
-                    hint: 'المنتصف = ((س₁+س₂)/2، (ص₁+ص₂)/2) = ((2+6)/2، (4+8)/2) = (4, 6)'
-                },
-                {
-                    id: 8,
-                    type: 'mcq',
-                    question: 'ميل المستقيم المار بالنقطتين (1, 2) و (3, 8) يساوي:',
-                    options: ['2', '3', '4', '6'],
-                    correct: 1,
-                    hint: 'الميل = (ص₂-ص₁)/(س₂-س₁) = (8-2)/(3-1) = 6/2 = 3'
-                },
-                {
-                    id: 9,
-                    type: 'mcq',
-                    question: 'معادلة الخط المستقيم المار بالنقطة (2, 3) وميله 2 هي:',
-                    options: ['ص = 2س + 1', 'ص = 2س - 1', 'ص = س + 2', 'ص = 2س + 3'],
-                    correct: 1,
-                    hint: 'ص - 3 = 2(س - 2) → ص = 2س - 4 + 3 = 2س - 1'
-                },
-                {
-                    id: 10,
-                    type: 'mcq',
-                    question: 'إذا كان س + ص = 7 و س ص = 12، فإن س² + ص² يساوي:',
-                    options: ['25', '37', '49', '13'],
-                    correct: 0,
-                    hint: '(س + ص)² = س² + 2سص + ص² → 49 = س² + ص² + 24 → س² + ص² = 25'
-                },
-                {
-                    id: 11,
-                    type: 'mcq',
-                    question: 'المعادلة 2س² - 3س + 5 = 0 لها مميز يساوي:',
-                    options: ['49', '-31', '31', '-49'],
-                    correct: 1,
-                    hint: 'Δ = ب² - 4أج = 9 - 4(2)(5) = 9 - 40 = -31'
-                },
-                {
-                    id: 12,
-                    type: 'mcq',
-                    question: 'حل عدم المساواة: 3س - 6 > 0',
-                    options: ['س > 2', 'س < 2', 'س > -2', 'س < -2'],
-                    correct: 0,
-                    hint: '3س > 6 → س > 2 (نقسم على 3 موجب، لا تتغير علامة العدم)'
-                },
-                {
-                    id: 13,
-                    type: 'mcq',
-                    question: 'إذا كان النظام: 2س + 3ص = 5 ، 4س + 6ص = 7 فإنه:',
-                    options: ['له حل واحد', 'له حلول لا نهائية', 'لا حل له', 'حلانه س = 1، ص = 1'],
-                    correct: 2,
-                    hint: '2/4 = 3/6 ≠ 5/7، إذن المستقيمان متوازيان ولا يوجد حل'
-                },
-                {
-                    id: 14,
-                    type: 'mcq',
-                    question: 'القيمة العظمى للدالة د(س) = -س² + 4س - 3 عندما س =',
-                    options: ['2', '4', '7', '-2'],
-                    correct: 0,
-                    hint: 'س = -ب/2أ = -4/-2 = 2 (رأس المنحنى للأعلى لأن أ < 0)'
-                },
-                {
-                    id: 15,
-                    type: 'mcq',
-                    question: 'إذا كانت جذور المعادلة س² - 6س + ك = 0 متساوية، فإن ك =',
-                    options: ['6', '9', '36', '3'],
-                    correct: 1,
-                    hint: 'للجذور المتساوية: Δ = 0 → 36 - 4ك = 0 → ك = 9'
-                },
-                {
-                    id: 16,
-                    type: 'mcq',
-                    question: 'حل المعادلة |س - 3| = 5',
-                    options: ['8 فقط', '-2 فقط', '8 و -2', '2 و -8'],
-                    correct: 2,
-                    hint: 'س - 3 = 5 → س = 8 أو س - 3 = -5 → س = -2'
-                },
-                {
-                    id: 17,
-                    type: 'mcq',
-                    question: 'نقطة تقاطع محوري السينات والصادات للمستقيم 2س + 3ص = 6 هي:',
-                    options: ['(3,0) و (0,2)', '(2,0) و (0,3)', '(6,0) و (0,6)', '(1,2) و (2,1)'],
-                    correct: 0,
-                    hint: 'عند ص=0: س=3. عند س=0: ص=2. إذن النقطتان (3,0) و (0,2)'
-                },
-                {
-                    id: 18,
-                    type: 'mcq',
-                    question: 'إذا كان س - ص = 3 و س² + ص² = 29، فإن س ص =',
-                    options: ['10', '20', '40', '5'],
-                    correct: 0,
-                    hint: '(س - ص)² = س² - 2سص + ص² → 9 = 29 - 2سص → سص = 10'
-                },
-                {
-                    id: 19,
-                    type: 'mcq',
-                    question: 'المعادلة س² + س + 1 = 0 لها:',
-                    options: ['حلان حقيقيان', 'حل واحد', 'لا حل حقيقي', 'حلان متعاكسان'],
-                    correct: 2,
-                    hint: 'Δ = 1 - 4 = -3 < 0، إذن لا يوجد حل في ℝ'
-                },
-                {
-                    id: 20,
-                    type: 'mcq',
-                    question: 'طول القطعة المستقيمة الواصلة بين (1, 2) و (4, 6) يساوي:',
-                    options: ['3', '4', '5', '7'],
-                    correct: 2,
-                    hint: 'الطول = √[(4-1)² + (6-2)²] = √[9 + 16] = √25 = 5'
-                },
-                {
-                    id: 21,
-                    type: 'mcq',
-                    question: 'حل المعادلة: 3س - 7 = 2س + 5',
-                    options: ['س = 2', 'س = 12', 'س = -12', 'س = 4'],
-                    correct: 1,
-                    hint: '3س - 2س = 5 + 7 → س = 12'
-                },
-                {
-                    id: 22,
-                    type: 'mcq',
-                    question: 'النظام: س + 2ص = 4 ، 2س + 4ص = 8 له:',
-                    options: ['حل واحد', 'لا حل', 'حلول لا نهائية', 'حلان'],
-                    correct: 2,
-                    hint: '1/2 = 2/4 = 4/8، إذن المعادلتان متطابقتان وحلولهما لا نهائية'
-                },
-                {
-                    id: 23,
-                    type: 'mcq',
-                    question: 'حل المعادلة التربيعية: س² - 5س + 6 = 0',
-                    options: ['2 و 3', '-2 و -3', '1 و 6', '-1 و -6'],
-                    correct: 0,
-                    hint: '(س - 2)(س - 3) = 0 → س = 2 أو س = 3'
-                },
-                {
-                    id: 24,
-                    type: 'mcq',
-                    question: 'إذا كان جذرا المعادلة س² - 8س + ك = 0 متعاكسين في الإشارة، فإن ك =',
-                    options: ['8', '-8', '0', '16'],
-                    correct: 2,
-                    hint: 'إذا كان الجذران متعاكسين، فمجموعهما = 0 = -ب/أ، وهذا متحقق. حاصل ضربهما = ك = 0'
-                },
-                {
-                    id: 25,
-                    type: 'mcq',
-                    question: 'معادلة المحور الصادي هي:',
-                    options: ['س = 0', 'ص = 0', 'س = ص', 'س + ص = 0'],
-                    correct: 0,
-                    hint: 'المحور الصادي هو الخط الرأسي الذي يمر بالنقطة (0,0) ومعادلة س = 0'
-                },
-                {
-                    id: 26,
-                    type: 'mcq',
-                    question: 'إذا كان (2, 3) يحقق المعادلة أ س + ب ص = 13 و (1, -1) يحققها أيضاً، فإن أ + ب =',
-                    options: ['5', '7', '13', '4'],
-                    correct: 1,
-                    hint: 'من النظام: 2أ + 3ب = 13 وأ - ب = 13. بالحل: أ = 8، ب = -1، إذن أ + ب = 7'
-                },
-                {
-                    id: 27,
-                    type: 'mcq',
-                    question: 'حل عدم المساواة: -2س + 4 < 8',
-                    options: ['س > -2', 'س < -2', 'س > 2', 'س < 2'],
-                    correct: 0,
-                    hint: '-2س < 4 → س > -2 (عند القسمة على سالب، نعكس الإشارة)'
-                },
-                {
-                    id: 28,
-                    type: 'mcq',
-                    question: 'الدالة د(س) = س² - 4س + 7 تكون قيمتها الصغرى عند س =',
-                    options: ['2', '4', '7', '-2'],
-                    correct: 0,
-                    hint: 'س = -ب/2أ = 4/2 = 2'
-                },
-                {
-                    id: 29,
-                    type: 'mcq',
-                    question: 'إذا كان س + 1/س = 3، فإن س² + 1/س² =',
-                    options: ['7', '9', '11', '3'],
-                    correct: 0,
-                    hint: '(س + 1/س)² = س² + 2 + 1/س² = 9 → س² + 1/س² = 7'
-                },
-                {
-                    id: 30,
-                    type: 'mcq',
-                    question: 'حل النظام: س + ص = 7 ، س² + ص² = 25',
-                    options: ['(3,4) و (4,3)', '(2,5) و (5,2)', '(1,6) و (6,1)', '(0,7) و (7,0)'],
-                    correct: 0,
-                    hint: '(س+ص)² = 49 = 25 + 2سص → سص = 12. إذن س، ص هما حلا س² - 7س + 12 = 0 → (س-3)(س-4)=0'
-                }
+                {id: 1, type: 'mcq', question: 'إذا كان المستقيمان س + 3ص = 4 و س + ك ص = 1 متوازيين، فإن ك =', options: ['1', '3', '4', '-3'], correct: 1, hint: 'في التوازي: 1/1 = 3/ك إذن ك = 3'},
+                {id: 2, type: 'mcq', question: 'حل: 2س - 5 = 3س + 7', options: ['-12', '12', '2', '-2'], correct: 0, hint: '-5 - 7 = 3س - 2س → س = -12'},
+                {id: 3, type: 'mcq', question: 'حل النظام: س + ص = 5 ، س - ص = 1', options: ['(2,3)', '(3,2)', '(4,1)', '(1,4)'], correct: 1, hint: 'بجمع المعادلتين: 2س = 6 → س = 3، ص = 2'},
+                {id: 4, type: 'mcq', question: 'المعادلة س² - 5س + 6 = 0 لها:', options: ['حل واحد', 'حلان حقيقيان', 'لا حل', 'حلان مركبان'], correct: 1, hint: 'Δ = 25 - 24 = 1 > 0 → حلان حقيقيان'},
+                {id: 5, type: 'mcq', question: 'حل: س² - 9 = 0', options: ['3 فقط', '-3 فقط', '3 و -3', '9'], correct: 2, hint: 'س² = 9 → س = ±3'},
+                {id: 6, type: 'mcq', question: 'إذا كانا حلا المعادلة هما 2 و 3، فمجموع الجذرين =', options: ['5', '6', '-5', '1'], correct: 0, hint: '2 + 3 = 5'},
+                {id: 7, type: 'mcq', question: 'منتصف (2,4) و (6,8) هو:', options: ['(4,6)', '(8,12)', '(3,4)', '(4,4)'], correct: 0, hint: '((2+6)/2, (4+8)/2) = (4,6)'},
+                {id: 8, type: 'mcq', question: 'ميل المستقيم المار بـ (1,2) و (3,8) =', options: ['2', '3', '4', '6'], correct: 1, hint: '(8-2)/(3-1) = 6/2 = 3'},
+                {id: 9, type: 'mcq', question: 'معادلة المستقيم المار بـ (2,3) وميله 2:', options: ['ص=2س+1', 'ص=2س-1', 'ص=س+2', 'ص=2س+3'], correct: 1, hint: 'ص-3=2(س-2) → ص=2س-1'},
+                {id: 10, type: 'mcq', question: 'إذا س+ص=7 وسص=12، فس²+ص²=', options: ['25', '37', '49', '13'], correct: 0, hint: '(س+ص)²=49=س²+ص²+24 → س²+ص²=25'}
             ],
-
-            // مارس: الدوال الكسرية (25 سؤال)
             mar: [
-                {
-                    id: 31,
-                    type: 'mcq',
-                    question: 'مجال الدالة د(س) = 1/(س-2) هو:',
-                    options: ['ℝ - {2}', 'ℝ - {0}', 'ℝ', 'س > 2'],
-                    correct: 0,
-                    hint: 'المقام ≠ 0 → س - 2 ≠ 0 → س ≠ 2. المجال هو ℝ - {2}'
-                },
-                {
-                    id: 32,
-                    type: 'mcq',
-                    question: 'أصفار الدالة د(س) = (س² - 4)/(س - 2) هي:',
-                    options: ['2', '-2', '2 و -2', 'لا يوجد أصفار'],
-                    correct: 1,
-                    hint: 'البسط = 0 → س² = 4 → س = ±2. ولكن س ≠ 2 (المجال)، إذن الصفر الوحيد هو س = -2'
-                },
-                {
-                    id: 33,
-                    type: 'mcq',
-                    question: 'بسط الكسر: (س² - 5س + 6)/(س - 3)',
-                    options: ['س - 2', 'س + 2', 'س - 3', 'س + 3'],
-                    correct: 0,
-                    hint: 'س² - 5س + 6 = (س-2)(س-3). إذن الكسر = (س-2)(س-3)/(س-3) = س - 2 حيث س ≠ 3'
-                },
-                {
-                    id: 34,
-                    type: 'mcq',
-                    question: 'مجال الدالة د(س) = (س+1)/(س² - 4) هو:',
-                    options: ['ℝ - {2}', 'ℝ - {-2}', 'ℝ - {2, -2}', 'ℝ - {-1}'],
-                    correct: 2,
-                    hint: 'س² - 4 ≠ 0 → (س-2)(س+2) ≠ 0 → س ≠ 2 و س ≠ -2'
-                },
-                {
-                    id: 35,
-                    type: 'mcq',
-                    question: 'ناتج (س/(س+1)) ÷ (س²/(س²-1)) يساوي:',
-                    options: ['(س-1)/س', 'س/(س-1)', '1', '(س+1)/س'],
-                    correct: 0,
-                    hint: 'القسمة = الضرب في المعكوس = س/(س+1) × (س-1)(س+1)/س² = (س-1)/س'
-                },
-                {
-                    id: 36,
-                    type: 'mcq',
-                    question: 'المعكوس الضربي لـ (2س)/(س+3) هو:',
-                    options: ['(س+3)/(2س)', '(2س)/(س+3)', '(س+3)/2', '2/(س+3)'],
-                    correct: 0,
-                    hint: 'المعكوس الضربي = مقلوب الكسر = (س+3)/(2س)'
-                },
-                {
-                    id: 37,
-                    type: 'mcq',
-                    question: 'مجال الدالة د(س) = √(س-2) هو:',
-                    options: ['س ≥ 2', 'س > 2', 'س ≤ 2', 'جميع الأعداد الحقيقية'],
-                    correct: 0,
-                    hint: 'ما تحت الجذر يجب أن يكون ≥ 0 → س - 2 ≥ 0 → س ≥ 2'
-                },
-                {
-                    id: 38,
-                    type: 'mcq',
-                    question: 'بسط: (1/س + 1/ص) ÷ (1/س² - 1/ص²)',
-                    options: ['سص/(ص-س)', 'سص/(س+ص)', '(ص+س)/(سص)', '(ص-س)/(سص)'],
-                    correct: 0,
-                    hint: 'البسط = (ص+س)/سص، المقام = (ص-س)(ص+س)/س²ص². القسمة = سص/(ص-س)'
-                },
-                {
-                    id: 39,
-                    type: 'mcq',
-                    question: 'أصفار الدالة د(س) = (س² - 9)/(س + 3) هي:',
-                    options: ['3 فقط', '-3 فقط', '3 و -3', 'لا يوجد'],
-                    correct: 0,
-                    hint: 'البسط = 0 → س = ±3. س ≠ -3 (المجال)، إذن الصفر الوحيد هو س = 3'
-                },
-                {
-                    id: 40,
-                    type: 'mcq',
-                    question: 'ناتج طرح: (س/(س+2)) - (2/(س-2))',
-                    options: ['(س²-2س-4)/((س+2)(س-2))', '(س-2)/(س+2)', '1', '(س²-4)/(س²-4)'],
-                    correct: 0,
-                    hint: 'نوحد المقامات: س(س-2) - 2(س+2) = س² - 2س - 2س - 4 = س² - 4س - 4'
-                },
-                {
-                    id: 41,
-                    type: 'mcq',
-                    question: 'مجال الدالة د(س) = 1/(س² + 1) هو:',
-                    options: ['ℝ - {1}', 'ℝ - {-1}', 'ℝ', 'س ≠ 0'],
-                    correct: 2,
-                    hint: 'س² + 1 ≠ 0 لأي س حقيقي (دائماً موجب)، إذن المجال هو ℝ'
-                },
-                {
-                    id: 42,
-                    type: 'mcq',
-                    question: 'بسط: (س² - 1)/(س² + 2س + 1)',
-                    options: ['(س-1)/(س+1)', '(س+1)/(س-1)', '1', '(س²-1)/(س+1)²'],
-                    correct: 0,
-                    hint: '(س²-1) = (س-1)(س+1) و (س²+2س+1) = (س+1)². إذن الكسر = (س-1
+                {id: 11, type: 'mcq', question: 'مجال د(س) = 1/(س-2) هو:', options: ['ℝ-{2}', 'ℝ-{0}', 'ℝ', 'س>2'], correct: 0, hint: 'س-2≠0 → س≠2'},
+                {id: 12, type: 'mcq', question: 'أصفار د(س)=(س²-4)/(س-2):', options: ['2', '-2', '2و-2', 'لا يوجد'], correct: 1, hint: 'س²=4→س=±2، س≠2، إذن س=-2 فقط'},
+                {id: 13, type: 'mcq', question: 'بسط: (س²-5س+6)/(س-3) =', options: ['س-2', 'س+2', 'س-3', 'س+3'], correct: 0, hint: '(س-2)(س-3)/(س-3) = س-2 حيث س≠3'},
+                {id: 14, type: 'mcq', question: 'مجال (س+1)/(س²-4) هو:', options: ['ℝ-{2}', 'ℝ-{-2}', 'ℝ-{2,-2}', 'ℝ-{-1}'], correct: 2, hint: 'س²≠4 → س≠±2'},
+                {id: 15, type: 'mcq', question: '(س/(س+1)) ÷ (س²/(س²-1)) =', options: ['(س-1)/س', 'س/(س-1)', '1', '(س+1)/س'], correct: 0, hint: 'س/(س+1) × (س-1)(س+1)/س² = (س-1)/س'},
+                {id: 16, type: 'mcq', question: 'المعكوس الضربي لـ (2س)/(س+3):', options: ['(س+3)/(2س)', '(2س)/(س+3)', '(س+3)/2', '2/(س+3)'], correct: 0, hint: 'مقلوب الكسر = (س+3)/(2س)'},
+                {id: 17, type: 'mcq', question: 'مجال √(س-2) هو:', options: ['س≥2', 'س>2', 'س≤2', 'ℝ'], correct: 0, hint: 'س-2≥0 → س≥2'},
+                {id: 18, type: 'mcq', question: 'أصفار (س²-9)/(س+3):', options: ['3 فقط', '-3 فقط', '3و-3', 'لا يوجد'], correct: 0, hint: 'س=3 فقط (س≠-3)'},
+                {id: 19, type: 'mcq', question: '(س/(س+2)) - (2/(س-2)) =', options: ['(س²-4س-4)/((س+2)(س-2))', '(س-2)/(س+2)', '1', '0'], correct: 0, hint: 'نوحد المقامات ونبسط'},
+                {id: 20, type: 'mcq', question: 'مجال 1/(س²+1) هو:', options: ['ℝ-{1}', 'ℝ-{-1}', 'ℝ', 'س≠0'], correct: 2, hint: 'س²+1≠0 دائماً'}
+            ],
+            apr: [
+                {id: 21, type: 'mcq', question: 'الوتر هو:', options: ['قطر الدائرة', 'قطعة بين نقطتين على الدائرة', 'نصف القطر', 'قوس'], correct: 1, hint: 'الوتر: قطعة مستقيمة بين نقطتين على الدائرة'},
+                {id: 22, type: 'mcq', question: 'أطول وتر في الدائرة هو:', options: ['الوتر', 'القطر', 'القوس', 'نصف القطر'], correct: 1, hint: 'القطر هو أطول وتر'},
+                {id: 23, type: 'mcq', question: 'الأوتار المتساوية في الطول:', options: ['متباعدة عن المركز', 'متساوية البعد عن المركز', 'أحداها يمر بالمركز', 'متعامدة'], correct: 1, hint: 'الأوتار المتساوية تتساوى في بعدها عن المركز'},
+                {id: 24, type: 'mcq', question: 'القطر يعامد الوتر:', options: ['في أي نقطة', 'في المنتصف فقط', 'لا يعامده', 'في النهاية'], correct: 1, hint: 'القطر يعامد الوتر في منتصفه'},
+                {id: 25, type: 'mcq', question: 'الزاوية المركزية = 80°، فالزاوية المحيطية =', options: ['40°', '80°', '160°', '20°'], correct: 0, hint: 'المحيطية = ½ المركزية = 40°'},
+                {id: 26, type: 'mcq', question: 'الزاوية في نصف دائرة =', options: ['45°', '90°', '60°', '180°'], correct: 1, hint: 'الزاوية المحيطية في نصف دائرة قائمة'},
+                {id: 27, type: 'mcq', question: 'الرباعي الدائري: مجموع زاويتين متقابلتين =', options: ['90°', '180°', '360°', '270°'], correct: 1, hint: 'في الرباعي الدائري: المجموع = 180°'},
+                {id: 28, type: 'mcq', question: 'طولا المماسين من نقطة خارجية:', options: ['متساويان', 'متعامدان', 'أحدهما أطول', 'متباعدان'], correct: 0, hint: 'المماسان من نقطة خارجية متساويان في الطول'},
+                {id: 29, type: 'mcq', question: 'المماس عمودي على:', options: ['الوتر', 'نصف القطر في نقطة التماس', 'القطر', 'القوس'], correct: 1, hint: 'المماس ⊥ نصف القطر في نقطة التماس'},
+                {id: 30, type: 'mcq', question: 'زاوية المماس والوتر =', options: ['الزاوية المحيطية في القوس البديل', 'الزاوية المركزية', '90°', '45°'], correct: 0, hint: 'زاوية المماس والوتر = الزاوية المحيطية في القوس البديل'}
+            ],
+            final1: [
+                {id: 31, type: 'mcq', question: 'حل: 3س - 7 = 2', options: ['س=3', 'س=2', 'س=1', 'س=4'], correct: 0, hint: '3س=9 → س=3'},
+                {id: 32, type: 'mcq', question: 'Δ للمعادلة س²-6س+9=0:', options: ['0', '36', '9', '-36'], correct: 0, hint: '36-36=0'},
+                {id: 33, type: 'mcq', question: 'حل: |س-2|=4', options: ['6,-2', '6,2', '-6,2', '-6,-2'], correct: 0, hint: 'س-2=4→س=6 أو س-2=-4→س=-2'},
+                {id: 34, type: 'mcq', question: 'ناتج (س²-1)/(س-1) لس≠1:', options: ['س+1', 'س-1', '1', '0'], correct: 0, hint: '(س-1)(س+1)/(س-1)=س+1'},
+                {id: 35, type: 'mcq', question: 'في دائرة نق=5، وتر على بعد 3 من المركز، طول الوتر=', options: ['8', '6', '4', '10'], correct: 0, hint: 'النصف=√(25-9)=4، الطول=8'},
+                {id: 36, type: 'mcq', question: 'زاوية محيطية = 50°، فالزاوية المركزية =', options: ['25°', '50°', '100°', '75°'], correct: 2, hint: 'المركزية = 2 × المحيطية = 100°'},
+                {id: 37, type: 'written', question: 'اشرح طريقة الحذف لحل نظام معادلتين.', hint: 'نضرب المعادلات بأعداد مناسبة لجعل معامل أحد المتغيرين متساوياً ثم نجمع أو نطرح'},
+                {id: 38, type: 'written', question: 'اوجد أصفار الدالة د(س) = (س²-9)/(س+3).', hint: 'س²-9=0→س=±3، س≠-3، إذن الصفر هو س=3'},
+                {id: 39, type: 'written', question: 'اثبت أن الرباعي ABCD دائري إذا كانت ∠A+∠C=180°.', hint: 'هذه خاصية الرباعي الدائري: مجموع زاويتين متقابلتين يساوي 180°'},
+                {id: 40, type: 'written', question: 'اوجد طول المماس من نقطة على بعد 13 من مركز دائرة نصف قطرها 5.', hint: 'المماس² = 13² - 5² = 169 - 25 = 144 → المماس = 12'}
+            ],
+            final2: [
+                {id: 41, type: 'mcq', question: 'حل: 4س + 3 = 2س + 9', options: ['س=2', 'س=3', 'س=4', 'س=6'], correct: 1, hint: '2س=6 → س=3'},
+                {id: 42, type: 'mcq', question: 'جذور س²-8س+16=0:', options: ['4,-4', '4 مكرر', '-4 مكرر', '8'], correct: 1, hint: '(س-4)²=0 → س=4 مكرر'},
+                {id: 43, type: 'mcq', question: 'مجال د(س)=√(3س-6):', options: ['س≥2', 'س>2', 'س≤2', 'س<2'], correct: 0, hint: '3س-6≥0 → س≥2'},
+                {id: 44, type: 'mcq', question: 'المعكوس الضربي لـ 2/3 هو:', options: ['3/2', '2/3', '-2/3', '-3/2'], correct: 0, hint: 'مقلوب الكسر = 3/2'},
+                {id: 45, type: 'mcq', question: 'قطره 10 (نق=5)، وتر على بعد 4 من المركز، طول الوتر=', options: ['6', '8', '10', '12'], correct: 0, hint: 'النصف=√(25-16)=3، الطول=6'},
+                {id: 46, type: 'mcq', question: 'زاوية مركزية = 120°، فالزاوية المحيطية =', options: ['240°', '120°', '60°', '30°'], correct: 2, hint: '120°/2 = 60°'},
+                {id: 47, type: 'mcq', question: 'في مثلث قائم، الساقان 6 و8، الوتر=', options: ['10', '14', '12', '100'], correct: 0, hint: '√(36+64)=√100=10'},
+                {id: 48, type: 'written', question: 'اشرح القانون العام لحل المعادلة التربيعية.', hint: 'س = (-ب ± √Δ)/2أ حيث Δ = ب² - 4أج'},
+                {id: 49, type: 'written', question: 'اوجد معادلة الخط المستقيم المار بالنقطتين (1,3) و (3,7).', hint: 'الميل=(7-3)/(3-1)=2، ص-3=2(س-1) → ص=2س+1'},
+                {id: 50, type: 'written', question: 'بين أن المثلث المتساوي الأضلاع زواياه 60°.', hint: '180°/3 = 60° لكل زاوية'}
+            ],
+            comprehensive: []
+        };
+
+        // Fill comprehensive with random selection from all
+        const allQuestions = [...questionDB.feb, ...questionDB.mar, ...questionDB.apr, ...questionDB.final1, ...questionDB.final2];
+        questionDB.comprehensive = allQuestions.slice(0, 20);
+
+        // ==========================================
+        // GLOBAL VARIABLES
+        // ==========================================
+        
+        let currentScreen = 'mainMenu';
+        let screenHistory = [];
+        let currentTest = null;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let studentAnswers = {};
+        let studentInfo = {};
+        let testStartTime = null;
+        let timerInterval = null;
+        let testResults = [];
+
+        // ==========================================
+        // NAVIGATION FUNCTIONS
+        // ==========================================
+
+        function navigateTo(screenId) {
+            console.log('Navigating to:', screenId);
+            
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show target screen
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                
+                // Update history
+                if (currentScreen !== screenId) {
+                    screenHistory.push(currentScreen);
+                }
+                currentScreen = screenId;
+                
+                // Update back button
+                const backBtn = document.getElementById('backBtn');
+                if (screenId === 'mainMenu') {
+                    backBtn.classList.remove('visible');
+                    screenHistory = [];
+                } else {
+                    backBtn.classList.add('visible');
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            } else {
+                console.error('Screen not found:', screenId);
+            }
+        }
+
+        function goBack() {
+            if (screenHistory.length > 0) {
+                const previousScreen = screenHistory.pop();
+                navigateTo(previousScreen);
+            } else {
+                navigateTo('mainMenu');
+            }
+        }
+
+        function goToMenu() {
+            navigateTo('mainMenu');
+        }
+
+        // ==========================================
+        // ENCYCLOPEDIA FUNCTIONS
+        // ==========================================
+
+        function switchTab(tabName) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // ==========================================
+        // TEST FUNCTIONS
+        // ==========================================
+
+        function selectTest(testId, testName, questionCount) {
+            console.log('Selecting test:', testId, testName);
+            
+            currentTest = {
+                id: testId,
+                name: testName,
+                count: questionCount
+            };
+            
+            // Use internal database
+            if (questionDB[testId]) {
+                currentQuestions = questionDB[testId].slice(0, questionCount);
+                console.log('Loaded', currentQuestions.length, 'questions');
+            } else {
+                alert('عذراً، هذا الاختبار غير متوفر');
+                return;
+            }
+            
+            // Show student form
+            document.getElementById('testTypeDisplay').value = testName;
+            navigateTo('studentForm');
+        }
+
+        function startTest() {
+            const name = document.getElementById('studentName').value.trim();
+            const grade = document.getElementById('studentGrade').value;
+            
+            if (!name) {
+                showAlert('الرجاء إدخال الاسم الثلاثي');
+                return;
+            }
+            if (!grade) {
+                showAlert('الرجاء اختيار الصف الدراسي');
+                return;
+            }
+            
+            studentInfo = { name, grade };
+            
+            // Initialize quiz
+            currentQuestionIndex = 0;
+            studentAnswers = {};
+            testStartTime = Date.now();
+            
+            document.getElementById('quizTitle').textContent = currentTest.name;
+            document.getElementById('totalQNum').textContent = currentQuestions.length;
+            
+            navigateTo('quizScreen');
+            displayQuestion();
+            startTimer();
+        }
+
+        function showAlert(message) {
+            const alert = document.getElementById('formAlert');
+            alert.textContent = message;
+            alert.classList.add('show');
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 3000);
+        }
+
+        function startTimer() {
+            let seconds = 0;
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                timerDisplay.textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+            
+            document.getElementById('currentQNum').textContent = currentQuestionIndex + 1;
+            updateProgress();
+            
+            let html = `
+                <div class="question-meta">
+                    <span>السؤال ${currentQuestionIndex + 1}</span>
+                    <span style="color: ${question.type === 'mcq' ? 'var(--success)' : 'var(--warning)'}">
+                        ${question.type === 'mcq' ? 'اختيار من متعدد' : 'سؤال مقالي'}
+                    </span>
+                </div>
+                <div class="question-text">${question.question}</div>
+            `;
+            
+            if (question.type === 'mcq') {
+                html += `<div class="options-container">`;
+                question.options.forEach((option, index) => {
+                    const letter = ['أ', 'ب', 'ج', 'د'][index];
+                    html += `
+                        <button class="option-btn" onclick="selectOption(${index})" id="opt-${index}">
+                            <span class="option-letter">${letter}</span>
+                            <span>${option}</span>
+                        </button>
+                    `;
+                });
+                html += `</div>`;
+            } else {
+                html += `
+                    <textarea class="written-answer" id="writtenAns" placeholder="اكتب إجابتك هنا..."></textarea>
+                    <button class="btn btn-primary" onclick="submitWrittenAnswer()" style="width: 100%;">تأكيد الإجابة</button>
+                `;
+            }
+            
+            html += `
+                <div class="feedback-box" id="feedbackBox">
+                    <div class="feedback-title">💡 تغذية راجعة</div>
+                    <div id="feedbackText"></div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Update buttons visibility
+            const nextBtn = document.getElementById('nextBtn');
+            const finishBtn = document.getElementById('finishBtn');
+            
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextBtn.classList.add('hidden');
+                finishBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                finishBtn.classList.add('hidden');
+            }
+            
+            // Disable next until answer selected
+            nextBtn.disabled = true;
+            finishBtn.disabled = true;
+        }
+
+        function selectOption(index) {
+            const question = currentQuestions[currentQuestionIndex];
+            const isCorrect = index === question.correct;
+            
+            // Visual feedback
+            document.querySelectorAll('.option-btn').forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === question.correct) {
+                    btn.classList.add('correct');
+                } else if (i === index && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+            
+            // Save answer
+            studentAnswers[question.id] = {
+                selected: index,
+                correct: question.correct,
+                isCorrect: isCorrect
+            };
+            
+            // Show feedback
+            showFeedback(question.hint);
+            
+            // Enable next
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('finishBtn').disabled = false;
+        }
+
+        function submitWrittenAnswer() {
+            const answer = document.getElementById('writtenAns').value.trim();
+            if (!answer) {
+                alert('الرجاء كتابة إجابة');
+                return;
+            }
+            
+            const question = currentQuestions[currentQuestionIndex];
+            
+            // Save answer (written answers considered correct for navigation)
+            studentAnswers[question.id] = {
+                written: answer,
+                isCorrect: true
+            };
+            
+            // Show feedback
+            showFeedback(question.hint);
+            
+            // Enable next
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('finishBtn').disabled = false;
+        }
+
+        function showFeedback(hint) {
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackText = document.getElementById('feedbackText');
+            feedbackText.textContent = hint;
+            feedbackBox.classList.add('show');
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        function finishTest() {
+            clearInterval(timerInterval);
+            
+            // Calculate results
+            let correct = 0;
+            Object.values(studentAnswers).forEach(answer => {
+                if (answer.isCorrect) correct++;
+            });
+            
+            const score = Math.round((correct / currentQuestions.length) * 100);
+            const timeTaken = document.getElementById('timerDisplay').textContent;
+            
+            // Determine grade
+            let grade = '';
+            if (score >= 90) grade = 'ممتاز';
+            else if (score >= 80) grade = 'جيد جداً';
+            else if (score >= 70) grade = 'جيد';
+            else if (score >= 60) grade = 'مقبول';
+            else grade = 'ضعيف';
+            
+            // Save result
+            testResults.push({
+                testName: currentTest.name,
+                score: score,
+                grade: grade,
+                date: new Date().toLocaleString('ar-SA'),
+                timeTaken: timeTaken
+            });
+            
+            // Update results screen
+            document.getElementById('finalScore').textContent = score + '%';
+            document.getElementById('gradeText').textContent = grade;
+            document.getElementById('correctAnswers').textContent = correct;
+            document.getElementById('wrongAnswers').textContent = currentQuestions.length - correct;
+            document.getElementById('timeSpent').textContent = timeTaken;
+            
+            navigateTo('resultsScreen');
+        }
+
+        // ==========================================
+        // CERTIFICATE FUNCTIONS
+        // ==========================================
+
+        function showCertificate() {
+            const lastResult = testResults[testResults.length - 1];
+            
+            document.getElementById('certStudentName').textContent = studentInfo.name;
+            document.getElementById('certTestName').textContent = lastResult.testName;
+            document.getElementById('certScore').textContent = lastResult.score + '%';
+            document.getElementById('certGrade').textContent = lastResult.grade;
+            document.getElementById('certDate').textContent = 'تاريخ الصدور: ' + lastResult.date;
+            
+            document.getElementById('certificate').style.display = 'block';
+            navigateTo('certificateScreen');
+        }
+
+        function printCertificate() {
+            window.print();
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Platform loaded successfully');
+        });
+    </script>
+</body>
+</html>

@@ -3,1519 +3,2442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العباقرة الرقمية - الشهادة الإعدادية</title>
+    <title>منصة العباقرة الرقمية - رياضيات الثالث الإعدادي (الترم الثاني)</title>
     <style>
+        /* ==========================================
+           DESIGN SYSTEM & VARIABLES (محسن)
+           ========================================== */
+        :root {
+            /* Primary Colors - محسنة للتباين */
+            --primary-900: #1e1b4b;
+            --primary-800: #312e81;
+            --primary-700: #4338ca;
+            --primary-600: #4f46e5;
+            --primary-500: #6366f1;
+            
+            /* Secondary Colors */
+            --secondary-900: #854d0e;
+            --secondary-800: #a16207;
+            --secondary-700: #b45309;
+            --secondary-600: #d97706;
+            --secondary-500: #f59e0b;
+            
+            /* Neutral Colors */
+            --neutral-50: #f9fafb;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #e5e7eb;
+            --neutral-300: #d1d5db;
+            --neutral-400: #9ca3af;
+            --neutral-500: #6b7280;
+            --neutral-600: #4b5563;
+            --neutral-700: #374151;
+            --neutral-800: #1f2937;
+            --neutral-900: #111827;
+            
+            /* Feedback Colors */
+            --success-500: #10b981;
+            --success-100: #d1fae5;
+            --warning-500: #f59e0b;
+            --warning-100: #fef3c7;
+            --error-500: #ef4444;
+            --error-100: #fee2e2;
+            --info-500: #3b82f6;
+            --info-100: #dbeafe;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 0.75rem;
+            --spacing-lg: 1rem;
+            --spacing-xl: 1.5rem;
+            --spacing-2xl: 2rem;
+            --spacing-3xl: 2.5rem;
+            --spacing-4xl: 3rem;
+            
+            /* Effects */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+        }
+
+        /* ==========================================
+           RESET & BASE (محسن للأداء)
+           ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --royal-blue: #1a237e;
-            --royal-light: #283593;
-            --gold: #c5a059;
-            --gold-light: #d4af37;
-            --white: #ffffff;
-            --gray-bg: #f5f7fa;
-            --text-dark: #212121;
-            --success: #4caf50;
-            --error: #f44336;
-            --warning: #ff9800;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--gray-bg) 0%, #e4e8ec 100%);
+            font-family: 'Tajawal', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, var(--neutral-50) 0%, #eef2ff 100%);
+            color: var(--neutral-800);
+            line-height: 1.6;
             min-height: 100vh;
-            color: var(--text-dark);
-            line-height: 1.8;
         }
 
-        /* Navigation */
-        .nav-bar {
-            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-light) 100%);
-            color: var(--white);
-            padding: 15px 30px;
+        /* ==========================================
+           LAYOUT (محسن)
+           ========================================== */
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar محسن */
+        .navbar {
             position: fixed;
             top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(145deg, var(--primary-800), var(--primary-900));
+            color: white;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-xl);
+            z-index: 1000;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
-        .nav-title {
-            font-size: 1.4em;
-            font-weight: bold;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 1.25rem;
+            font-weight: 700;
         }
 
-        .back-btn {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid var(--white);
-            color: var(--white);
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s;
+        .navbar-brand-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary-600);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .navbar-back {
             display: none;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.95rem;
         }
 
-        .back-btn:hover {
-            background: var(--white);
-            color: var(--royal-blue);
+        .navbar-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
         }
 
-        .back-btn.visible {
-            display: block;
+        .navbar-back.visible {
+            display: flex;
         }
 
-        /* Screens */
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding-top: 70px;
+        }
+
+        /* Screen Management - محسن */
         .screen {
             display: none;
-            padding: 100px 20px 40px;
-            max-width: 1200px;
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            max-width: 1400px;
             margin: 0 auto;
-            min-height: 100vh;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .screen.active {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Home Screen */
+        /* ==========================================
+           HOME SCREEN (محسن)
+           ========================================== */
         .hero-section {
             text-align: center;
-            margin-bottom: 50px;
-            padding-top: 20px;
+            padding: var(--spacing-4xl) 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            background: var(--secondary-100);
+            color: var(--secondary-800);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            margin-bottom: var(--spacing-2xl);
+            border: 2px solid var(--secondary-200);
         }
 
         .hero-title {
-            color: var(--royal-blue);
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--primary-900);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-xl);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
         }
 
         .hero-subtitle {
-            color: #666;
-            font-size: 1.2em;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--neutral-600);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-3xl);
         }
 
+        /* Menu Grid - محسن للأداء */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
         }
 
-        /* CRITICAL FIX: Menu Card with proper click handling */
         .menu-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            box-shadow: var(--shadow-lg);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--transition-base);
             border: 3px solid transparent;
             position: relative;
-            /* Ensure the card captures all clicks */
-            z-index: 10;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary-600), var(--secondary-500));
+            transform: scaleX(0);
+            transition: transform var(--transition-base);
         }
 
         .menu-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(26, 35, 126, 0.25);
-            border-color: var(--gold);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--secondary-200);
         }
 
-        .menu-card:active {
-            transform: translateY(-5px) scale(0.98);
+        .menu-card:hover::before {
+            transform: scaleX(1);
         }
 
-        /* CRITICAL FIX: Icon doesn't block clicks */
-        .menu-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            display: block;
-            /* Prevent icon from capturing clicks */
-            pointer-events: none;
-            user-select: none;
+        .menu-card-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary-100), var(--primary-50));
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: var(--spacing-xl);
+            transition: all var(--transition-base);
         }
 
-        .menu-title {
-            color: var(--royal-blue);
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            pointer-events: none;
+        .menu-card:hover .menu-card-icon {
+            transform: scale(1.1) rotate(8deg);
+            background: linear-gradient(135deg, var(--primary-200), var(--primary-100));
         }
 
-        .menu-desc {
-            color: #666;
-            font-size: 1em;
-            pointer-events: none;
+        .menu-card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-900);
+            margin-bottom: var(--spacing-md);
         }
 
-        .menu-action {
-            margin-top: 20px;
-            padding: 10px 25px;
-            background: var(--royal-blue);
-            color: var(--white);
-            border-radius: 25px;
-            display: inline-block;
+        .menu-card-desc {
+            color: var(--neutral-600);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .menu-card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: var(--primary-800);
+            color: white;
+            border-radius: var(--radius-full);
+            font-weight: 600;
             opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            pointer-events: none;
+            transform: translateY(15px);
+            transition: all var(--transition-base);
         }
 
-        .menu-card:hover .menu-action {
+        .menu-card:hover .menu-card-action {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Encyclopedia */
+        /* ==========================================
+           ENCYCLOPEDIA SCREEN (موسوعة شاملة)
+           ========================================== */
         .encyclopedia-container {
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
             overflow: hidden;
         }
 
+        /* Tabs محسنة */
         .encyclopedia-tabs {
             display: flex;
-            background: var(--gray-bg);
+            background: var(--neutral-100);
+            border-bottom: 1px solid var(--neutral-200);
+            padding: var(--spacing-sm);
+            gap: var(--spacing-sm);
         }
 
         .tab-btn {
             flex: 1;
-            padding: 20px;
-            border: none;
+            padding: var(--spacing-xl);
             background: transparent;
-            color: var(--royal-blue);
-            font-size: 1.1em;
-            font-weight: bold;
+            border: none;
+            color: var(--neutral-600);
+            font-size: 1.125rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
+            transition: all var(--transition-fast);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+        }
+
+        .tab-btn:hover {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary-700);
         }
 
         .tab-btn.active {
-            background: var(--white);
-            color: var(--royal-blue);
-            border-bottom-color: var(--gold);
+            background: white;
+            color: var(--primary-800);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-content-wrapper {
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            padding: var(--spacing-2xl);
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-400) var(--neutral-200);
+        }
+
+        .tab-content-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .tab-content-wrapper::-webkit-scrollbar-track {
+            background: var(--neutral-200);
+            border-radius: var(--radius-full);
+        }
+
+        .tab-content-wrapper::-webkit-scrollbar-thumb {
+            background: var(--primary-400);
+            border-radius: var(--radius-full);
         }
 
         .tab-content {
             display: none;
-            padding: 40px;
-            max-height: 70vh;
-            overflow-y: auto;
         }
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Lesson Sections - محسنة */
         .lesson-section {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #eee;
+            margin-bottom: var(--spacing-4xl);
+            padding-bottom: var(--spacing-3xl);
+            border-bottom: 3px solid var(--neutral-200);
+        }
+
+        .lesson-section:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .lesson-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
         }
 
         .lesson-title {
-            color: var(--royal-blue);
-            font-size: 1.5em;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-900);
+        }
+
+        .lesson-content {
+            color: var(--neutral-700);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .lesson-content p {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .lesson-content strong {
+            color: var(--primary-700);
+            font-weight: 700;
+        }
+
+        /* Formula Box - محسنة */
+        .formula-box {
+            background: linear-gradient(145deg, var(--info-100) 0%, #bfdbfe 100%);
+            border-right: 6px solid var(--info-500);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-2xl) 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.15rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .formula-box .formula-title {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            color: var(--primary-800);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.2rem;
+            border-bottom: 2px dashed var(--primary-400);
+            padding-bottom: var(--spacing-sm);
+        }
+
+        /* Concept Grid - محسنة */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin: var(--spacing-2xl) 0;
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid var(--neutral-200);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            transition: all var(--transition-fast);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .concept-card:hover {
+            border-color: var(--primary-400);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .concept-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-800);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--secondary-400);
+        }
+
+        .concept-card-content {
+            color: var(--neutral-600);
+            line-height: 1.8;
+        }
+
+        /* Concept List - محسنة */
+        .concept-list {
+            background: var(--neutral-50);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-2xl) 0;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .concept-list-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-800);
+            margin-bottom: var(--spacing-lg);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: var(--spacing-sm);
         }
 
-        .lesson-title::before {
-            content: "▶";
-            color: var(--gold);
-        }
-
-        .formula-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-right: 5px solid var(--royal-blue);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1em;
-            direction: ltr;
-            text-align: center;
-        }
-
-        .concept-list {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 15px 0;
+        .concept-list ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
         }
 
         .concept-list li {
-            margin: 10px 0;
-            padding-right: 20px;
             position: relative;
-            list-style: none;
+            padding-right: var(--spacing-2xl);
+            color: var(--neutral-700);
         }
 
         .concept-list li::before {
-            content: "•";
-            color: var(--gold);
-            font-weight: bold;
+            content: '📌';
             position: absolute;
             right: 0;
+            color: var(--secondary-600);
+            font-size: 1.1rem;
         }
 
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
+        /* Example Box - جديدة */
+        .example-box {
+            background: var(--success-100);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            border-right: 6px solid var(--success-500);
         }
 
-        /* Test Selection */
+        .example-box-title {
+            font-weight: 700;
+            color: var(--success-700);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .example-box-content {
+            color: var(--neutral-700);
+            font-size: 1rem;
+        }
+
+        /* Note Box - جديدة */
+        .note-box {
+            background: var(--warning-100);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            border-right: 4px solid var(--warning-500);
+        }
+
+        .note-box-title {
+            font-weight: 700;
+            color: var(--warning-700);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        /* ==========================================
+           TEST SELECTION SCREEN (محسن)
+           ========================================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--spacing-4xl);
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary-900);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .page-subtitle {
+            color: var(--neutral-600);
+            font-size: 1.125rem;
+        }
+
         .test-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--spacing-2xl);
         }
 
         .category-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .category-card:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .category-header {
+            background: linear-gradient(145deg, var(--primary-800), var(--primary-700));
+            color: white;
+            padding: var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-lg);
         }
 
         .category-title {
-            color: var(--royal-blue);
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
         }
 
-        /* CRITICAL FIX: Test item with proper click handling */
+        .category-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .test-list {
+            padding: var(--spacing-xl);
+        }
+
         .test-item {
-            background: var(--gray-bg);
-            margin: 12px 0;
-            padding: 18px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-right: 4px solid transparent;
-            position: relative;
-            z-index: 10;
+            justify-content: space-between;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            background: var(--neutral-50);
+            border-radius: var(--radius-xl);
+            border-right: 5px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
         }
 
         .test-item:hover {
-            background: #e8eaf6;
-            border-right-color: var(--royal-blue);
+            background: var(--primary-50);
+            border-right-color: var(--primary-600);
             transform: translateX(-5px);
         }
 
-        .test-item:active {
-            transform: translateX(-3px) scale(0.98);
+        .test-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--neutral-800);
+            margin-bottom: var(--spacing-xs);
         }
 
-        .test-text {
-            pointer-events: none;
+        .test-info p {
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+        }
+
+        .test-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
         }
 
         .test-badge {
-            background: var(--gold);
-            color: var(--white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
-            pointer-events: none;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: var(--secondary-100);
+            color: var(--secondary-800);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
         }
 
-        /* Quiz Interface */
+        .test-arrow {
+            color: var(--neutral-400);
+            font-size: 1.2rem;
+            transition: color var(--transition-fast);
+        }
+
+        .test-item:hover .test-arrow {
+            color: var(--primary-600);
+        }
+
+        /* ==========================================
+           STUDENT FORM SCREEN (محسن)
+           ========================================== */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: var(--spacing-4xl);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .form-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-100), var(--primary-50));
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto var(--spacing-xl);
+        }
+
+        .form-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-900);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            color: var(--neutral-700);
+            margin-bottom: var(--spacing-md);
+            font-size: 1rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: var(--spacing-lg);
+            border: 2px solid var(--neutral-200);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            background: white;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 4px var(--primary-100);
+        }
+
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--neutral-500);
+            margin-top: var(--spacing-sm);
+        }
+
+        .alert {
+            display: none;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            font-weight: 500;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-error {
+            background: var(--error-100);
+            color: var(--error-500);
+            border-right: 5px solid var(--error-500);
+        }
+
+        /* ==========================================
+           QUIZ SCREEN (محسن مع ذاكرة تخزين)
+           ========================================== */
         .quiz-header {
-            background: var(--white);
-            padding: 25px 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--spacing-2xl);
         }
 
-        .quiz-info h3 {
-            color: var(--royal-blue);
-            margin-bottom: 5px;
+        .quiz-progress {
+            margin-bottom: var(--spacing-xl);
         }
 
-        .timer-box {
-            background: linear-gradient(135deg, var(--royal-blue), var(--royal-light));
-            color: var(--white);
-            padding: 12px 25px;
-            border-radius: 12px;
-            font-size: 1.3em;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
+        .quiz-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .quiz-progress-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-800);
+        }
+
+        .quiz-progress-meta {
+            font-size: 0.95rem;
+            color: var(--neutral-600);
+            background: var(--neutral-100);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
         }
 
         .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 10px;
+            height: 10px;
+            background: var(--neutral-200);
+            border-radius: var(--radius-full);
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--royal-blue), var(--gold));
+            background: linear-gradient(90deg, var(--primary-600), var(--secondary-600));
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width var(--transition-base);
         }
 
-        .question-container {
-            background: var(--white);
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+        .quiz-timer {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: linear-gradient(145deg, var(--primary-800), var(--primary-900));
+            color: white;
+            border-radius: var(--radius-lg);
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
         }
 
-        .question-meta {
+        .quiz-timer.warning {
+            background: linear-gradient(145deg, var(--error-500), #dc2626);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .question-header {
             display: flex;
             justify-content: space-between;
-            color: var(--royal-blue);
-            font-weight: bold;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: var(--spacing-2xl);
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            background: var(--primary-100);
+            color: var(--primary-800);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+        }
+
+        .question-type {
+            padding: var(--spacing-sm) var(--spacing-xl);
+            background: var(--secondary-100);
+            color: var(--secondary-800);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .question-text {
-            font-size: 1.25em;
-            margin-bottom: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-800);
             line-height: 1.8;
+            margin-bottom: var(--spacing-2xl);
         }
 
-        .options-container {
+        /* Options - محسنة */
+        .options-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: var(--spacing-lg);
         }
 
-        .option-btn {
-            background: var(--gray-bg);
-            border: 3px solid transparent;
-            padding: 18px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: right;
-            font-size: 1.05em;
-            transition: all 0.3s;
+        .option-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background: var(--neutral-50);
+            border: 2px solid transparent;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: all var(--transition-fast);
         }
 
-        .option-btn:hover {
-            background: #e3f2fd;
-            border-color: var(--royal-blue);
+        .option-item:hover:not(.disabled) {
+            background: var(--primary-50);
+            border-color: var(--primary-300);
+            transform: translateX(-5px);
         }
 
-        .option-btn.selected {
-            background: #e3f2fd;
-            border-color: var(--royal-blue);
+        .option-item.selected {
+            background: var(--primary-100);
+            border-color: var(--primary-600);
         }
 
-        .option-btn.correct {
-            background: #e8f5e9;
-            border-color: var(--success);
-            color: var(--success);
+        .option-item.correct {
+            background: var(--success-100);
+            border-color: var(--success-500);
         }
 
-        .option-btn.wrong {
-            background: #ffebee;
-            border-color: var(--error);
-            color: var(--error);
+        .option-item.wrong {
+            background: var(--error-100);
+            border-color: var(--error-500);
+        }
+
+        .option-item.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         .option-letter {
-            width: 35px;
-            height: 35px;
-            background: var(--royal-blue);
-            color: var(--white);
-            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-600);
+            color: white;
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1.2rem;
             flex-shrink: 0;
         }
 
-        .written-answer {
-            width: 100%;
-            min-height: 150px;
-            padding: 20px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-family: inherit;
-            resize: vertical;
-            margin-bottom: 15px;
+        .option-item.correct .option-letter {
+            background: var(--success-500);
         }
 
+        .option-item.wrong .option-letter {
+            background: var(--error-500);
+        }
+
+        .option-text {
+            font-size: 1.1rem;
+            color: var(--neutral-700);
+            flex: 1;
+        }
+
+        /* Written Answer */
+        .written-container {
+            margin-top: var(--spacing-xl);
+        }
+
+        .written-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: var(--spacing-xl);
+            border: 2px solid var(--neutral-200);
+            border-radius: var(--radius-xl);
+            font-size: 1.1rem;
+            font-family: inherit;
+            resize: vertical;
+            transition: all var(--transition-fast);
+        }
+
+        .written-textarea:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 4px var(--primary-100);
+        }
+
+        /* Feedback Box */
         .feedback-box {
-            background: #fff8e1;
-            border-right: 5px solid var(--warning);
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 12px;
             display: none;
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-xl);
+            background: var(--info-100);
+            border-right: 6px solid var(--info-500);
+            border-radius: var(--radius-xl);
+            animation: slideDown 0.3s ease;
         }
 
         .feedback-box.show {
             display: block;
-            animation: slideDown 0.3s ease;
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .feedback-title {
-            color: var(--warning);
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .nav-controls {
+        .feedback-header {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 700;
+            color: var(--info-700);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feedback-text {
+            color: var(--neutral-700);
+            line-height: 1.8;
+        }
+
+        /* Quiz Navigation */
+        .quiz-nav {
+            display: flex;
             justify-content: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-2xl);
+            flex-wrap: wrap;
         }
 
-        .btn {
-            padding: 14px 35px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.05em;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--royal-blue), var(--royal-light));
-            color: var(--white);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #45a049);
-            color: var(--white);
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: var(--white);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Results */
+        /* ==========================================
+           RESULTS SCREEN (محسن)
+           ========================================== */
         .results-container {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
+            background: white;
+            padding: var(--spacing-4xl);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            text-align: center;
         }
 
-        .score-display {
-            font-size: 4.5em;
-            color: var(--royal-blue);
-            font-weight: bold;
-            margin: 20px 0;
+        .results-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--secondary-100), var(--secondary-50));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto var(--spacing-2xl);
+            border: 4px solid var(--secondary-400);
         }
 
-        .grade-display {
-            font-size: 2em;
-            color: var(--gold);
-            font-weight: bold;
-            margin: 15px 0;
-            padding: 10px 30px;
-            background: rgba(197, 160, 89, 0.15);
-            border-radius: 10px;
+        .results-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-900);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .score-circle {
+            width: 250px;
+            height: 250px;
+            margin: var(--spacing-3xl) auto;
+            position: relative;
+        }
+
+        .score-circle-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary-600) calc(var(--score-percent) * 1%),
+                var(--neutral-200) 0
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle-bg::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .score-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-900);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            color: var(--neutral-500);
+            margin-top: var(--spacing-sm);
+        }
+
+        .grade-badge {
             display: inline-block;
+            padding: var(--spacing-md) var(--spacing-3xl);
+            background: var(--secondary-100);
+            color: var(--secondary-800);
+            border-radius: var(--radius-full);
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-2xl);
+            border: 3px solid var(--secondary-400);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 30px 0;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-3xl);
         }
 
-        .stat-box {
-            background: var(--gray-bg);
-            padding: 20px;
-            border-radius: 15px;
+        .stat-item {
+            padding: var(--spacing-xl);
+            background: var(--neutral-50);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--neutral-200);
         }
 
         .stat-value {
-            font-size: 1.8em;
-            color: var(--royal-blue);
-            font-weight: bold;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-800);
         }
 
         .stat-label {
-            color: #666;
-            margin-top: 5px;
+            font-size: 0.95rem;
+            color: var(--neutral-500);
+            margin-top: var(--spacing-sm);
         }
 
-        /* Certificate */
-        .certificate {
-            display: none;
-            background: linear-gradient(135deg, #fff9e6 0%, #ffecb3 100%);
-            border: 12px solid var(--gold);
-            padding: 50px;
-            text-align: center;
-            border-radius: 20px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 850px;
+        /* ==========================================
+           CERTIFICATE SCREEN (محسن)
+           ========================================== */
+        .certificate-wrapper {
+            max-width: 1000px;
             margin: 0 auto;
+        }
+
+        .certificate {
+            background: linear-gradient(145deg, #fffbeb 0%, #fef9e7 100%);
+            border: 15px solid var(--secondary-600);
+            padding: var(--spacing-4xl);
+            border-radius: var(--radius-2xl);
+            position: relative;
+            box-shadow: var(--shadow-2xl);
         }
 
         .certificate::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 3px solid var(--gold);
-            border-radius: 15px;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px dashed var(--secondary-500);
+            border-radius: var(--radius-xl);
             pointer-events: none;
         }
 
-        .cert-header {
-            margin-bottom: 30px;
+        .certificate-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+            position: relative;
         }
 
-        .cert-icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-        }
-
-        .cert-title {
-            color: var(--royal-blue);
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-
-        .cert-content {
-            margin: 30px 0;
-            font-size: 1.15em;
-            line-height: 2;
-        }
-
-        .cert-name {
-            font-size: 2em;
-            color: var(--royal-blue);
-            font-weight: bold;
-            margin: 15px 0;
-            border-bottom: 3px solid var(--gold);
-            display: inline-block;
-            padding: 0 30px 10px;
-        }
-
-        .cert-score {
-            font-size: 3em;
-            color: var(--gold);
-            font-weight: bold;
-            margin: 15px 0;
-        }
-
-        .cert-footer {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 25px;
-            border-top: 2px solid var(--gold);
-        }
-
-        .cert-date {
-            color: #666;
-        }
-
-        .cert-seal {
-            width: 130px;
-            height: 130px;
-            background: var(--gold);
+        .certificate-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, var(--primary-800), var(--primary-700));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-weight: bold;
-            font-size: 1.1em;
-            border: 4px solid var(--white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 3.5rem;
+            margin: 0 auto var(--spacing-xl);
+            box-shadow: var(--shadow-xl);
+            border: 4px solid var(--secondary-500);
         }
 
-        /* Student Form */
-        .student-form {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 550px;
-            margin: 0 auto;
+        .certificate-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-900);
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 2px 2px 0 var(--secondary-200);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-            text-align: right;
+        .certificate-subtitle {
+            font-size: 1.4rem;
+            color: var(--secondary-700);
+            font-weight: 600;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--royal-blue);
-            font-weight: bold;
+        .certificate-body {
+            text-align: center;
+            padding: var(--spacing-3xl) 0;
+            position: relative;
         }
 
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1.05em;
+        .certificate-text {
+            font-size: 1.3rem;
+            color: var(--neutral-700);
+            line-height: 2.2;
         }
 
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--royal-blue);
+        .certificate-name {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-900);
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-lg) var(--spacing-4xl);
+            border-bottom: 4px solid var(--secondary-600);
+            display: inline-block;
+            text-shadow: 2px 2px 0 var(--secondary-200);
         }
 
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
+        .certificate-test {
+            font-size: 1.8rem;
+            color: var(--primary-700);
+            font-weight: 700;
+            margin: var(--spacing-xl) 0;
         }
 
-        .alert-error {
-            background: #ffebee;
-            color: #c62828;
-            border-right: 4px solid #c62828;
+        .certificate-score {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--secondary-700);
+            margin: var(--spacing-xl) 0;
+            text-shadow: 3px 3px 0 var(--secondary-300);
         }
 
-        .alert.show {
-            display: block;
+        .certificate-grade {
+            display: inline-block;
+            padding: var(--spacing-lg) var(--spacing-4xl);
+            background: var(--primary-800);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: 2rem;
+            font-weight: 800;
+            border: 3px solid var(--secondary-500);
         }
 
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--spacing-4xl);
+            padding-top: var(--spacing-2xl);
+            border-top: 3px solid var(--secondary-600);
+            position: relative;
+        }
+
+        .certificate-date {
+            font-size: 1.1rem;
+            color: var(--neutral-600);
+        }
+
+        .certificate-seal {
+            width: 160px;
+            height: 160px;
+            background: var(--secondary-600);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 5px solid white;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .certificate-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-3xl);
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================
+           BUTTONS (محسنة)
+           ========================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            min-width: 140px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, var(--primary-700), var(--primary-800));
+            color: white;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(145deg, var(--success-500), #059669);
+            color: white;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-gold {
+            background: linear-gradient(145deg, var(--secondary-600), var(--secondary-700));
+            color: white;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-gold:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--neutral-300);
+            color: var(--neutral-700);
+        }
+
+        .btn-outline:hover:not(:disabled) {
+            border-color: var(--primary-600);
+            color: var(--primary-700);
+            background: var(--primary-50);
+        }
+
+        /* ==========================================
+           UTILITIES
+           ========================================== */
         .hidden {
             display: none !important;
         }
 
-        @media (max-width: 768px) {
-            .menu-grid, .test-categories { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .hero-title { font-size: 1.8em; }
-            .certificate { padding: 30px 20px; }
-            .cert-footer { flex-direction: column; gap: 20px; }
+        .text-center {
+            text-align: center;
         }
 
+        .mt-4 {
+            margin-top: var(--spacing-4xl);
+        }
+
+        /* Responsive Design - محسن */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-4xl: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .test-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate {
+                padding: var(--spacing-xl);
+                border-width: 8px;
+            }
+
+            .certificate::before {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+            }
+
+            .certificate-title {
+                font-size: 2rem;
+            }
+
+            .certificate-name {
+                font-size: 2rem;
+                padding: var(--spacing-md) var(--spacing-xl);
+            }
+
+            .certificate-footer {
+                flex-direction: column;
+                gap: var(--spacing-xl);
+                text-align: center;
+            }
+
+            .certificate-seal {
+                width: 120px;
+                height: 120px;
+                font-size: 1rem;
+            }
+
+            .form-container {
+                padding: var(--spacing-2xl);
+            }
+
+            .question-card {
+                padding: var(--spacing-xl);
+            }
+
+            .option-item {
+                padding: var(--spacing-md);
+                gap: var(--spacing-md);
+            }
+
+            .encyclopedia-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                padding: var(--spacing-lg);
+            }
+
+            .lesson-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+
+            .certificate-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Print Styles - محسنة */
         @media print {
-            body * { visibility: hidden; }
-            .certificate, .certificate * { visibility: visible; }
+            body * {
+                visibility: hidden;
+            }
+
+            .certificate, .certificate * {
+                visibility: visible;
+            }
+
             .certificate {
                 position: absolute;
                 left: 0;
                 top: 0;
                 width: 100%;
                 margin: 0;
+                border: 10px solid black;
+                padding: 2rem;
             }
+
+            .certificate-actions {
+                display: none;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--primary-500);
+            outline-offset: 3px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Navigation -->
-    <nav class="nav-bar">
-        <div class="nav-title">منصة العباقرة الرقمية</div>
-        <button class="back-btn" id="backBtn" onclick="goBack()">← عودة للقائمة السابقة</button>
-    </nav>
-
-    <!-- Screen 1: Main Menu -->
-    <div id="mainMenu" class="screen active">
-        <div class="hero-section">
-            <h1 class="hero-title">منصة العباقرة الرقمية</h1>
-            <p class="hero-subtitle">الشهادة الإعدادية - الترم الثاني - مادة الرياضيات</p>
-        </div>
-
-        <div class="menu-grid">
-            <!-- Card 1: Encyclopedia -->
-            <div class="menu-card" onclick="navigateTo('encyclopedia')">
-                <span class="menu-icon">📚</span>
-                <h3 class="menu-title">الموسوعة التعليمية</h3>
-                <p class="menu-desc">شرح شامل لمنهج الجبر والهندسة</p>
-                <span class="menu-action">اضغط للدخول</span>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <div class="navbar-brand-icon">🧮</div>
+                <span>منصة العباقرة - رياضيات الثالث الإعدادي</span>
             </div>
-
-            <!-- Card 2: Tests -->
-            <div class="menu-card" onclick="navigateTo('testSelection')">
-                <span class="menu-icon">📝</span>
-                <h3 class="menu-title">الاختبارات الذكية</h3>
-                <p class="menu-desc">اختبارات شهور ونماذج نهائية</p>
-                <span class="menu-action">اضغط للدخول</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Screen 2: Encyclopedia -->
-    <div id="encyclopedia" class="screen">
-        <div class="encyclopedia-container">
-            <div class="encyclopedia-tabs">
-                <button class="tab-btn active" onclick="switchTab('algebra')">📐 الجبر والإحصاء</button>
-                <button class="tab-btn" onclick="switchTab('geometry')">⚫ الهندسة</button>
-            </div>
-
-            <!-- Algebra Content -->
-            <div id="algebra" class="tab-content active">
-                
-                <!-- Lesson 1 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">حل معادلتين من الدرجة الأولى</h3>
-                    <p><strong>التعريف:</strong> المعادلة من الدرجة الأولى في مجهولين: أ س + ب ص = ج</p>
-                    
-                    <div class="concept-list">
-                        <li><strong>الطريقة البيانية:</strong> رسم المستقيمين وإيجاد نقطة التقاطع</li>
-                        <li><strong>طريقة الحذف:</strong> جعل معامل أحد المتغيرين متساوياً ثم الجمع/الطرح</li>
-                        <li><strong>طريقة التعويض:</strong> التعبير عن أحد المتغيرين والتعويض في المعادلة الأخرى</li>
-                    </div>
-
-                    <div class="formula-box">
-                        حالات الحل:<br>
-                        معاملات غير متناسبة → حل واحد (تقاطع)<br>
-                        معاملات متناسبة ≠ حدود مطلقة → لا حل (توازي)<br>
-                        الكل متناسب → حلول لا نهائية (تطابق)
-                    </div>
-                </div>
-
-                <!-- Lesson 2 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">القانون العام للمعادلة التربيعية</h3>
-                    <div class="formula-box">
-                        س = (-ب ± √(ب² - 4أج)) / 2أ
-                    </div>
-                    <p><strong>المميز Δ = ب² - 4أج</strong></p>
-                    <div class="concept-list">
-                        <li><span class="highlight">Δ > 0:</span> حلان حقيقيان مختلفان</li>
-                        <li><span class="highlight">Δ = 0:</span> حل واحد مكرر</li>
-                        <li><span class="highlight">Δ < 0:</span> لا حل حقيقي</li>
-                    </div>
-                </div>
-
-                <!-- Lesson 3 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الدوال الكسرية</h3>
-                    <p><strong>أصفار الدالة:</strong> قيم س التي تجعل البسط = 0 (مع شرط المقام ≠ 0)</p>
-                    <div class="formula-box">
-                        مجال الدالة = ℝ - {قيم س التي تجعل المقام = 0}
-                    </div>
-                    <p><strong>المعكوس الضربي:</strong> مقلوب الكسر (ب/أ) هو المعكوس الضربي لـ (أ/ب)</p>
-                </div>
-
-                <!-- Lesson 4 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الاحتمالات</h3>
-                    <div class="formula-box">
-                        ل(أ ∪ ب) = ل(أ) + ل(ب) - ل(أ ∩ ب)<br>
-                        ل(أ') = 1 - ل(أ)<br>
-                        الأحداث المتنافية: ل(أ ∩ ب) = 0
-                    </div>
-                </div>
-            </div>
-
-            <!-- Geometry Content -->
-            <div id="geometry" class="tab-content">
-                
-                <!-- Lesson 1 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الدائرة والأوتار</h3>
-                    <div class="concept-list">
-                        <li><strong>الوتر:</strong> القطعة المستقيمة بين نقطتين على الدائرة</li>
-                        <li><strong>القطر:</strong> وتر يمر بالمركز (أطول أوتر)</li>
-                        <li><strong>نصف القطر:</strong> من المركز إلى أي نقطة على الدائرة</li>
-                    </div>
-                    <div class="formula-box">
-                        إذا كان طول الوتر = ل، وبعده عن المركز = ع<br>
-                        (ل/2)² + ع² = نق²
-                    </div>
-                </div>
-
-                <!-- Lesson 2 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الزوايا في الدائرة</h3>
-                    <div class="formula-box">
-                        الزاوية المحيطية = ½ × الزاوية المركزية<br>
-                        الزاوية في نصف دائرة = 90°<br>
-                        زاوية المماس والوتر = الزاوية المحيطية في القوس البديل
-                    </div>
-                </div>
-
-                <!-- Lesson 3 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">الرباعي الدائري</h3>
-                    <p><strong>التعريف:</strong> رباعي يمكن إدراجه في دائرة</p>
-                    <div class="concept-list">
-                        <li>مجموع زاويتين متقابلتين = 180°</li>
-                        <li>الزاوية الخارجية = الزاوية الداخلية المتقابلة</li>
-                    </div>
-                </div>
-
-                <!-- Lesson 4 -->
-                <div class="lesson-section">
-                    <h3 class="lesson-title">المماسات</h3>
-                    <div class="concept-list">
-                        <li>المماس عمودي على نصف القطر في نقطة التماس</li>
-                        <li>طولا المماسين من نقطة خارجية متساويان</li>
-                        <li>خط الواصل بين النقطة الخارجية والمركز ينصف زاوية المماسين</li>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Screen 3: Test Selection -->
-    <div id="testSelection" class="screen">
-        <h1 style="color: var(--royal-blue); text-align: center; margin-bottom: 30px;">اختيار الاختبار</h1>
-        
-        <div class="test-categories">
-            <div class="category-card">
-                <h3 class="category-title">📅 اختبارات الشهور</h3>
-                
-                <div class="test-item" onclick="selectTest('feb', 'امتحان فبراير - المعادلات', 10)">
-                    <span class="test-text">امتحان فبراير: حل المعادلات</span>
-                    <span class="test-badge">10 أسئلة</span>
-                </div>
-                
-                <div class="test-item" onclick="selectTest('mar', 'امتحان مارس - الدوال الكسرية', 10)">
-                    <span class="test-text">امتحان مارس: الدوال الكسرية</span>
-                    <span class="test-badge">10 أسئلة</span>
-                </div>
-                
-                <div class="test-item" onclick="selectTest('apr', 'امتحان أبريل - الهندسة', 10)">
-                    <span class="test-text">امتحان أبريل: هندسة الدائرة</span>
-                    <span class="test-badge">10 أسئلة</span>
-                </div>
-            </div>
-
-            <div class="category-card">
-                <h3 class="category-title">🎓 نماذج الامتحانات النهائية</h3>
-                
-                <div class="test-item" onclick="selectTest('final1', 'نموذج امتحان نهائي أول', 15)">
-                    <span class="test-text">نموذج امتحان محافظة أول</span>
-                    <span class="test-badge">15 سؤالاً</span>
-                </div>
-                
-                <div class="test-item" onclick="selectTest('final2', 'نموذج امتحان نهائي ثانٍ', 15)">
-                    <span class="test-text">نموذج امتحان محافظة ثانٍ</span>
-                    <span class="test-badge">15 سؤالاً</span>
-                </div>
-                
-                <div class="test-item" onclick="selectTest('comprehensive', 'اختبار شامل', 20)">
-                    <span class="test-text">اختبار شامل على المنهج</span>
-                    <span class="test-badge">20 سؤالاً</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Screen 4: Student Form -->
-    <div id="studentForm" class="screen">
-        <div class="student-form">
-            <h2 style="color: var(--royal-blue); text-align: center; margin-bottom: 25px;">معلومات الطالب</h2>
-            
-            <div id="formAlert" class="alert alert-error"></div>
-
-            <div class="form-group">
-                <label for="studentName">الاسم الثلاثي</label>
-                <input type="text" id="studentName" placeholder="أدخل اسمك الثلاثي">
-            </div>
-
-            <div class="form-group">
-                <label for="studentGrade">الصف الدراسي</label>
-                <select id="studentGrade">
-                    <option value="">اختر الصف</option>
-                    <option value="third">الصف الثالث الإعدادي</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="testTypeDisplay">نوع الاختبار</label>
-                <input type="text" id="testTypeDisplay" readonly style="background: #f5f5f5;">
-            </div>
-
-            <button class="btn btn-primary" onclick="startTest()" style="width: 100%;">
-                بدء الاختبار الآن
+            <button class="navbar-back" id="backBtn">
+                <span>←</span>
+                <span>العودة للرئيسية</span>
             </button>
-        </div>
-    </div>
+        </nav>
 
-    <!-- Screen 5: Quiz -->
-    <div id="quizScreen" class="screen">
-        <div class="quiz-header">
-            <div class="quiz-info">
-                <h3 id="quizTitle">عنوان الاختبار</h3>
-                <div class="progress-bar">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-                <p style="margin-top: 8px; color: #666;">
-                    السؤال <span id="currentQNum">1</span> من <span id="totalQNum">10</span>
-                </p>
-            </div>
-            <div class="timer-box" id="timerBox">
-                <span id="timerDisplay">00:00</span>
-            </div>
-        </div>
-
-        <div class="question-container" id="questionContainer">
-            <!-- Dynamic content -->
-        </div>
-
-        <div class="nav-controls">
-            <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
-                السؤال التالي ←
-            </button>
-            <button class="btn btn-success hidden" id="finishBtn" onclick="finishTest()">
-                إنهاء الاختبار ✓
-            </button>
-        </div>
-    </div>
-
-    <!-- Screen 6: Results -->
-    <div id="resultsScreen" class="screen">
-        <div class="results-container">
-            <h2 style="color: var(--royal-blue);">نتيجة الاختبار</h2>
+        <!-- Main Content -->
+        <main class="main-content">
             
-            <div class="score-display" id="finalScore">0%</div>
-            <div class="grade-display" id="gradeText">-</div>
+            <!-- Screen 1: Home -->
+            <div id="homeScreen" class="screen active">
+                <div class="hero-section">
+                    <div class="hero-badge">
+                        <span>📐</span>
+                        <span>الترم الثاني - الصف الثالث الإعدادي</span>
+                    </div>
+                    <h1 class="hero-title">منصة العباقرة الرقمية<br>لتعليم الرياضيات</h1>
+                    <p class="hero-subtitle">شرح مبسط، تدريبات تفاعلية، واختبارات محاكية لامتحانات المحافظات - كل ما تحتاجه للتفوق في الرياضيات</p>
+                </div>
 
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-value" id="correctAnswers">0</div>
-                    <div class="stat-label">إجابات صحيحة</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="wrongAnswers">0</div>
-                    <div class="stat-label">إجابات خاطئة</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="timeSpent">0:00</div>
-                    <div class="stat-label">الوقت المستغرق</div>
+                <div class="menu-grid">
+                    <div class="menu-card" onclick="navigateTo('encyclopedia')">
+                        <div class="menu-card-icon">📖</div>
+                        <h3 class="menu-card-title">الموسوعة التعليمية</h3>
+                        <p class="menu-card-desc">منهج كامل ومتكامل: شرح مفصل، قوانين، أمثلة محلولة، وتدريبات على كل درس في الجبر والهندسة</p>
+                        <div class="menu-card-action">
+                            <span>تصفح المنهج</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" onclick="navigateTo('tests')">
+                        <div class="menu-card-icon">✍️</div>
+                        <h3 class="menu-card-title">بنك الاختبارات</h3>
+                        <p class="menu-card-desc">اختبارات متنوعة: امتحانات المحافظات، اختبارات شهرية، واختبارات تحديد المستوى مع تصحيح فوري</p>
+                        <div class="menu-card-action">
+                            <span>اختبر نفسك</span>
+                            <span>→</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="nav-controls">
-                <button class="btn btn-gold" onclick="showCertificate()">عرض الشهادة 🏆</button>
-                <button class="btn btn-primary" onclick="goToMenu()">القائمة الرئيسية</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Screen 7: Certificate -->
-    <div id="certificateScreen" class="screen">
-        <div class="certificate" id="certificate">
-            <div class="cert-header">
-                <div class="cert-icon">🎓</div>
-                <h1 class="cert-title">شهادة إتمام اختبار</h1>
-            </div>
-
-            <div class="cert-content">
-                <p>يشهد مركز التميز التعليمي بأن الطالب</p>
-                <div class="cert-name" id="certStudentName">-</div>
-                <p>قد أتم بنجاح</p>
-                <div style="font-size: 1.2em; color: var(--royal-blue); font-weight: bold; margin: 10px 0;" id="certTestName">-</div>
-                <p>وحصل على الدرجة</p>
-                <div class="cert-score" id="certScore">0%</div>
-                <div class="grade-display" id="certGrade">-</div>
-            </div>
-
-            <div class="cert-footer">
-                <div class="cert-date" id="certDate">-</div>
-                <div class="cert-seal">معتمد<br>رقمياً</div>
-            </div>
-        </div>
-
-        <div class="nav-controls" style="margin-top: 30px;">
-            <button class="btn btn-primary" onclick="printCertificate()">🖨️ طباعة الشهادة</button>
-            <button class="btn btn-success" onclick="goToMenu()">اختبار جديد</button>
-        </div>
-    </div>
-
-    <script>
-        // ==========================================
-        // DATABASE: 50 Questions
-        // ==========================================
-        
-        const questionDB = {
-            feb: [
-                {id: 1, type: 'mcq', question: 'إذا كان المستقيمان س + 3ص = 4 و س + ك ص = 1 متوازيين، فإن ك =', options: ['1', '3', '4', '-3'], correct: 1, hint: 'في التوازي: 1/1 = 3/ك إذن ك = 3'},
-                {id: 2, type: 'mcq', question: 'حل: 2س - 5 = 3س + 7', options: ['-12', '12', '2', '-2'], correct: 0, hint: '-5 - 7 = 3س - 2س → س = -12'},
-                {id: 3, type: 'mcq', question: 'حل النظام: س + ص = 5 ، س - ص = 1', options: ['(2,3)', '(3,2)', '(4,1)', '(1,4)'], correct: 1, hint: 'بجمع المعادلتين: 2س = 6 → س = 3، ص = 2'},
-                {id: 4, type: 'mcq', question: 'المعادلة س² - 5س + 6 = 0 لها:', options: ['حل واحد', 'حلان حقيقيان', 'لا حل', 'حلان مركبان'], correct: 1, hint: 'Δ = 25 - 24 = 1 > 0 → حلان حقيقيان'},
-                {id: 5, type: 'mcq', question: 'حل: س² - 9 = 0', options: ['3 فقط', '-3 فقط', '3 و -3', '9'], correct: 2, hint: 'س² = 9 → س = ±3'},
-                {id: 6, type: 'mcq', question: 'إذا كانا حلا المعادلة هما 2 و 3، فمجموع الجذرين =', options: ['5', '6', '-5', '1'], correct: 0, hint: '2 + 3 = 5'},
-                {id: 7, type: 'mcq', question: 'منتصف (2,4) و (6,8) هو:', options: ['(4,6)', '(8,12)', '(3,4)', '(4,4)'], correct: 0, hint: '((2+6)/2, (4+8)/2) = (4,6)'},
-                {id: 8, type: 'mcq', question: 'ميل المستقيم المار بـ (1,2) و (3,8) =', options: ['2', '3', '4', '6'], correct: 1, hint: '(8-2)/(3-1) = 6/2 = 3'},
-                {id: 9, type: 'mcq', question: 'معادلة المستقيم المار بـ (2,3) وميله 2:', options: ['ص=2س+1', 'ص=2س-1', 'ص=س+2', 'ص=2س+3'], correct: 1, hint: 'ص-3=2(س-2) → ص=2س-1'},
-                {id: 10, type: 'mcq', question: 'إذا س+ص=7 وسص=12، فس²+ص²=', options: ['25', '37', '49', '13'], correct: 0, hint: '(س+ص)²=49=س²+ص²+24 → س²+ص²=25'}
-            ],
-            mar: [
-                {id: 11, type: 'mcq', question: 'مجال د(س) = 1/(س-2) هو:', options: ['ℝ-{2}', 'ℝ-{0}', 'ℝ', 'س>2'], correct: 0, hint: 'س-2≠0 → س≠2'},
-                {id: 12, type: 'mcq', question: 'أصفار د(س)=(س²-4)/(س-2):', options: ['2', '-2', '2و-2', 'لا يوجد'], correct: 1, hint: 'س²=4→س=±2، س≠2، إذن س=-2 فقط'},
-                {id: 13, type: 'mcq', question: 'بسط: (س²-5س+6)/(س-3) =', options: ['س-2', 'س+2', 'س-3', 'س+3'], correct: 0, hint: '(س-2)(س-3)/(س-3) = س-2 حيث س≠3'},
-                {id: 14, type: 'mcq', question: 'مجال (س+1)/(س²-4) هو:', options: ['ℝ-{2}', 'ℝ-{-2}', 'ℝ-{2,-2}', 'ℝ-{-1}'], correct: 2, hint: 'س²≠4 → س≠±2'},
-                {id: 15, type: 'mcq', question: '(س/(س+1)) ÷ (س²/(س²-1)) =', options: ['(س-1)/س', 'س/(س-1)', '1', '(س+1)/س'], correct: 0, hint: 'س/(س+1) × (س-1)(س+1)/س² = (س-1)/س'},
-                {id: 16, type: 'mcq', question: 'المعكوس الضربي لـ (2س)/(س+3):', options: ['(س+3)/(2س)', '(2س)/(س+3)', '(س+3)/2', '2/(س+3)'], correct: 0, hint: 'مقلوب الكسر = (س+3)/(2س)'},
-                {id: 17, type: 'mcq', question: 'مجال √(س-2) هو:', options: ['س≥2', 'س>2', 'س≤2', 'ℝ'], correct: 0, hint: 'س-2≥0 → س≥2'},
-                {id: 18, type: 'mcq', question: 'أصفار (س²-9)/(س+3):', options: ['3 فقط', '-3 فقط', '3و-3', 'لا يوجد'], correct: 0, hint: 'س=3 فقط (س≠-3)'},
-                {id: 19, type: 'mcq', question: '(س/(س+2)) - (2/(س-2)) =', options: ['(س²-4س-4)/((س+2)(س-2))', '(س-2)/(س+2)', '1', '0'], correct: 0, hint: 'نوحد المقامات ونبسط'},
-                {id: 20, type: 'mcq', question: 'مجال 1/(س²+1) هو:', options: ['ℝ-{1}', 'ℝ-{-1}', 'ℝ', 'س≠0'], correct: 2, hint: 'س²+1≠0 دائماً'}
-            ],
-            apr: [
-                {id: 21, type: 'mcq', question: 'الوتر هو:', options: ['قطر الدائرة', 'قطعة بين نقطتين على الدائرة', 'نصف القطر', 'قوس'], correct: 1, hint: 'الوتر: قطعة مستقيمة بين نقطتين على الدائرة'},
-                {id: 22, type: 'mcq', question: 'أطول وتر في الدائرة هو:', options: ['الوتر', 'القطر', 'القوس', 'نصف القطر'], correct: 1, hint: 'القطر هو أطول وتر'},
-                {id: 23, type: 'mcq', question: 'الأوتار المتساوية في الطول:', options: ['متباعدة عن المركز', 'متساوية البعد عن المركز', 'أحداها يمر بالمركز', 'متعامدة'], correct: 1, hint: 'الأوتار المتساوية تتساوى في بعدها عن المركز'},
-                {id: 24, type: 'mcq', question: 'القطر يعامد الوتر:', options: ['في أي نقطة', 'في المنتصف فقط', 'لا يعامده', 'في النهاية'], correct: 1, hint: 'القطر يعامد الوتر في منتصفه'},
-                {id: 25, type: 'mcq', question: 'الزاوية المركزية = 80°، فالزاوية المحيطية =', options: ['40°', '80°', '160°', '20°'], correct: 0, hint: 'المحيطية = ½ المركزية = 40°'},
-                {id: 26, type: 'mcq', question: 'الزاوية في نصف دائرة =', options: ['45°', '90°', '60°', '180°'], correct: 1, hint: 'الزاوية المحيطية في نصف دائرة قائمة'},
-                {id: 27, type: 'mcq', question: 'الرباعي الدائري: مجموع زاويتين متقابلتين =', options: ['90°', '180°', '360°', '270°'], correct: 1, hint: 'في الرباعي الدائري: المجموع = 180°'},
-                {id: 28, type: 'mcq', question: 'طولا المماسين من نقطة خارجية:', options: ['متساويان', 'متعامدان', 'أحدهما أطول', 'متباعدان'], correct: 0, hint: 'المماسان من نقطة خارجية متساويان في الطول'},
-                {id: 29, type: 'mcq', question: 'المماس عمودي على:', options: ['الوتر', 'نصف القطر في نقطة التماس', 'القطر', 'القوس'], correct: 1, hint: 'المماس ⊥ نصف القطر في نقطة التماس'},
-                {id: 30, type: 'mcq', question: 'زاوية المماس والوتر =', options: ['الزاوية المحيطية في القوس البديل', 'الزاوية المركزية', '90°', '45°'], correct: 0, hint: 'زاوية المماس والوتر = الزاوية المحيطية في القوس البديل'}
-            ],
-            final1: [
-                {id: 31, type: 'mcq', question: 'حل: 3س - 7 = 2', options: ['س=3', 'س=2', 'س=1', 'س=4'], correct: 0, hint: '3س=9 → س=3'},
-                {id: 32, type: 'mcq', question: 'Δ للمعادلة س²-6س+9=0:', options: ['0', '36', '9', '-36'], correct: 0, hint: '36-36=0'},
-                {id: 33, type: 'mcq', question: 'حل: |س-2|=4', options: ['6,-2', '6,2', '-6,2', '-6,-2'], correct: 0, hint: 'س-2=4→س=6 أو س-2=-4→س=-2'},
-                {id: 34, type: 'mcq', question: 'ناتج (س²-1)/(س-1) لس≠1:', options: ['س+1', 'س-1', '1', '0'], correct: 0, hint: '(س-1)(س+1)/(س-1)=س+1'},
-                {id: 35, type: 'mcq', question: 'في دائرة نق=5، وتر على بعد 3 من المركز، طول الوتر=', options: ['8', '6', '4', '10'], correct: 0, hint: 'النصف=√(25-9)=4، الطول=8'},
-                {id: 36, type: 'mcq', question: 'زاوية محيطية = 50°، فالزاوية المركزية =', options: ['25°', '50°', '100°', '75°'], correct: 2, hint: 'المركزية = 2 × المحيطية = 100°'},
-                {id: 37, type: 'written', question: 'اشرح طريقة الحذف لحل نظام معادلتين.', hint: 'نضرب المعادلات بأعداد مناسبة لجعل معامل أحد المتغيرين متساوياً ثم نجمع أو نطرح'},
-                {id: 38, type: 'written', question: 'اوجد أصفار الدالة د(س) = (س²-9)/(س+3).', hint: 'س²-9=0→س=±3، س≠-3، إذن الصفر هو س=3'},
-                {id: 39, type: 'written', question: 'اثبت أن الرباعي ABCD دائري إذا كانت ∠A+∠C=180°.', hint: 'هذه خاصية الرباعي الدائري: مجموع زاويتين متقابلتين يساوي 180°'},
-                {id: 40, type: 'written', question: 'اوجد طول المماس من نقطة على بعد 13 من مركز دائرة نصف قطرها 5.', hint: 'المماس² = 13² - 5² = 169 - 25 = 144 → المماس = 12'}
-            ],
-            final2: [
-                {id: 41, type: 'mcq', question: 'حل: 4س + 3 = 2س + 9', options: ['س=2', 'س=3', 'س=4', 'س=6'], correct: 1, hint: '2س=6 → س=3'},
-                {id: 42, type: 'mcq', question: 'جذور س²-8س+16=0:', options: ['4,-4', '4 مكرر', '-4 مكرر', '8'], correct: 1, hint: '(س-4)²=0 → س=4 مكرر'},
-                {id: 43, type: 'mcq', question: 'مجال د(س)=√(3س-6):', options: ['س≥2', 'س>2', 'س≤2', 'س<2'], correct: 0, hint: '3س-6≥0 → س≥2'},
-                {id: 44, type: 'mcq', question: 'المعكوس الضربي لـ 2/3 هو:', options: ['3/2', '2/3', '-2/3', '-3/2'], correct: 0, hint: 'مقلوب الكسر = 3/2'},
-                {id: 45, type: 'mcq', question: 'قطره 10 (نق=5)، وتر على بعد 4 من المركز، طول الوتر=', options: ['6', '8', '10', '12'], correct: 0, hint: 'النصف=√(25-16)=3، الطول=6'},
-                {id: 46, type: 'mcq', question: 'زاوية مركزية = 120°، فالزاوية المحيطية =', options: ['240°', '120°', '60°', '30°'], correct: 2, hint: '120°/2 = 60°'},
-                {id: 47, type: 'mcq', question: 'في مثلث قائم، الساقان 6 و8، الوتر=', options: ['10', '14', '12', '100'], correct: 0, hint: '√(36+64)=√100=10'},
-                {id: 48, type: 'written', question: 'اشرح القانون العام لحل المعادلة التربيعية.', hint: 'س = (-ب ± √Δ)/2أ حيث Δ = ب² - 4أج'},
-                {id: 49, type: 'written', question: 'اوجد معادلة الخط المستقيم المار بالنقطتين (1,3) و (3,7).', hint: 'الميل=(7-3)/(3-1)=2، ص-3=2(س-1) → ص=2س+1'},
-                {id: 50, type: 'written', question: 'بين أن المثلث المتساوي الأضلاع زواياه 60°.', hint: '180°/3 = 60° لكل زاوية'}
-            ],
-            comprehensive: []
-        };
-
-        // Fill comprehensive with random selection from all
-        const allQuestions = [...questionDB.feb, ...questionDB.mar, ...questionDB.apr, ...questionDB.final1, ...questionDB.final2];
-        questionDB.comprehensive = allQuestions.slice(0, 20);
-
-        // ==========================================
-        // GLOBAL VARIABLES
-        // ==========================================
-        
-        let currentScreen = 'mainMenu';
-        let screenHistory = [];
-        let currentTest = null;
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let studentAnswers = {};
-        let studentInfo = {};
-        let testStartTime = null;
-        let timerInterval = null;
-        let testResults = [];
-
-        // ==========================================
-        // NAVIGATION FUNCTIONS
-        // ==========================================
-
-        function navigateTo(screenId) {
-            console.log('Navigating to:', screenId);
-            
-            // Hide all screens
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            
-            // Show target screen
-            const targetScreen = document.getElementById(screenId);
-            if (targetScreen) {
-                targetScreen.classList.add('active');
-                
-                // Update history
-                if (currentScreen !== screenId) {
-                    screenHistory.push(currentScreen);
-                }
-                currentScreen = screenId;
-                
-                // Update back button
-                const backBtn = document.getElementById('backBtn');
-                if (screenId === 'mainMenu') {
-                    backBtn.classList.remove('visible');
-                    screenHistory = [];
-                } else {
-                    backBtn.classList.add('visible');
-                }
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
-            } else {
-                console.error('Screen not found:', screenId);
-            }
-        }
-
-        function goBack() {
-            if (screenHistory.length > 0) {
-                const previousScreen = screenHistory.pop();
-                navigateTo(previousScreen);
-            } else {
-                navigateTo('mainMenu');
-            }
-        }
-
-        function goToMenu() {
-            navigateTo('mainMenu');
-        }
-
-        // ==========================================
-        // ENCYCLOPEDIA FUNCTIONS
-        // ==========================================
-
-        function switchTab(tabName) {
-            // Update buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-        }
-
-        // ==========================================
-        // TEST FUNCTIONS
-        // ==========================================
-
-        function selectTest(testId, testName, questionCount) {
-            console.log('Selecting test:', testId, testName);
-            
-            currentTest = {
-                id: testId,
-                name: testName,
-                count: questionCount
-            };
-            
-            // Use internal database
-            if (questionDB[testId]) {
-                currentQuestions = questionDB[testId].slice(0, questionCount);
-                console.log('Loaded', currentQuestions.length, 'questions');
-            } else {
-                alert('عذراً، هذا الاختبار غير متوفر');
-                return;
-            }
-            
-            // Show student form
-            document.getElementById('testTypeDisplay').value = testName;
-            navigateTo('studentForm');
-        }
-
-        function startTest() {
-            const name = document.getElementById('studentName').value.trim();
-            const grade = document.getElementById('studentGrade').value;
-            
-            if (!name) {
-                showAlert('الرجاء إدخال الاسم الثلاثي');
-                return;
-            }
-            if (!grade) {
-                showAlert('الرجاء اختيار الصف الدراسي');
-                return;
-            }
-            
-            studentInfo = { name, grade };
-            
-            // Initialize quiz
-            currentQuestionIndex = 0;
-            studentAnswers = {};
-            testStartTime = Date.now();
-            
-            document.getElementById('quizTitle').textContent = currentTest.name;
-            document.getElementById('totalQNum').textContent = currentQuestions.length;
-            
-            navigateTo('quizScreen');
-            displayQuestion();
-            startTimer();
-        }
-
-        function showAlert(message) {
-            const alert = document.getElementById('formAlert');
-            alert.textContent = message;
-            alert.classList.add('show');
-            setTimeout(() => {
-                alert.classList.remove('show');
-            }, 3000);
-        }
-
-        function startTimer() {
-            let seconds = 0;
-            const timerDisplay = document.getElementById('timerDisplay');
-            
-            timerInterval = setInterval(() => {
-                seconds++;
-                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
-                const secs = (seconds % 60).toString().padStart(2, '0');
-                timerDisplay.textContent = `${mins}:${secs}`;
-            }, 1000);
-        }
-
-        function displayQuestion() {
-            const question = currentQuestions[currentQuestionIndex];
-            const container = document.getElementById('questionContainer');
-            
-            document.getElementById('currentQNum').textContent = currentQuestionIndex + 1;
-            updateProgress();
-            
-            let html = `
-                <div class="question-meta">
-                    <span>السؤال ${currentQuestionIndex + 1}</span>
-                    <span style="color: ${question.type === 'mcq' ? 'var(--success)' : 'var(--warning)'}">
-                        ${question.type === 'mcq' ? 'اختيار من متعدد' : 'سؤال مقالي'}
-                    </span>
-                </div>
-                <div class="question-text">${question.question}</div>
-            `;
-            
-            if (question.type === 'mcq') {
-                html += `<div class="options-container">`;
-                question.options.forEach((option, index) => {
-                    const letter = ['أ', 'ب', 'ج', 'د'][index];
-                    html += `
-                        <button class="option-btn" onclick="selectOption(${index})" id="opt-${index}">
-                            <span class="option-letter">${letter}</span>
-                            <span>${option}</span>
+            <!-- Screen 2: Encyclopedia (موسوعة شاملة) -->
+            <div id="encyclopediaScreen" class="screen">
+                <div class="encyclopedia-container">
+                    <!-- Tabs -->
+                    <div class="encyclopedia-tabs">
+                        <button class="tab-btn active" data-tab="algebra">
+                            <span>📊</span>
+                            <span>الجبر والإحصاء</span>
                         </button>
-                    `;
-                });
-                html += `</div>`;
-            } else {
-                html += `
-                    <textarea class="written-answer" id="writtenAns" placeholder="اكتب إجابتك هنا..."></textarea>
-                    <button class="btn btn-primary" onclick="submitWrittenAnswer()" style="width: 100%;">تأكيد الإجابة</button>
-                `;
-            }
-            
-            html += `
-                <div class="feedback-box" id="feedbackBox">
-                    <div class="feedback-title">💡 تغذية راجعة</div>
-                    <div id="feedbackText"></div>
+                        <button class="tab-btn" data-tab="geometry">
+                            <span>📐</span>
+                            <span>الهندسة</span>
+                        </button>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="tab-content-wrapper">
+                        <!-- Algebra Tab - منهج الجبر كامل -->
+                        <div id="algebra" class="tab-content active">
+                            
+                            <!-- الوحدة الأولى: النسبة والتناسب -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">١</div>
+                                    <h3 class="lesson-title">الوحدة الأولى: النسبة والتناسب</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">النسبة</div>
+                                            <div class="concept-card-content">
+                                                النسبة بين كميتين من نفس النوع هي مقارنة بينهما باستخدام القسمة. تكتب على الصورة أ : ب أو أ/ب حيث ب ≠ ٠.<br>
+                                                <strong>خصائص النسبة:</strong>
+                                                <ul style="margin-top: var(--spacing-sm); padding-right: var(--spacing-xl);">
+                                                    <li>النسبة ليس لها وحدات قياس</li>
+                                                    <li>يمكن تبسيط النسبة بقسمة الحدين على عامل مشترك</li>
+                                                    <li>النسبة تتغير بتغير الكميات</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">التناسب</div>
+                                            <div class="concept-card-content">
+                                                التناسب هو تساوي نسبتين. يكتب على الصورة أ/ب = ج/د أو أ : ب = ج : د.<br>
+                                                <strong>خصائص التناسب:</strong>
+                                                <ul style="margin-top: var(--spacing-sm); padding-right: var(--spacing-xl);">
+                                                    <li>أ × د = ب × ج (ضرب الطرفين = ضرب الوسطين)</li>
+                                                    <li>إذا كان أ/ب = ج/د فإن ب/أ = د/ج (التبادل)</li>
+                                                    <li>إذا كان أ/ب = ج/د فإن (أ+ب)/ب = (ج+د)/د</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">قوانين التناسب المهمة</div>
+                                        إذا كان أ/ب = ج/د فإن:<br>
+                                        ١) (أ × د) = (ب × ج)<br>
+                                        ٢) (أ/ج) = (ب/د) (التبادل بين الوسطين)<br>
+                                        ٣) (أ + ب)/ب = (ج + د)/د (الخاصية الرابعة)<br>
+                                        ٤) (أ - ب)/ب = (ج - د)/د
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال محلول:</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            إذا كانت ٣ : ٥ = س : ١٥، أوجد قيمة س.<br>
+                                            <strong>الحل:</strong><br>
+                                            باستخدام ضرب الطرفين في الوسطين:<br>
+                                            ٣ × ١٥ = ٥ × س<br>
+                                            ٤٥ = ٥س<br>
+                                            س = ٩
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 تطبيقات على التناسب</div>
+                                        <ul>
+                                            <li><strong>التناسب الطردي:</strong> إذا زادت س تزداد ص بنفس النسبة (ص = ك س) حيث ك ثابت</li>
+                                            <li><strong>التناسب العكسي:</strong> إذا زادت س تقل ص بنفس النسبة (ص = ك/س) حيث ك ثابت</li>
+                                            <li><strong>تقسيم الكمية تناسبياً:</strong> لتقسيم كمية م على نسبة أ:ب:ج، نصيب الأول = (أ × م)/(أ+ب+ج)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الثانية: المتغير العشوائي والتوزيعات الاحتمالية -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٢</div>
+                                    <h3 class="lesson-title">الوحدة الثانية: المتغير العشوائي والتوزيعات الاحتمالية</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">المتغير العشوائي</div>
+                                            <div class="concept-card-content">
+                                                دالة تأخذ قيمها من نتائج تجربة عشوائية. نوعان:
+                                                <ul style="margin-top: var(--spacing-sm);">
+                                                    <li><strong>متغير عشوائي منفصل:</strong> يأخذ قيماً محدودة أو قابلة للعد (مثل: عدد الأبناء)</li>
+                                                    <li><strong>متغير عشوائي متصل:</strong> يأخذ قيماً في فترة معينة (مثل: الطول، الوزن)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">التوزيع الاحتمالي</div>
+                                            <div class="concept-card-content">
+                                                هو دالة تربط كل قيمة من قيم المتغير العشوائي باحتمالها.
+                                                <strong>شروط التوزيع الاحتمالي:</strong>
+                                                <ul style="margin-top: var(--spacing-sm);">
+                                                    <li>٠ ≤ احتمالات ≥ ١</li>
+                                                    <li>مجموع الاحتمالات = ١</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">المتوسط الحسابي والتباين للمتغير العشوائي</div>
+                                        <strong>المتوسط الحسابي (القيمة المتوقعة):</strong> μ = Σ(س × ل(س))<br>
+                                        <strong>التباين:</strong> σ² = Σ[(س - μ)² × ل(س)] = Σ(س² × ل(س)) - μ²<br>
+                                        <strong>الانحراف المعياري:</strong> σ = √(التباين)
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال: توزيع عدد مرات رمي قطعة نقود</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            عند رمي قطعة نقود مرتين، المتغير العشوائي س = عدد الصور:<br>
+                                            س = ٠، ١، ٢<br>
+                                            ل(س=٠) = ١/٤، ل(س=١) = ١/٢، ل(س=٢) = ١/٤<br>
+                                            <strong>المتوسط:</strong> μ = (٠×¼) + (١×½) + (٢×¼) = ٠ + ٠.٥ + ٠.٥ = ١
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الثالثة: العينات -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٣</div>
+                                    <h3 class="lesson-title">الوحدة الثالثة: العينات</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">أنواع العينات</div>
+                                            <div class="concept-card-content">
+                                                <ul>
+                                                    <li><strong>العينة العشوائية البسيطة:</strong> لكل فرد من المجتمع نفس فرصة الاختيار</li>
+                                                    <li><strong>العينة الطبقية:</strong> تقسيم المجتمع إلى طبقات ثم اختيار عينة من كل طبقة</li>
+                                                    <li><strong>العينة المنتظمة:</strong> اختيار كل فرد رقم n من قائمة</li>
+                                                    <li><strong>العينة العنقودية:</strong> اختيار مجموعات كاملة من المجتمع</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">مقاييس العينة</div>
+                                            <div class="concept-card-content">
+                                                <strong>متوسط العينة (س̄):</strong> مجموع القيم / عددها<br>
+                                                <strong>تباين العينة:</strong> Σ(س - س̄)²/(ن - ١)<br>
+                                                <strong>الانحراف المعياري للعينة:</strong> √(تباين العينة)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="note-box">
+                                        <div class="note-box-title">
+                                            <span>💡 ملاحظة مهمة:</span>
+                                        </div>
+                                        <div class="note-box-content">
+                                            تباين العينة يقسم على (ن - ١) وليس على ن للحصول على تقدير غير متحيز لتباين المجتمع.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الرابعة: الاحتمال الشرطي -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٤</div>
+                                    <h3 class="lesson-title">الوحدة الرابعة: الاحتمال الشرطي</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">الاحتمال الشرطي</div>
+                                            <div class="concept-card-content">
+                                                احتمال وقوع الحدث A بشرط وقوع الحدث B:<br>
+                                                <strong>ل(أ|ب) = ل(أ ∩ ب) / ل(ب)</strong> حيث ل(ب) ≠ ٠
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">الأحداث المستقلة</div>
+                                            <div class="concept-card-content">
+                                                حدثان A و B مستقلان إذا كان:<br>
+                                                ل(أ ∩ ب) = ل(أ) × ل(ب)<br>
+                                                أو ل(أ|ب) = ل(أ)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">قوانين مهمة في الاحتمال الشرطي</div>
+                                        <strong>قانون الضرب:</strong> ل(أ ∩ ب) = ل(أ) × ل(ب|أ) = ل(ب) × ل(أ|ب)<br>
+                                        <strong>قانون الاحتمال الكلي:</strong> ل(ب) = ل(أ) × ل(ب|أ) + ل(أ') × ل(ب|أ')<br>
+                                        <strong>قانون بايز:</strong> ل(أ|ب) = [ل(أ) × ل(ب|أ)] / ل(ب)
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال على الاحتمال الشرطي</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            صندوق يحتوي على ٦ كرات حمراء و ٤ زرقاء. سحبت كرتان متتاليتان بدون إرجاع. احسب احتمال أن تكون الثانية حمراء إذا كانت الأولى زرقاء.<br>
+                                            <strong>الحل:</strong><br>
+                                            ل(الثانية حمراء | الأولى زرقاء) = ٦/٩ = ٢/٣
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Geometry Tab - منهج الهندسة كامل -->
+                        <div id="geometry" class="tab-content">
+                            
+                            <!-- الوحدة الأولى: الدائرة -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">١</div>
+                                    <h3 class="lesson-title">الوحدة الأولى: الدائرة (مفاهيم أساسية)</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">تعريف الدائرة</div>
+                                            <div class="concept-card-content">
+                                                الدائرة هي مجموعة النقاط التي تبعد بعداً ثابتاً عن نقطة ثابتة تسمى المركز. البعد الثابت يسمى نصف القطر.
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">عناصر الدائرة</div>
+                                            <div class="concept-card-content">
+                                                <ul>
+                                                    <li><strong>المركز:</strong> نقطة ثابتة داخل الدائرة</li>
+                                                    <li><strong>نصف القطر (نق):</strong> قطعة تصل المركز بأي نقطة على الدائرة</li>
+                                                    <li><strong>الوتر:</strong> قطعة تصل بين نقطتين على الدائرة</li>
+                                                    <li><strong>القطر:</strong> وتر يمر بالمركز (طوله = ٢نق)</li>
+                                                    <li><strong>القوس:</strong> جزء من محيط الدائرة</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">العلاقات الأساسية في الدائرة</div>
+                                        <strong>محيط الدائرة:</strong> ٢π نق<br>
+                                        <strong>مساحة الدائرة:</strong> π نق²<br>
+                                        <strong>طول القوس:</strong> (قياس الزاوية المركزية/٣٦٠) × ٢π نق
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الثانية: أوتار الدائرة -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٢</div>
+                                    <h3 class="lesson-title">الوحدة الثانية: أوتار الدائرة</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 نظريات الأوتار</div>
+                                        <ul>
+                                            <li><strong>نظرية ١:</strong> الأوتار المتساوية في الطول تقابل أقواساً متساوية في القياس (والعكس)</li>
+                                            <li><strong>نظرية ٢:</strong> الأوتار المتساوية تبعد أبعاداً متساوية عن المركز (والعكس)</li>
+                                            <li><strong>نظرية ٣:</strong> كلما زاد طول الوتر قل بعده عن المركز</li>
+                                            <li><strong>نظرية ٤:</strong> القطر العمودي على وتر ينصفه وينصف قوسيه</li>
+                                            <li><strong>نظرية ٥:</strong> المستقيم المار بمركز الدائرة والعمودي على وتر ينصفه</li>
+                                            <li><strong>نظرية ٦:</strong> المستقيم المار بمنتصف وتر وعمودي عليه يمر بمركز الدائرة</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">علاقة طول الوتر ببعده عن المركز</div>
+                                        إذا كان طول الوتر = ل، بعده عن المركز = ع، نصف القطر = نق:<br>
+                                        (ل/٢)² + ع² = نق² (نظرية فيثاغورس)
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال: وتر في دائرة</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            دائرة نصف قطرها ١٠ سم، وتر طوله ١٦ سم. أوجد بعد الوتر عن المركز.<br>
+                                            <strong>الحل:</strong><br>
+                                            (ل/٢)² + ع² = نق²<br>
+                                            (١٦/٢)² + ع² = ١٠²<br>
+                                            ٨² + ع² = ١٠٠<br>
+                                            ٦٤ + ع² = ١٠٠<br>
+                                            ع² = ٣٦<br>
+                                            ع = ٦ سم
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الثالثة: الزوايا في الدائرة -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٣</div>
+                                    <h3 class="lesson-title">الوحدة الثالثة: الزوايا في الدائرة</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">الزاوية المركزية</div>
+                                            <div class="concept-card-content">
+                                                رأسها مركز الدائرة وضلعاها نصفي قطر. قياسها يساوي قياس القوس المقابل لها.
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">الزاوية المحيطية</div>
+                                            <div class="concept-card-content">
+                                                رأسها على محيط الدائرة وضلعاها وتران. قياسها = ½ قياس القوس المقابل لها.<br>
+                                                <strong>الزاوية المحيطية المرسومة في نصف دائرة = ٩٠°</strong>
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">الزاوية المماسية</div>
+                                            <div class="concept-card-content">
+                                                رأسها على الدائرة، أحد ضلعيها مماس والآخر وتر. قياسها = ½ قياس القوس المقابل لها.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 نظريات الزوايا في الدائرة</div>
+                                        <ul>
+                                            <li><strong>نظرية الزاوية المحيطية:</strong> الزوايا المحيطية المشتركة في قوس واحد متساوية في القياس</li>
+                                            <li><strong>نظرية الزاوية المركزية والمحيطية:</strong> الزاوية المركزية = ٢ × الزاوية المحيطية المشتركة معها في نفس القوس</li>
+                                            <li><strong>نظرية الزاوية المماسية:</strong> الزاوية المماسية تساوي الزاوية المحيطية المشتركة معها في نفس القوس البديل</li>
+                                            <li><strong>نظرية الزوايا المتساوية:</strong> إذا ساوت زاوية محيطية زاوية مماسية فإنهما تشتركان في نفس القوس</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">ملخص قياسات الزوايا</div>
+                                        <strong>الزاوية المركزية:</strong> = قياس القوس<br>
+                                        <strong>الزاوية المحيطية:</strong> = ½ قياس القوس<br>
+                                        <strong>الزاوية المماسية:</strong> = ½ قياس القوس<br>
+                                        <strong>الزاوية الداخلية:</strong> = ½ (مجموع القوسين المقابلين)<br>
+                                        <strong>الزاوية الخارجية:</strong> = ½ (الفرق بين القوسين)
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال: زوايا في دائرة</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            في دائرة، زاوية مركزية قياسها ١٢٠°. أوجد قياس الزاوية المحيطية المشتركة معها في نفس القوس.<br>
+                                            <strong>الحل:</strong><br>
+                                            الزاوية المحيطية = ½ × الزاوية المركزية = ½ × ١٢٠ = ٦٠°
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الرابعة: الشكل الرباعي الدائري -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٤</div>
+                                    <h3 class="lesson-title">الوحدة الرابعة: الشكل الرباعي الدائري</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-card" style="margin-bottom: var(--spacing-xl);">
+                                        <div class="concept-card-title">تعريف الشكل الرباعي الدائري</div>
+                                        <div class="concept-card-content">
+                                            هو شكل رباعي رؤوسه الأربعة تقع على دائرة واحدة. يمكن إدراج هذا الشكل في دائرة.
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 خواص الشكل الرباعي الدائري</div>
+                                        <ul>
+                                            <li><strong>الخاصية ١ (الأساسية):</strong> مجموع كل زاويتين متقابلتين = ١٨٠°</li>
+                                            <li><strong>الخاصية ٢:</strong> الزاوية الخارجية = الزاوية الداخلية المقابلة لها</li>
+                                            <li><strong>الخاصية ٣:</strong> الزوايا المتساوية تقابل أقواساً متساوية</li>
+                                            <li><strong>الخاصية ٤:</strong> حاصل ضرب قطري الشكل = مجموع حاصل ضرب الأضلاع المتقابلة (نظرية بطليموس)</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 شروط كون الشكل الرباعي دائرياً</div>
+                                        <ul>
+                                            <li>إذا كان مجموع زاويتين متقابلتين = ١٨٠°</li>
+                                            <li>إذا كانت الزاوية الخارجية = الزاوية الداخلية المقابلة</li>
+                                            <li>إذا كانت الزوايا المتساوية تقابل أقواساً متساوية</li>
+                                            <li>المستطيل والمربع دائريان دائماً (جميع رؤوسهما تقع على دائرة)</li>
+                                            <li>شبه المنحرف المتساوي الساقين دائري</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="formula-box">
+                                        <div class="formula-title">نظرية بطليموس</div>
+                                        في الشكل الرباعي الدائري ABCD:<br>
+                                        (AC × BD) = (AB × CD) + (BC × AD)<br>
+                                        حيث AC و BD هما القطران، و AB, BC, CD, AD هي الأضلاع.
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال: شكل رباعي دائري</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            ABCD شكل رباعي دائري، إذا كان ∠A = ٨٠°، أوجد ∠C.<br>
+                                            <strong>الحل:</strong><br>
+                                            في الشكل الرباعي الدائري، ∠A + ∠C = ١٨٠°<br>
+                                            ∴ ٨٠ + ∠C = ١٨٠<br>
+                                            ∠C = ١٠٠°
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة الخامسة: التماس -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٥</div>
+                                    <h3 class="lesson-title">الوحدة الخامسة: التماس</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">مماس الدائرة</div>
+                                            <div class="concept-card-content">
+                                                مستقيم يمس الدائرة في نقطة واحدة تسمى نقطة التماس.<br>
+                                                <strong>خاصية المماس:</strong> المماس عمودي على نصف القطر عند نقطة التماس.
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">المماسان من نقطة خارجية</div>
+                                            <div class="concept-card-content">
+                                                من نقطة خارج الدائرة، يمكن رسم مماسين للدائرة.<br>
+                                                <strong>خاصية:</strong> طول المماسين المتساويين من نقطة خارجية متساويان.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="concept-list">
+                                        <div class="concept-list-title">🔹 نظريات التماس</div>
+                                        <ul>
+                                            <li><strong>نظرية ١:</strong> المماس عمودي على نصف القطر عند نقطة التماس</li>
+                                            <li><strong>نظرية ٢:</strong> إذا كان مستقيم عمودياً على نصف قطر عند نهايته، فهو مماس للدائرة</li>
+                                            <li><strong>نظرية ٣:</strong> طولا المماسين المرسومين من نقطة خارجية إلى دائرة متساويان</li>
+                                            <li><strong>نظرية ٤:</strong> الزاوية المماسية = الزاوية المحيطية المشتركة معها في القوس البديل</li>
+                                            <li><strong>نظرية ٥:</strong> المماس المشترك الخارجي لدائرتين: طوله² = (المسافة بين المركزين)² - (نق١ - نق٢)²</li>
+                                            <li><strong>نظرية ٦:</strong> المماس المشترك الداخلي لدائرتين: طوله² = (المسافة بين المركزين)² - (نق١ + نق٢)²</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="example-box">
+                                        <div class="example-box-title">
+                                            <span>📝 مثال: مماس من نقطة خارجية</span>
+                                        </div>
+                                        <div class="example-box-content">
+                                            من نقطة خارج دائرة بعدها عن المركز ١٣ سم، رسم مماس للدائرة طوله ١٢ سم. أوجد نصف قطر الدائرة.<br>
+                                            <strong>الحل:</strong><br>
+                                            المماس عمودي على نصف القطر، إذن المثلث قائم الزاوية.<br>
+                                            بتطبيق نظرية فيثاغورس:<br>
+                                            نق² + (المماس)² = (البعد عن المركز)²<br>
+                                            نق² + ١٢² = ١٣²<br>
+                                            نق² + ١٤٤ = ١٦٩<br>
+                                            نق² = ٢٥<br>
+                                            نق = ٥ سم
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الوحدة السادسة: العلاقات بين الدوائر -->
+                            <div class="lesson-section">
+                                <div class="lesson-header">
+                                    <div class="lesson-icon">٦</div>
+                                    <h3 class="lesson-title">الوحدة السادسة: العلاقات بين الدوائر</h3>
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <div class="concept-grid">
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">دائرتان متباعدتان</div>
+                                            <div class="concept-card-content">
+                                                المسافة بين المركزين > نق١ + نق٢
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">دائرتان متماستان خارجياً</div>
+                                            <div class="concept-card-content">
+                                                المسافة بين المركزين = نق١ + نق٢
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">دائرتان متقاطعتان</div>
+                                            <div class="concept-card-content">
+                                                |نق١ - نق٢| < المسافة بين المركزين < نق١ + نق٢
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">دائرتان متماستان داخلياً</div>
+                                            <div class="concept-card-content">
+                                                المسافة بين المركزين = |نق١ - نق٢|
+                                            </div>
+                                        </div>
+                                        <div class="concept-card">
+                                            <div class="concept-card-title">داخليتان (إحداهما داخل الأخرى)</div>
+                                            <div class="concept-card-content">
+                                                المسافة بين المركزين < |نق١ - نق٢|
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="note-box">
+                                        <div class="note-box-title">
+                                            <span>💡 ملاحظة مهمة:</span>
+                                        </div>
+                                        <div class="note-box-content">
+                                            الدائرتان المتطابقتان: لهما نفس نصف القطر. إذا كانت المسافة بين مركزيهما = صفر، فهما متحدتا المركز (متراكزتان).
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            `;
-            
-            container.innerHTML = html;
-            
-            // Update buttons visibility
-            const nextBtn = document.getElementById('nextBtn');
-            const finishBtn = document.getElementById('finishBtn');
-            
-            if (currentQuestionIndex === currentQuestions.length - 1) {
-                nextBtn.classList.add('hidden');
-                finishBtn.classList.remove('hidden');
-            } else {
-                nextBtn.classList.remove('hidden');
-                finishBtn.classList.add('hidden');
-            }
-            
-            // Disable next until answer selected
-            nextBtn.disabled = true;
-            finishBtn.disabled = true;
-        }
+            </div>
 
-        function selectOption(index) {
-            const question = currentQuestions[currentQuestionIndex];
-            const isCorrect = index === question.correct;
-            
-            // Visual feedback
-            document.querySelectorAll('.option-btn').forEach((btn, i) => {
-                btn.disabled = true;
-                if (i === question.correct) {
-                    btn.classList.add('correct');
-                } else if (i === index && !isCorrect) {
-                    btn.classList.add('wrong');
-                }
-            });
-            
-            // Save answer
-            studentAnswers[question.id] = {
-                selected: index,
-                correct: question.correct,
-                isCorrect: isCorrect
-            };
-            
-            // Show feedback
-            showFeedback(question.hint);
-            
-            // Enable next
-            document.getElementById('nextBtn').disabled = false;
-            document.getElementById('finishBtn').disabled = false;
-        }
+            <!-- Screen 3: Test Selection -->
+            <div id="testSelectionScreen" class="screen">
+                <div class="page-header">
+                    <h2 class="page-title">بنك الاختبارات التفاعلية</h2>
+                    <p class="page-subtitle">اختر نوع الاختبار المناسب لمستواك وابدأ التحدي</p>
+                </div>
 
-        function submitWrittenAnswer() {
-            const answer = document.getElementById('writtenAns').value.trim();
-            if (!answer) {
-                alert('الرجاء كتابة إجابة');
-                return;
-            }
-            
-            const question = currentQuestions[currentQuestionIndex];
-            
-            // Save answer (written answers considered correct for navigation)
-            studentAnswers[question.id] = {
-                written: answer,
-                isCorrect: true
-            };
-            
-            // Show feedback
-            showFeedback(question.hint);
-            
-            // Enable next
-            document.getElementById('nextBtn').disabled = false;
-            document.getElementById('finishBtn').disabled = false;
-        }
+                <div class="test-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon">📝</div>
+                            <div class="category-title">اختبارات الجبر</div>
+                            <div class="category-subtitle">اختبارات شاملة على منهج الجبر والإحصاء</div>
+                        </div>
+                        <div class="test-list">
+                            <div class="test-item" onclick="selectTest('algebra1')">
+                                <div class="test-info">
+                                    <h4>اختبار الجبر الشامل ١</h4>
+                                    <p>النسبة والتناسب - المتغير العشوائي</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">١٥ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('algebra2')">
+                                <div class="test-info">
+                                    <h4>اختبار الجبر الشامل ٢</h4>
+                                    <p>التوزيعات الاحتمالية - العينات</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٢٠ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('algebra3')">
+                                <div class="test-info">
+                                    <h4>اختبار الجبر الشامل ٣</h4>
+                                    <p>الاحتمال الشرطي - المراجعة النهائية</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٢٥ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        function showFeedback(hint) {
-            const feedbackBox = document.getElementById('feedbackBox');
-            const feedbackText = document.getElementById('feedbackText');
-            feedbackText.textContent = hint;
-            feedbackBox.classList.add('show');
-        }
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon">📐</div>
+                            <div class="category-title">اختبارات الهندسة</div>
+                            <div class="category-subtitle">اختبارات شاملة على منهج الهندسة</div>
+                        </div>
+                        <div class="test-list">
+                            <div class="test-item" onclick="selectTest('geo1')">
+                                <div class="test-info">
+                                    <h4>اختبار الهندسة الشامل ١</h4>
+                                    <p>الدائرة - الأوتار - الزوايا</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">١٥ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('geo2')">
+                                <div class="test-info">
+                                    <h4>اختبار الهندسة الشامل ٢</h4>
+                                    <p>الشكل الرباعي الدائري - التماس</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٢٠ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('geo3')">
+                                <div class="test-info">
+                                    <h4>اختبار الهندسة الشامل ٣</h4>
+                                    <p>العلاقات بين الدوائر - المراجعة النهائية</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٢٥ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        function updateProgress() {
-            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon">🏆</div>
+                            <div class="category-title">اختبارات المحافظات</div>
+                            <div class="category-subtitle">نماذج محاكاة لامتحانات المحافظات السابقة</div>
+                        </div>
+                        <div class="test-list">
+                            <div class="test-item" onclick="selectTest('gov1')">
+                                <div class="test-info">
+                                    <h4>امتحان محافظة القاهرة</h4>
+                                    <p>نموذج محاكي لامتحان نصف العام</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٣٠ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('gov2')">
+                                <div class="test-info">
+                                    <h4>امتحان محافظة الجيزة</h4>
+                                    <p>نموذج محاكي لامتحان نهاية العام</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٣٠ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                            <div class="test-item" onclick="selectTest('gov3')">
+                                <div class="test-info">
+                                    <h4>امتحان محافظة الإسكندرية</h4>
+                                    <p>نموذج محاكي للامتحان التجريبي</p>
+                                </div>
+                                <div class="test-meta">
+                                    <span class="test-badge">٣٠ سؤالاً</span>
+                                    <span class="test-arrow">←</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        function nextQuestion() {
-            currentQuestionIndex++;
-            displayQuestion();
-        }
+            <!-- Screen 4: Student Form -->
+            <div id="studentFormScreen" class="screen">
+                <div class="form-container">
+                    <div class="form-header">
+                        <div class="form-icon">👨‍🎓</div>
+                        <h2 class="form-title">بيانات الطالب</h2>
+                    </div>
 
-        function finishTest() {
-            clearInterval(timerInterval);
-            
-            // Calculate results
-            let correct = 0;
-            Object.values(studentAnswers).forEach(answer => {
-                if (answer.isCorrect) correct++;
-            });
-            
-            const score = Math.round((correct / currentQuestions.length) * 100);
-            const timeTaken = document.getElementById('timerDisplay').textContent;
-            
-            // Determine grade
-            let grade = '';
-            if (score >= 90) grade = 'ممتاز';
-            else if (score >= 80) grade = 'جيد جداً';
-            else if (score >= 70) grade = 'جيد';
-            else if (score >= 60) grade = 'مقبول';
-            else grade = 'ضعيف';
-            
-            // Save result
-            testResults.push({
-                testName: currentTest.name,
-                score: score,
-                grade: grade,
-                date: new Date().toLocaleString('ar-SA'),
-                timeTaken: timeTaken
-            });
-            
-            // Update results screen
-            document.getElementById('finalScore').textContent = score + '%';
-            document.getElementById('gradeText').textContent = grade;
-            document.getElementById('correctAnswers').textContent = correct;
-            document.getElementById('wrongAnswers').textContent = currentQuestions.length - correct;
-            document.getElementById('timeSpent').textContent = timeTaken;
-            
-            navigateTo('resultsScreen');
-        }
+                    <div id="formAlert" class="alert alert-error"></div>
 
-        // ==========================================
-        // CERTIFICATE FUNCTIONS
-        // ==========================================
+                    <div class="form-group">
+                        <label class="form-label" for="studentName">الاسم الثلاثي</label>
+                        <input type="text" class="form-input" id="studentName" placeholder="مثال: أحمد محمد علي" autocomplete="off">
+                        <div class="form-hint">أدخل اسمك كاملاً كما تريده في الشهادة</div>
+                    </div>
 
-        function showCertificate() {
-            const lastResult = testResults[testResults.length - 1];
-            
-            document.getElementById('certStudentName').textContent = studentInfo.name;
-            document.getElementById('certTestName').textContent = lastResult.testName;
-            document.getElementById('certScore').textContent = lastResult.score + '%';
-            document.getElementById('certGrade').textContent = lastResult.grade;
-            document.getElementById('certDate').textContent = 'تاريخ الصدور: ' + lastResult.date;
-            
-            document.getElementById('certificate').style.display = 'block';
-            navigateTo('certificateScreen');
-        }
+                    <div class="form-group">
+                        <label class="form-label" for="studentSchool">المدرسة</label>
+                        <input type="text" class="form-input" id="studentSchool" placeholder="اسم مدرستك">
+                    </div>
 
-        function printCertificate() {
-            window.print();
-        }
+                    <div class="form-group">
+                        <label class="form-label" for="studentGovernorate">المحافظة</label>
+                        <select class="form-select" id="studentGovernorate">
+                            <option value="">اختر محافظتك</option>
+                            <option value="القاهرة">القاهرة</option>
+                            <option value="الجيزة">الجيزة</option>
+                            <option value="الإسكندرية">الإسكندرية</option>
+                            <option value="الدقهلية">الدقهلية</option>
+                            <option value="الشرقية">الشرقية</option>
+                            <option value="القليوبية">القليوبية</option>
+                            <option value="المنوفية">المنوفية</option>
+                            <option value="الغربية">الغربية</option>
+                            <option value="كفر الشيخ">كفر الشيخ</option>
+                            <option value="البحيرة">البحيرة</option>
+                        </select>
+                    </div>
 
-        // ==========================================
-        // INITIALIZATION
-        // ==========================================
+                    <button class="btn btn-primary" onclick="startQuiz()" style="width: 100%;">ابدأ الاختبار الآن</button>
+                </div>
+            </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Platform loaded successfully');
-        });
-    </script>
-</body>
-</html>
+            <!-- Screen 5: Quiz -->
+            <div id="quizScreen" class="screen">
+                <div class="quiz-header">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-header">
+                            <span class="quiz-progress-title" id="quizTitle">اختبار الجبر</span>
+                            <span class="quiz-progress-meta" id="quizProgress">١ / ١٥</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-timer" id="quizTimer">
+                        <span>⏱️</span>
+                        <span id="timerDisplay">٣٠:٠٠</span>
+                    </div>
+                </div>
+
+                <div class="question-card" id="questionCard">
+                    <div class="question-header">
+                        <span class="question-number" id="questionNumber">السؤال ١</span>
+                        <span class="question-type" id="questionType">اختيار من متعدد</span>
+                    </div>
+                    <div class="question-text" id="questionText">
+                        نص السؤال يظهر هنا
+                    </div>
+                    <div id="optionsContainer" class="options-list">
+                        <!-- Options will be inserted here -->
+                    </div>
+                    <div class="written-container hidden" id="writtenContainer">
+                        <textarea class="written-textarea" id="writtenAnswer" placeholder="اكتب إجابتك هنا مع خطوات الحل..."></textarea>
+                    </div>
+                    <div class="feedback-box" id="feedbackBox">
+                        <div class="feedback-header">
+                            <span>💡</span>
+                            <span>التغذية الراجعة</span>
+                        </div>
+                        <div class="feedback-text" id="feedbackText"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()">السابق</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">التالي</button>
+                    <button class="btn btn-success hidden" id="submitBtn" onclick="submitQuiz()">إنهاء الاختبار</button>
+                </div>
+            </div>
+
+            <!-- Screen 6: Results -->
+            <div id="resultsScreen" class="screen">
+                <div class="results-container">
+                    <div class="results-icon">🏆</div>
+                    <h2 class="results-title">نتيجة الاختبار</h2>
+                    
+                    <div class="score-circle" style="--score-percent: 0;" id="scoreCircle">
+                        <div class="score-circle-bg">
+                            <div class="score-content">
+                                <div class="score-value" id="scoreValue">٠</div>
+                                <div class="score-label">درجة</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grade-badge" id="gradeBadge">ممتاز</div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="correctCount">٠</div>
+                            <div class="stat-label">إجابات صحيحة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="wrongCount">٠</div>
+                            <div class="stat-label">إجابات خاطئة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="percentageValue">٠%</div>
+                            <div class="stat-label">النسبة المئوية</div>
+                        </div>
+                    </div>
+
+                    <div class="certificate-actions">
+                        <button class="btn btn-gold" onclick="showCertificate()">عرض الشهادة</button>
+                        <button class="btn btn-primary" onclick="restartQuiz()">اختبار جديد</button>
+                        <button class="btn btn-outline" onclick="navigateTo('home')">الع

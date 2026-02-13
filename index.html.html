@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة العباقرة | النظام الديناميكي</title>
+    <style>
+        :root { --primary: #1a237e; --secondary: #3498db; --success: #27ae60; --danger: #e74c3c; --gold: #c5a059; --dark: #2c3e50; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f7f6; margin: 0; direction: rtl; color: #333; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; border-top: 5px solid var(--primary); }
+        .btn { border: none; padding: 15px; border-radius: 12px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; width: 100%; margin: 8px 0; display: block; text-decoration: none; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-gold { background: var(--gold); color: white; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .hidden { display: none; }
+        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-height: 85%; background: white; z-index: 1000; padding: 25px; border-radius: 20px; box-shadow: 0 0 100px rgba(0,0,0,0.5); overflow-y: auto; text-align: right; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; }
+        .certificate { border: 15px double var(--gold); background: #fffcf5; padding: 30px; position: relative; }
+        #feedback { margin-top: 15px; padding: 15px; border-radius: 10px; text-align: right; }
+        @media (max-width: 600px) { .grid-menu { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="screen-start" class="card">
+        <h1>🎓 منصة العباقرة الرقمية</h1>
+        <p>مرحباً بك في نظام الاختبارات الذكي</p>
+        <input type="text" id="student-name" style="width:90%; padding:15px; border-radius:10px; border:2px solid #ddd; text-align:center;" placeholder="أدخل اسمك الثلاثي">
+        <button class="btn btn-primary" onclick="loadAndStart()">دخول المنصة</button>
+        <p id="load-status" style="color: var(--danger); font-size: 0.8rem;"></p>
+    </div>
+
+    <div id="screen-menu" class="card hidden">
+        <h2>القائمة الرئيسية</h2>
+        <div class="grid-menu">
+            <button class="btn btn-primary" onclick="startQuiz(true)">🔓 تجربة مجانية</button>
+            <button class="btn btn-gold" onclick="startQuiz(false)">🏆 الاختبار الكامل</button>
+            <button class="btn btn-outline" onclick="showModal('laws-modal')">📜 القوانين</button>
+        </div>
+    </div>
+
+    <div id="screen-quiz" class="card hidden">
+        <div id="quiz-area">
+            <h3 id="q-text"></h3>
+            <div id="options-area"></div>
+        </div>
+        <div id="feedback" style="display:none;"></div>
+        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">السؤال التالي</button>
+    </div>
+
+    <div id="screen-result" class="card hidden">
+        <div class="certificate">
+            <h2 style="color:var(--gold)">شهادة إنجاز</h2>
+            <p>الطالب: <strong id="cert-name"></strong></p>
+            <p>النتيجة: <strong id="cert-score"></strong></p>
+            <p id="cert-date"></p>
+        </div>
+        <button class="btn btn-primary" onclick="location.reload()">العودة للرئيسية</button>
+    </div>
+</div>
+
+<div id="overlay" class="overlay" onclick="hideModals()"></div>
+<div id="laws-modal" class="modal">
+    <h2>📜 القوانين</h2>
+    <p>سيتم عرض القوانين هنا...</p>
+    <button class="btn btn-primary" onclick="hideModals()">إغلاق</button>
+</div>
+
+<script>
+    let allQuestions = [];
+    let currentQuestions = [];
+    let currentIdx = 0;
+    let score = 0;
+
+    // الدالة المسؤولة عن جلب الأسئلة من الملف الخارجي دون لمس الكود
+    async function loadAndStart() {
+        const status = document.getElementById('load-status');
+        try {
+            const response = await fetch('questions.json');
+            if (!response.ok) throw new Error('ملف الأسئلة غير موجود');
+            allQuestions = await response.json();
+            
+            const name = document.getElementById('student-name').value;
+            if(name.length < 3) return alert("أدخل اسمك أولاً");
+            
+            switchScreen('screen-menu');
+        } catch (error) {
+            status.innerText = "خطأ: تأكد من رفع ملف questions.json في نفس المجلد على GitHub";
+            console.error(error);
+        }
+    }
+
+    function switchScreen(id) {
+        document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function startQuiz(isFree) {
+        currentQuestions = isFree ? allQuestions.slice(0, 5) : allQuestions;
+        currentIdx = 0; score = 0;
+        switchScreen('screen-quiz');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const q = currentQuestions[currentIdx];
+        document.getElementById('q-text').innerText = q.q;
+        const area = document.getElementById('options-area');
+        area.innerHTML = "";
+        q.opts.forEach((o, i) => {
+            area.innerHTML += `<button class="btn btn-outline" onclick="check(${i})">${o}</button>`;
+        });
+        document.getElementById('feedback').style.display = "none";
+        document.getElementById('next-btn').classList.add('hidden');
+    }
+
+    function check(i) {
+        const q = currentQuestions[currentIdx];
+        const f = document.getElementById('feedback');
+        f.style.display = "block";
+        if(i === q.ans) { score++; f.style.background="#d4edda"; f.innerHTML = "✅ صح: " + q.hint; }
+        else { f.style.background="#f8d7da"; f.innerHTML = "❌ خطأ: " + q.hint; }
+        document.getElementById('next-btn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if(currentIdx < currentQuestions.length) showQuestion();
+        else endQuiz();
+    }
+
+    function endQuiz() {
+        switchScreen('screen-result');
+        document.getElementById('cert-name').innerText = document.getElementById('student-name').value;
+        document.getElementById('cert-score').innerText = `${score} من ${currentQuestions.length}`;
+        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('ar-EG');
+    }
+
+    function showModal(id) { document.getElementById(id).style.display = 'block'; document.getElementById('overlay').style.display = 'block'; }
+    function hideModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); document.getElementById('overlay').style.display = 'none'; }
+</script>
+</body>
+</html>

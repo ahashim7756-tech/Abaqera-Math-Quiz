@@ -1,0 +1,426 @@
+html
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منطقة المدرس - منصة العباقرة</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- لوحة تحكم المدرس -->
+    <div class="teacher-dashboard">
+        <!-- الشريط الجانبي -->
+        <div class="dashboard-sidebar">
+            <div class="teacher-profile">
+                <div class="teacher-avatar">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>أحمد محمد</h3>
+                <p>مدرس رياضيات</p>
+                <div class="teacher-badge">
+                    <i class="fas fa-check-circle"></i> حساب موثق
+                </div>
+            </div>
+
+            <nav class="dashboard-nav">
+                <a href="#" class="active">
+                    <i class="fas fa-home"></i>
+                    الرئيسية
+                </a>
+                <a href="#">
+                    <i class="fas fa-upload"></i>
+                    رفع امتحان جديد
+                </a>
+                <a href="#">
+                    <i class="fas fa-tasks"></i>
+                    إدارة الامتحانات
+                </a>
+                <a href="#">
+                    <i class="fas fa-users"></i>
+                    متابعة الطلاب
+                </a>
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    الإحصائيات
+                </a>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    الإعدادات
+                </a>
+            </nav>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="dashboard-main">
+            <!-- بطاقات الإحصائيات -->
+            <div class="stats-cards">
+                <div class="stat-card-mini">
+                    <div class="number">١٥</div>
+                    <div class="label">امتحان مرفوع</div>
+                </div>
+                <div class="stat-card-mini">
+                    <div class="number">٢٣٤</div>
+                    <div class="label">طالب متابع</div>
+                </div>
+                <div class="stat-card-mini">
+                    <div class="number">٨٩٪</div>
+                    <div class="label">متوسط النتائج</div>
+                </div>
+                <div class="stat-card-mini">
+                    <div class="number">١٢</div>
+                    <div class="label">امتحان نشط</div>
+                </div>
+            </div>
+
+            <!-- نموذج رفع امتحان جديد -->
+            <div class="upload-exam-section">
+                <h2><i class="fas fa-upload"></i> رفع امتحان جديد</h2>
+                
+                <form id="uploadExamForm" class="upload-form">
+                    <div class="form-group">
+                        <label>عنوان الامتحان</label>
+                        <input type="text" placeholder="مثال: امتحان الجبر الشهر الأول" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>المادة</label>
+                            <select required>
+                                <option value="">اختر المادة</option>
+                                <option value="algebra">الجبر</option>
+                                <option value="geometry">الهندسة</option>
+                                <option value="both">شامل</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>نوع الامتحان</label>
+                            <select required>
+                                <option value="">اختر النوع</option>
+                                <option value="monthly">امتحان شهري</option>
+                                <option value="weekly">اختبار أسبوعي</option>
+                                <option value="final">امتحان نهاية العام</option>
+                                <option value="model">نموذج محاكاة</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>الصف</label>
+                            <select required>
+                                <option value="3">الثالث الإعدادي</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الدرجة النهائية</label>
+                            <input type="number" placeholder="مثال: ٤٠" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>الزمن (بالدقائق)</label>
+                            <input type="number" placeholder="مثال: ١٢٠" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>تاريخ الامتحان</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+
+                    <!-- رفع الملفات -->
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>اسحب ملف الامتحان هنا أو انقر للرفع</h3>
+                        <p>الصيغ المدعومة: PDF, DOCX, JPG, PNG (بحد أقصى ٢٠ ميجابايت)</p>
+                        <input type="file" id="examFile" accept=".pdf,.docx,.jpg,.png" hidden>
+                        <button type="button" class="browse-btn" onclick="document.getElementById('examFile').click()">
+                            استعراض الملفات
+                        </button>
+                    </div>
+
+                    <!-- معاينة الملف المرفوع -->
+                    <div class="file-preview" id="filePreview" style="display: none;">
+                        <i class="fas fa-file-pdf"></i>
+                        <span class="file-name">امتحان_الجبر_شهر_فبراير.pdf</span>
+                        <span class="file-size">٢.٥ ميجابايت</span>
+                        <button type="button" class="remove-file"><i class="fas fa-times"></i></button>
+                    </div>
+
+                    <!-- إعدادات إضافية -->
+                    <div class="advanced-settings">
+                        <h4>إعدادات متقدمة <i class="fas fa-cog"></i></h4>
+                        
+                        <div class="settings-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox"> تفعيل التصحيح الإلكتروني
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox"> إرسال إشعار للطلاب
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox"> عرض النتائج فور الانتهاء
+                            </label>
+                            
+                            <label class="checkbox-label">
+                                <input type="checkbox"> السماح بإعادة المحاولة
+                            </label>
+                        </div>
+
+                        <div class="time-settings">
+                            <label>وقت بدء الامتحان</label>
+                            <input type="datetime-local">
+                            
+                            <label>وقت انتهاء الامتحان</label>
+                            <input type="datetime-local">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-exam-btn">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        رفع الامتحان ونشره
+                    </button>
+                </form>
+            </div>
+
+            <!-- الامتحانات المرفوعة مؤخراً -->
+            <div class="recent-exams">
+                <h2>آخر الامتحانات المرفوعة</h2>
+                
+                <div class="exams-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الامتحان</th>
+                                <th>المادة</th>
+                                <th>النوع</th>
+                                <th>تاريخ الرفع</th>
+                                <th>عدد المشاهدات</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>امتحان الجبر الشهر الأول</td>
+                                <td>الجبر</td>
+                                <td>شهري</td>
+                                <td>١٥ فبراير ٢٠٢٦</td>
+                                <td>١٥٤ مشاهدة</td>
+                                <td>
+                                    <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="action-btn stats"><i class="fas fa-chart-bar"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>اختبار الهندسة الأسبوعي</td>
+                                <td>الهندسة</td>
+                                <td>أسبوعي</td>
+                                <td>١٠ فبراير ٢٠٢٦</td>
+                                <td>٩٨ مشاهدة</td>
+                                <td>
+                                    <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="action-btn stats"><i class="fas fa-chart-bar"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>نموذج محاكاة نصف العام</td>
+                                <td>شامل</td>
+                                <td>نموذج</td>
+                                <td>٥ فبراير ٢٠٢٦</td>
+                                <td>٣٢١ مشاهدة</td>
+                                <td>
+                                    <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    <button class="action-btn stats"><i class="fas fa-chart-bar"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- إحصائيات متقدمة -->
+            <div class="analytics-section">
+                <h2>تحليلات متقدمة</h2>
+                
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>نسبة نجاح الطلاب</h3>
+                        <canvas id="successChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>أكثر المواد مشاهدة</h3>
+                        <canvas id="subjectsChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>توزيع الدرجات</h3>
+                        <canvas id="gradesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إدارة الطلاب -->
+            <div class="students-management">
+                <h2>متابعة الطلاب</h2>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="ابحث عن طالب...">
+                </div>
+
+                <div class="students-grid">
+                    <div class="student-card">
+                        <div class="student-avatar">أ</div>
+                        <h4>أحمد محمد</h4>
+                        <p>مدرسة القاهرة الثانوية</p>
+                        <div class="student-progress">
+                            <div class="progress-label">
+                                <span>تقدم عام</span>
+                                <span>٨٥٪</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="student-actions">
+                            <button class="msg-btn"><i class="fas fa-envelope"></i></button>
+                            <button class="view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="report-btn"><i class="fas fa-file-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="student-card">
+                        <div class="student-avatar">س</div>
+                        <h4>سارة علي</h4>
+                        <p>مدرسة الجيزة الرسمية</p>
+                        <div class="student-progress">
+                            <div class="progress-label">
+                                <span>تقدم عام</span>
+                                <span>٩٢٪</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="student-actions">
+                            <button class="msg-btn"><i class="fas fa-envelope"></i></button>
+                            <button class="view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="report-btn"><i class="fas fa-file-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // تفعيل معاينة الملف
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('examFile');
+            const uploadArea = document.getElementById('fileUploadArea');
+            const preview = document.getElementById('filePreview');
+            
+            if (uploadArea) {
+                // سحب وإفلات
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    uploadArea.addEventListener(eventName, preventDefaults, false);
+                });
+
+                function preventDefaults(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    uploadArea.addEventListener(eventName, highlight, false);
+                });
+
+                ['dragleave', 'drop'].forEach(eventName => {
+                    uploadArea.addEventListener(eventName, unhighlight, false);
+                });
+
+                function highlight() {
+                    uploadArea.classList.add('highlight');
+                }
+
+                function unhighlight() {
+                    uploadArea.classList.remove('highlight');
+                }
+
+                uploadArea.addEventListener('drop', handleDrop, false);
+
+                function handleDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    fileInput.files = files;
+                    handleFiles(files);
+                }
+
+                uploadArea.addEventListener('click', () => {
+                    fileInput.click();
+                });
+
+                fileInput.addEventListener('change', function() {
+                    handleFiles(this.files);
+                });
+
+                function handleFiles(files) {
+                    const file = files[0];
+                    if (file) {
+                        document.querySelector('.file-name').textContent = file.name;
+                        document.querySelector('.file-size').textContent = 
+                            (file.size / 1024 / 1024).toFixed(2) + ' ميجابايت';
+                        preview.style.display = 'flex';
+                    }
+                }
+
+                // إزالة الملف
+                document.querySelector('.remove-file').addEventListener('click', function() {
+                    fileInput.value = '';
+                    preview.style.display = 'none';
+                });
+            }
+
+            // رسوم بيانية
+            if (document.getElementById('successChart')) {
+                const successCtx = document.getElementById('successChart').getContext('2d');
+                new Chart(successCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل'],
+                        datasets: [{
+                            label: 'نسبة النجاح',
+                            data: [85, 88, 92, 95],
+                            borderColor: '#ffd700',
+                            tension: 0.4
+                        }]
+                    }
+                });
+
+                const subjectsCtx = document.getElementById('subjectsChart').getContext('2d');
+                new Chart(subjectsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['الجبر', 'الهندسة', 'الامتحانات'],
+                        datasets: [{
+                            data: [45, 35, 20],
+                            backgroundColor: ['#667eea', '#764ba2', '#ffd700']
+                        }]
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

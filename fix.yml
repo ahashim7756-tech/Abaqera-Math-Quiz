@@ -1,0 +1,23 @@
+name: Fix Repository Structure
+on: [workflow_dispatch]
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git rm -rf "ف الملفات عبر التحميل" || true
+          mkdir -p pages data
+          mv index.html style.css script.js ./ 2>/dev/null || true
+          mv aljabr.html pages/algebra-ar.html 2>/dev/null || true
+          mv geometry.html pages/geometry-ar.html 2>/dev/null || true
+          mv teacher.html pages/teacher-ar.html 2>/dev/null || true
+          mv exams-ar.html pages/exams-ar.html 2>/dev/null || true
+          mv "الأسئلة.json" data/algebra-questions.json 2>/dev/null || true
+          mv geometry-questions.json data/geometry-questions.json 2>/dev/null || true
+          mv "بيانات امتحانات المعلمين.json" data/teacher-exams.json 2>/dev/null || true
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "تلقائي: تصحيح هيكل الملفات"
+          git push

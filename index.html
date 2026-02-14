@@ -1,1064 +1,264 @@
+html
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العباقرة - رياضيات الثالث الإعدادي (الترم الثاني كاملاً)</title>
-    <style>
-        /* ==========================================
-           STYLES (محسنة بالكامل)
-           ========================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-
-        .header h2 {
-            color: #667eea;
-            font-size: 1.8em;
-        }
-
-        .subtitle {
-            color: #718096;
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-            color: #4a5568;
-            min-width: 200px;
-        }
-
-        .tab-btn.active {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: #e2e8f0;
-        }
-
-        /* Content */
-        .tab-content {
-            display: none;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Units */
-        .unit {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: #f8fafc;
-            border-radius: 20px;
-            border-right: 8px solid #667eea;
-        }
-
-        .unit h3 {
-            font-size: 1.8em;
-            color: #2d3748;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #cbd5e0;
-        }
-
-        .unit h4 {
-            font-size: 1.4em;
-            color: #4a5568;
-            margin: 20px 0 15px;
-        }
-
-        /* Lessons */
-        .lesson {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-
-        .lesson h5 {
-            font-size: 1.3em;
-            color: #2d3748;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .lesson h5::before {
-            content: "📘";
-            font-size: 1.5em;
-        }
-
-        /* Content Boxes */
-        .definition {
-            background: #ebf8ff;
-            border-right: 6px solid #4299e1;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .formula-box {
-            background: #fefcbf;
-            border-right: 6px solid #ecc94b;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            direction: ltr;
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        .example {
-            background: #c6f6d5;
-            border-right: 6px solid #48bb78;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .note {
-            background: #fed7d7;
-            border-right: 6px solid #f56565;
-            padding: 15px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        .properties {
-            background: #e9d8fd;
-            border-right: 6px solid #9f7aea;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .properties ul {
-            margin-right: 30px;
-            margin-top: 10px;
-        }
-
-        .properties li {
-            margin: 10px 0;
-        }
-
-        /* Questions */
-        .questions-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 3px dashed #cbd5e0;
-        }
-
-        .question-item {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .question-item p {
-            font-size: 1.1em;
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .option {
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1em;
-        }
-
-        .option:hover {
-            background: #667eea;
-            color: white;
-            border-color: #5a67d8;
-            transform: translateX(-5px);
-        }
-
-        .option.correct {
-            background: #c6f6d5;
-            border-color: #48bb78;
-            color: #22543d;
-        }
-
-        .option.wrong {
-            background: #fed7d7;
-            border-color: #f56565;
-            color: #742a2a;
-        }
-
-        .show-answer-btn {
-            background: #48bb78;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-
-        .show-answer-btn:hover {
-            background: #38a169;
-            transform: scale(1.05);
-        }
-
-        .answer {
-            display: none;
-            background: #faf089;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-size: 1.1em;
-            border-right: 4px solid #ecc94b;
-        }
-
-        .answer.show {
-            display: block;
-            animation: slideDown 0.3s;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .header h2 {
-                font-size: 1.3em;
-            }
-            
-            .tab-btn {
-                min-width: 100%;
-            }
-            
-            .unit {
-                padding: 15px;
-            }
-            
-            .lesson {
-                padding: 15px;
-            }
-            
-            .options {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Back Button */
-        .back-btn {
-            background: white;
-            color: #4a5568;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .back-btn:hover {
-            background: #f7fafc;
-            transform: translateX(5px);
-        }
-    </style>
+    <title>منصة العباقرة الذهبية - رياضيات الثالث الإعدادي</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>📚 منصة العباقرة الرقمية</h1>
-            <h2>الرياضيات - الصف الثالث الإعدادي</h2>
-            <div class="subtitle">الترم الثاني (الفصل الدراسي الثاني) - المنهج المصري المطور</div>
+    <!-- شاشة التحميل المتحركة -->
+    <div class="preloader" id="preloader">
+        <div class="loader">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <span>منصة العباقرة</span>
         </div>
+    </div>
 
-        <!-- Navigation Buttons -->
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button class="back-btn" onclick="window.location.href='#'">🏠 الرئيسية</button>
-            <button class="back-btn" onclick="window.print()">🖨️ طباعة المنهج</button>
-        </div>
+    <!-- الصفحة الرئيسية -->
+    <div class="main-wrapper" id="mainWrapper" style="display: none;">
+        <!-- شريط التنقل المتطور -->
+        <nav class="navbar glass-effect">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-icon">🧮</div>
+                    <div class="logo-text">
+                        <h1>منصة العباقرة</h1>
+                        <span>رياضيات الثالث الإعدادي</span>
+                    </div>
+                </div>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('algebra')">📊 الجبر والإحصاء</button>
-            <button class="tab-btn" onclick="switchTab('geometry')">📐 الهندسة</button>
-        </div>
+                <div class="nav-links">
+                    <a href="#home" class="active">الرئيسية</a>
+                    <a href="pages/algebra.html">الجبر</a>
+                    <a href="pages/geometry.html">الهندسة</a>
+                    <a href="pages/exams.html">الامتحانات</a>
+                    <a href="pages/teacher-zone.html" class="teacher-link">منطقة المدرس</a>
+                </div>
 
-        <!-- Algebra Content (كامل ومفصل) -->
-        <div id="algebra" class="tab-content active">
-            <!-- الوحدة الأولى: النسبة والتناسب -->
-            <div class="unit">
-                <h3>📊 الوحدة الأولى: النسبة والتناسب</h3>
+                <div class="user-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile" id="userProfile">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>طالب</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- الهيدر الرئيسي -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="floating-elements">
+                    <div class="floating-element">📐</div>
+                    <div class="floating-element">📊</div>
+                    <div class="floating-element">🧮</div>
+                    <div class="floating-element">📏</div>
+                </div>
+                <h1 class="glitch-text" data-text="منصة العباقرة الذهبية">منصة العباقرة الذهبية</h1>
+                <p class="subtitle">المنصة الأقوى لشرح وتدريبات رياضيات الثالث الإعدادي - الترم الثاني</p>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-number">١٢٠</span>
+                        <span class="stat-label">درس تفاعلي</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">١٥٠٠</span>
+                        <span class="stat-label">سؤال محلول</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">٢٥</span>
+                        <span class="stat-label">امتحان شامل</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">٥٠٠٠</span>
+                        <span class="stat-label">طالب مستفيد</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- بطاقات التنقل -->
+        <section class="cards-section">
+            <div class="container">
+                <h2 class="section-title">اختر مسار التعلم الخاص بك</h2>
                 
-                <!-- الدرس 1: النسبة -->
-                <div class="lesson">
-                    <h5>الدرس الأول: النسبة</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 تعريف النسبة:</strong> هي مقارنة بين كميتين من نفس النوع باستخدام القسمة. تكتب على الصورة أ : ب أو أ/ب حيث ب ≠ ٠.
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 خصائص النسبة:</strong>
-                        <ul>
-                            <li>النسبة ليس لها وحدات قياس (كمية غير مسماة).</li>
-                            <li>يمكن تبسيط النسبة بقسمة حديها على عامل مشترك.</li>
-                            <li>النسبة تتغير بتغير الكميات المقارنة.</li>
-                            <li>النسبة أ:ب تختلف عن النسبة ب:أ إلا إذا كان أ = ب.</li>
-                            <li>إذا ضربنا أو قسمنا حدي النسبة على عدد غير صفر، نحصل على نسبة مكافئة.</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال (١):</strong> في فصل دراسي، عدد البنين ١٨ والبنات ٢٤. أوجد النسبة بين:
-                        <ul style="margin-top: 10px; margin-right: 20px;">
-                            <li>عدد البنين إلى عدد البنات = ١٨ : ٢٤ = ٣ : ٤ (بالقسمة على ٦)</li>
-                            <li>عدد البنات إلى عدد البنين = ٢٤ : ١٨ = ٤ : ٣</li>
-                            <li>عدد البنين إلى مجموع التلاميذ = ١٨ : ٤٢ = ٣ : ٧ (بالقسمة على ٦)</li>
-                        </ul>
-                    </div>
-
-                    <div class="note">
-                        <strong>⚠️ ملاحظة مهمة:</strong> عند المقارنة بين كميتين بواسطة النسبة، يجب أن تكون بنفس الوحدة. مثال: ٣ أمتار : ٥٠ سم = ٣٠٠ سم : ٥٠ سم = ٦ : ١
-                    </div>
-
-                    <div class="questions-section">
-                        <h4>📝 أسئلة على الدرس:</h4>
-                        
-                        <div class="question-item">
-                            <p>١) إذا كانت النسبة بين طولي ضلعين في مثلث هي ٣ : ٥، فإذا كان طول الضلع الأصغر ١٢ سم، أوجد طول الضلع الأكبر.</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> نفرض أن طول الضلع الأكبر = س<br>
-                                ٣ : ٥ = ١٢ : س<br>
-                                ٣س = ٥ × ١٢ = ٦٠<br>
-                                س = ٢٠ سم
+                <div class="cards-grid">
+                    <div class="card-3d" onclick="window.location.href='pages/algebra.html'">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">📊</div>
+                                <h3>الجبر والإحصاء</h3>
+                                <div class="card-badge">٤ وحدات</div>
                             </div>
-                        </div>
-
-                        <div class="question-item">
-                            <p>٢) إذا كانت النسبة بين عمر أحمد وعمر محمد هي ٤ : ٧، وكان عمر محمد ٢٨ سنة، فما عمر أحمد؟</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> نفرض عمر أحمد = س<br>
-                                ٤ : ٧ = س : ٢٨<br>
-                                ٧س = ٤ × ٢٨ = ١١٢<br>
-                                س = ١٦ سنة
+                            <div class="card-back">
+                                <h4>محتويات الجبر:</h4>
+                                <ul>
+                                    <li>✓ النسبة والتناسب</li>
+                                    <li>✓ المتغير العشوائي</li>
+                                    <li>✓ العينات</li>
+                                    <li>✓ الاحتمال الشرطي</li>
+                                </ul>
+                                <div class="progress-indicator">تقدمك: ٠٪</div>
+                                <button class="start-btn">ابدأ الآن</button>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- الدرس 2: التناسب -->
-                <div class="lesson">
-                    <h5>الدرس الثاني: التناسب</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 تعريف التناسب:</strong> هو تساوي نسبتين. يكتب على الصورة أ/ب = ج/د أو أ : ب = ج : د.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>قوانين التناسب الأساسية:</strong><br>
-                        إذا كان أ : ب = ج : د فإن:<br>
-                        ١) أ × د = ب × ج (ضرب الطرفين = ضرب الوسطين)<br>
-                        ٢) أ : ج = ب : د (تبديل الوسطين)<br>
-                        ٣) ب : أ = د : ج (التبادل)<br>
-                        ٤) (أ + ب) : ب = (ج + د) : د (الخاصية الرابعة)<br>
-                        ٥) (أ - ب) : ب = (ج - د) : د
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 أنواع التناسب:</strong>
-                        <ul>
-                            <li><strong>التناسب الطردي:</strong> كلما زادت الكمية الأولى تزداد الثانية بنسبة ثابتة (ص = ك × س)</li>
-                            <li><strong>التناسب العكسي:</strong> كلما زادت الكمية الأولى تقل الثانية بنسبة ثابتة (ص = ك / س)</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال (٢):</strong> إذا كانت ٥ : س = ٣ : ٩، أوجد قيمة س.<br>
-                        <strong>الحل:</strong> ٥ × ٩ = ٣ × س → ٤٥ = ٣س → س = ١٥
-                    </div>
-
-                    <div class="questions-section">
-                        <h4>📝 أسئلة على الدرس:</h4>
-                        
-                        <div class="question-item">
-                            <p>١) حل التناسب: ٧ : ٨ = س : ٢٤</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> ٧ × ٢٤ = ٨ × س<br>
-                                ١٦٨ = ٨س<br>
-                                س = ٢١
+                    <div class="card-3d" onclick="window.location.href='pages/geometry.html'">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">📐</div>
+                                <h3>الهندسة</h3>
+                                <div class="card-badge">٦ وحدات</div>
                             </div>
-                        </div>
-
-                        <div class="question-item">
-                            <p>٢) إذا كانت س : ٦ = ١٠ : ١٥، أوجد قيمة س.</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> ١٥س = ٦ × ١٠<br>
-                                ١٥س = ٦٠<br>
-                                س = ٤
+                            <div class="card-back">
+                                <h4>محتويات الهندسة:</h4>
+                                <ul>
+                                    <li>✓ الدائرة</li>
+                                    <li>✓ الأوتار</li>
+                                    <li>✓ الزوايا</li>
+                                    <li>✓ الرباعي الدائري</li>
+                                    <li>✓ التماس</li>
+                                </ul>
+                                <div class="progress-indicator">تقدمك: ٠٪</div>
+                                <button class="start-btn">ابدأ الآن</button>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- الدرس 3: تطبيقات على التناسب -->
-                <div class="lesson">
-                    <h5>الدرس الثالث: تطبيقات على التناسب</h5>
-
-                    <div class="definition">
-                        <strong>🔹 تقسيم الكمية تناسبياً:</strong> لتقسيم كمية (م) على نسبة أ : ب : ج، فإن:
-                        <ul style="margin-top: 10px;">
-                            <li>نصيب الأول = (أ × م) / (أ + ب + ج)</li>
-                            <li>نصيب الثاني = (ب × م) / (أ + ب + ج)</li>
-                            <li>نصيب الثالث = (ج × م) / (أ + ب + ج)</li>
-                        </ul>
+                    <div class="card-3d" onclick="window.location.href='pages/exams.html'">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">📝</div>
+                                <h3>الامتحانات الشاملة</h3>
+                                <div class="card-badge">٢٥ امتحاناً</div>
+                            </div>
+                            <div class="card-back">
+                                <h4>أنواع الامتحانات:</h4>
+                                <ul>
+                                    <li>✓ امتحانات المحافظات</li>
+                                    <li>✓ اختبارات شهرية</li>
+                                    <li>✓ امتحانات نهاية العام</li>
+                                    <li>✓ اختبارات تحديد المستوى</li>
+                                </ul>
+                                <button class="start-btn">اختبر نفسك</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="example">
-                        <strong>✏️ مثال (٣):</strong> وزع أب ٣٠٠٠ جنيه على أبنائه الثلاثة بنسبة ٢ : ٣ : ٥. أوجد نصيب كل منهم.<br>
-                        <strong>الحل:</strong> مجموع الأجزاء = ٢ + ٣ + ٥ = ١٠<br>
-                        نصيب الأول = (٢/١٠) × ٣٠٠٠ = ٦٠٠ جنيه<br>
-                        نصيب الثاني = (٣/١٠) × ٣٠٠٠ = ٩٠٠ جنيه<br>
-                        نصيب الثالث = (٥/١٠) × ٣٠٠٠ = ١٥٠٠ جنيه
-                    </div>
-
-                    <div class="questions-section">
-                        <div class="question-item">
-                            <p>١) وزعت جائزة ٤٥٠٠ جنيه على ثلاثة فائزين بنسبة ١ : ٢ : ٣. أوجد نصيب كل منهم.</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> مجموع الأجزاء = ١ + ٢ + ٣ = ٦<br>
-                                الأول = (١/٦) × ٤٥٠٠ = ٧٥٠ جنيه<br>
-                                الثاني = (٢/٦) × ٤٥٠٠ = ١٥٠٠ جنيه<br>
-                                الثالث = (٣/٦) × ٤٥٠٠ = ٢٢٥٠ جنيه
+                    <div class="card-3d special" onclick="window.location.href='pages/teacher-zone.html'">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-icon">👨‍🏫</div>
+                                <h3>منطقة المدرس</h3>
+                                <div class="card-badge">خاص بالمدرسين</div>
+                            </div>
+                            <div class="card-back">
+                                <h4>صلاحيات المدرس:</h4>
+                                <ul>
+                                    <li>✓ رفع امتحانات شهرية</li>
+                                    <li>✓ متابعة تقدم الطلاب</li>
+                                    <li>✓ تصحيح إلكتروني</li>
+                                    <li>✓ إحصائيات متقدمة</li>
+                                </ul>
+                                <button class="start-btn teacher-btn">دخول المدرسين</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- الوحدة الثانية: المتغير العشوائي -->
-            <div class="unit">
-                <h3>📊 الوحدة الثانية: المتغير العشوائي والتوزيعات الاحتمالية</h3>
+        <!-- إحصائيات متقدمة -->
+        <section class="statistics-section">
+            <div class="container">
+                <h2 class="section-title">إحصائيات المنصة</h2>
                 
-                <!-- الدرس 1: المتغير العشوائي -->
-                <div class="lesson">
-                    <h5>الدرس الأول: المتغير العشوائي</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 تعريف المتغير العشوائي:</strong> هو دالة تأخذ قيماً عددية مرتبطة بنتائج تجربة عشوائية.
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 أنواع المتغيرات العشوائية:</strong>
-                        <ul>
-                            <li><strong>متغير عشوائي منفصل:</strong> يأخذ عدداً محدوداً من القيم أو قيماً قابلة للعد (مثل: عدد مرات ظهور صورة في رمي قطعة نقود).</li>
-                            <li><strong>متغير عشوائي متصل:</strong> يأخذ عدداً لا نهائياً من القيم في فترة معينة (مثل: الطول، الوزن، درجة الحرارة).</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال (١):</strong> عند إلقاء قطعة نقود ثلاث مرات، المتغير العشوائي س = عدد مرات ظهور الصورة. ما هي قيم س الممكنة؟<br>
-                        <strong>الحل:</strong> يمكن أن تظهر الصورة ٠، ١، ٢، ٣ مرات. إذن قيم س = {٠، ١، ٢، ٣}
-                    </div>
-                </div>
-
-                <!-- الدرس 2: التوزيع الاحتمالي للمتغير العشوائي المنفصل -->
-                <div class="lesson">
-                    <h5>الدرس الثاني: التوزيع الاحتمالي للمتغير العشوائي المنفصل</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 التوزيع الاحتمالي:</strong> هو دالة تربط كل قيمة من قيم المتغير العشوائي باحتمالها.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>شروط التوزيع الاحتمالي:</strong><br>
-                        ١) ٠ ≤ ل(س) ≤ ١ لكل قيمة من قيم س<br>
-                        ٢) مجموع الاحتمالات Σ ل(س) = ١
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>المتوسط الحسابي (القيمة المتوقعة):</strong> μ = Σ[س × ل(س)]<br>
-                        <strong>التباين:</strong> σ² = Σ[(س - μ)² × ل(س)] = Σ[س² × ل(س)] - μ²<br>
-                        <strong>الانحراف المعياري:</strong> σ = √(التباين)
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال (٢):</strong> في تجربة إلقاء قطعة نقود مرة واحدة، المتغير العوائي س = عدد الصور. كون جدول التوزيع الاحتمالي لس.<br>
-                        <strong>الحل:</strong>
-                        <table style="width: 100%; margin: 15px 0; border-collapse: collapse;">
-                            <tr style="background: #667eea; color: white;">
-                                <th style="padding: 10px; border: 1px solid #ddd;">س</th>
-                                <th style="padding: 10px; border: 1px solid #ddd;">٠</th>
-                                <th style="padding: 10px; border: 1px solid #ddd;">١</th>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>ل(س)</strong></td>
-                                <td style="padding: 10px; border: 1px solid #ddd;">١/٢</td>
-                                <td style="padding: 10px; border: 1px solid #ddd;">١/٢</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="questions-section">
-                        <div class="question-item">
-                            <p>١) إذا كان التوزيع الاحتمالي لمتغير عشوائي س هو: س = {١، ٢، ٣}، ل(١) = ٠.٣، ل(٢) = ٠.٥، أوجد ل(٣).</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> ٠.٣ + ٠.٥ + ل(٣) = ١<br>
-                                ٠.٨ + ل(٣) = ١<br>
-                                ل(٣) = ٠.٢
-                            </div>
+                <div class="stats-grid">
+                    <div class="stat-card animate">
+                        <div class="stat-circle" data-value="95">
+                            <span class="stat-percent">٩٥٪</span>
                         </div>
+                        <p>نسبة نجاح الطلاب</p>
                     </div>
-                </div>
-
-                <!-- الدرس 3: التوزيعات الاحتمالية المنتظمة -->
-                <div class="lesson">
-                    <h5>الدرس الثالث: التوزيعات الاحتمالية المنتظمة</h5>
                     
-                    <div class="definition">
-                        <strong>🔹 التوزيع المنتظم:</strong> إذا كان للمتغير العشوائي س عدد (ن) من القيم وكانت جميعها متساوية الاحتمال، فإن:
-                        <br>ل(س) = ١/ن لكل قيمة من قيم س
+                    <div class="stat-card animate">
+                        <div class="stat-number-counter" data-target="1500">٠</div>
+                        <p>سؤال وتدريب</p>
                     </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال (٣):</strong> عند رمي حجر نرد مرة واحدة، س = العدد الظاهر. كون جدول التوزيع الاحتمالي لس.<br>
-                        <strong>الحل:</strong> بما أن حجر النرد منتظم، فإن جميع القيم من ١ إلى ٦ لها نفس الاحتمال = ١/٦
+                    
+                    <div class="stat-card animate">
+                        <div class="stat-number-counter" data-target="25">٠</div>
+                        <p>امتحان كامل</p>
+                    </div>
+                    
+                    <div class="stat-card animate">
+                        <div class="stat-number-counter" data-target="120">٠</div>
+                        <p>درس تفاعلي</p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- الوحدة الثالثة: العينات -->
-            <div class="unit">
-                <h3>📊 الوحدة الثالثة: العينات</h3>
+        <!-- آخر الامتحانات المضافة -->
+        <section class="latest-exams">
+            <div class="container">
+                <h2 class="section-title">آخر الامتحانات المضافة</h2>
                 
-                <!-- الدرس 1: المجتمع والعينة -->
-                <div class="lesson">
-                    <h5>الدرس الأول: المجتمع والعينة</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 المجتمع:</strong> المجموعة الكاملة للأفراد أو المفردات التي نريد دراستها.<br>
-                        <strong>🔹 العينة:</strong> جزء مختار من المجتمع لدراسته واستخلاص النتائج.
+                <div class="exams-carousel">
+                    <div class="exam-card-mini">
+                        <div class="exam-date">١٥ فبراير ٢٠٢٦</div>
+                        <h4>امتحان الجبر الشهر الأول</h4>
+                        <p>إضافة: أ/ أحمد محمد</p>
+                        <button class="download-btn">تحميل PDF</button>
                     </div>
-
-                    <div class="properties">
-                        <strong>📌 شروط العينة الجيدة:</strong>
-                        <ul>
-                            <li>أن تكون ممثلة للمجتمع</li>
-                            <li>أن تكون عشوائية (كل فرد له نفس الفرصة)</li>
-                            <li>أن يكون حجمها مناسباً</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- الدرس 2: طرق اختيار العينة -->
-                <div class="lesson">
-                    <h5>الدرس الثاني: طرق اختيار العينة</h5>
                     
-                    <div class="properties">
-                        <ul>
-                            <li><strong>العينة العشوائية البسيطة:</strong> لكل فرد من المجتمع نفس الاحتمال في الاختيار</li>
-                            <li><strong>العينة المنتظمة:</strong> اختيار فرد كل فاصل ثابت من قائمة</li>
-                            <li><strong>العينة الطبقية:</strong> تقسيم المجتمع إلى طبقات ثم اختيار عينة من كل طبقة</li>
-                            <li><strong>العينة العنقودية:</strong> اختيار مجموعات كاملة عشوائياً</li>
-                        </ul>
+                    <div class="exam-card-mini">
+                        <div class="exam-date">١٠ فبراير ٢٠٢٦</div>
+                        <h4>اختبار الهندسة الأسبوعي</h4>
+                        <p>إضافة: أ/ سارة علي</p>
+                        <button class="download-btn">تحميل PDF</button>
+                    </div>
+                    
+                    <div class="exam-card-mini">
+                        <div class="exam-date">٥ فبراير ٢٠٢٦</div>
+                        <h4>نموذج محاكاة لامتحان نصف العام</h4>
+                        <p>إضافة: أ/ محمود حسن</p>
+                        <button class="download-btn">تحميل PDF</button>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- الوحدة الرابعة: الاحتمال الشرطي -->
-            <div class="unit">
-                <h3>📊 الوحدة الرابعة: الاحتمال الشرطي</h3>
-                
-                <div class="lesson">
-                    <h5>الدرس الأول: مفهوم الاحتمال الشرطي</h5>
-                    
-                    <div class="formula-box">
-                        <strong>الاحتمال الشرطي:</strong> ل(أ|ب) = ل(أ ∩ ب) / ل(ب) ، بشرط ل(ب) ≠ ٠
-                    </div>
-
-                    <div class="definition">
-                        <strong>🔹 معنى الاحتمال الشرطي:</strong> هو احتمال وقوع الحدث (أ) بشرط أن يكون الحدث (ب) قد وقع بالفعل.
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> صندوق يحتوي على ٦ كرات حمراء و ٤ زرقاء. سحبت كرتان متتاليتان بدون إرجاع. احسب احتمال أن تكون الثانية حمراء إذا كانت الأولى زرقاء.<br>
-                        <strong>الحل:</strong> بعد سحب كرة زرقاء أولى، يتبقى ٩ كرات (٦ حمراء + ٣ زرقاء)<br>
-                        ل(حمراء | أولى زرقاء) = ٦/٩ = ٢/٣
-                    </div>
-                </div>
-
-                <div class="lesson">
-                    <h5>الدرس الثاني: الأحداث المستقلة</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 حدثان مستقلان:</strong> إذا كان وقوع أحدهما لا يؤثر على احتمال وقوع الآخر.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>شروط استقلال الحدثين:</strong><br>
-                        ١) ل(أ ∩ ب) = ل(أ) × ل(ب)<br>
-                        ٢) ل(أ|ب) = ل(أ)<br>
-                        ٣) ل(ب|أ) = ل(ب)
-                    </div>
-                </div>
+        <!-- شريط الإنجازات -->
+        <div class="achievement-bar">
+            <div class="achievement-item">
+                <i class="fas fa-star"></i>
+                <span>أفضل منصة تعليمية ٢٠٢٦</span>
             </div>
-        </div>
-
-        <!-- Geometry Content (كامل ومفصل) -->
-        <div id="geometry" class="tab-content">
-            <!-- الوحدة الأولى: الدائرة -->
-            <div class="unit">
-                <h3>📐 الوحدة الأولى: الدائرة</h3>
-                
-                <!-- الدرس 1: تعريف الدائرة وعناصرها -->
-                <div class="lesson">
-                    <h5>الدرس الأول: تعريف الدائرة وعناصرها</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 تعريف الدائرة:</strong> هي مجموعة نقاط المستوى التي تبعد بعداً ثابتاً عن نقطة ثابتة تسمى المركز.
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 عناصر الدائرة:</strong>
-                        <ul>
-                            <li><strong>المركز (م):</strong> نقطة ثابتة داخل الدائرة</li>
-                            <li><strong>نصف القطر (نق):</strong> قطعة تصل المركز بأي نقطة على الدائرة</li>
-                            <li><strong>الوتر:</strong> قطعة مستقيمة تصل بين نقطتين على الدائرة</li>
-                            <li><strong>القطر (ق):</strong> وتر يمر بمركز الدائرة (طوله = ٢نق)</li>
-                            <li><strong>القوس:</strong> جزء من محيط الدائرة</li>
-                            <li><strong>محيط الدائرة:</strong> ٢π نق</li>
-                            <li><strong>مساحة الدائرة:</strong> π نق²</li>
-                        </ul>
-                    </div>
-
-                    <div class="note">
-                        <strong>⚠️ ملاحظات هامة:</strong>
-                        <ul>
-                            <li>جميع أنصاف أقطار الدائرة الواحدة متساوية في الطول</li>
-                            <li>جميع أقطار الدائرة الواحدة متساوية في الطول</li>
-                            <li>القطر هو أطول وتر في الدائرة</li>
-                            <li>عدد لا نهائي من أنصاف الأقطار والأقطار</li>
-                        </ul>
-                    </div>
-
-                    <div class="questions-section">
-                        <div class="question-item">
-                            <p>١) دائرة طول قطرها ١٤ سم. أوجد طول نصف قطرها ومحيطها (اعتبر π = ٢٢/٧).</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> نق = ١٤ ÷ ٢ = ٧ سم<br>
-                                المحيط = ٢ × (٢٢/٧) × ٧ = ٤٤ سم
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- الدرس 2: أوضاع النقطة بالنسبة للدائرة -->
-                <div class="lesson">
-                    <h5>الدرس الثاني: أوضاع النقطة بالنسبة للدائرة</h5>
-                    
-                    <div class="properties">
-                        <ul>
-                            <li><strong>النقطة داخل الدائرة:</strong> بعدها عن المركز < نق</li>
-                            <li><strong>النقطة على الدائرة:</strong> بعدها عن المركز = نق</li>
-                            <li><strong>النقطة خارج الدائرة:</strong> بعدها عن المركز > نق</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- الدرس 3: أوضاع المستقيم بالنسبة للدائرة -->
-                <div class="lesson">
-                    <h5>الدرس الثالث: أوضاع المستقيم بالنسبة للدائرة</h5>
-                    
-                    <div class="properties">
-                        <ul>
-                            <li><strong>المستقيم القاطع:</strong> يقطع الدائرة في نقطتين (البعد عن المركز < نق)</li>
-                            <li><strong>المستقيم المماس:</strong> يمس الدائرة في نقطة واحدة (البعد عن المركز = نق)</li>
-                            <li><strong>المستقيم غير المار:</strong> لا يقطع الدائرة (البعد عن المركز > نق)</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> دائرة نصف قطرها ٥ سم، بعد مستقيم عن مركزها ٣ سم. كم نقطة تقاطع بين المستقيم والدائرة؟<br>
-                        <strong>الحل:</strong> ٣ < ٥ إذن المستقيم قاطع ويقطع الدائرة في نقطتين.
-                    </div>
-                </div>
+            <div class="achievement-item">
+                <i class="fas fa-users"></i>
+                <span>أكثر من ٥٠٠٠ طالب</span>
             </div>
-
-            <!-- الوحدة الثانية: أوتار الدائرة -->
-            <div class="unit">
-                <h3>📐 الوحدة الثانية: أوتار الدائرة</h3>
-                
-                <div class="lesson">
-                    <h5>نظريات الأوتار</h5>
-                    
-                    <div class="properties">
-                        <ul>
-                            <li><strong>نظرية ١:</strong> الأوتار المتساوية في الطول تقابل أقواساً متساوية في القياس (والعكس)</li>
-                            <li><strong>نظرية ٢:</strong> الأوتار المتساوية في الطول تبعد أبعاداً متساوية عن المركز (والعكس)</li>
-                            <li><strong>نظرية ٣:</strong> كلما زاد طول الوتر قل بعده عن المركز (علاقة عكسية)</li>
-                            <li><strong>نظرية ٤:</strong> القطر العمودي على وتر ينصفه وينصف قوسيه</li>
-                            <li><strong>نظرية ٥:</strong> المستقيم المار بمركز الدائرة والعمودي على وتر ينصفه</li>
-                            <li><strong>نظرية ٦:</strong> المستقيم المار بمنتصف وتر وعمودي عليه يمر بمركز الدائرة</li>
-                        </ul>
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>العلاقة بين طول الوتر وبعده عن المركز:</strong><br>
-                        إذا كان طول الوتر = ل، بعده عن المركز = ع، نصف القطر = نق<br>
-                        (ل/٢)² + ع² = نق²
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> دائرة نصف قطرها ١٠ سم، وتر طوله ١٢ سم. أوجد بعد هذا الوتر عن المركز.<br>
-                        <strong>الحل:</strong> (١٢/٢)² + ع² = ١٠²<br>
-                        ٦² + ع² = ١٠٠<br>
-                        ٣٦ + ع² = ١٠٠<br>
-                        ع² = ٦٤<br>
-                        ع = ٨ سم
-                    </div>
-
-                    <div class="questions-section">
-                        <div class="question-item">
-                            <p>١) دائرة نصف قطرها ١٣ سم، وتر يبعد عن مركزها ٥ سم. أوجد طول الوتر.</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong> (ل/٢)² + ٥² = ١٣²<br>
-                                (ل/٢)² + ٢٥ = ١٦٩<br>
-                                (ل/٢)² = ١٤٤<br>
-                                ل/٢ = ١٢<br>
-                                ل = ٢٤ سم
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- الوحدة الثالثة: الزوايا في الدائرة -->
-            <div class="unit">
-                <h3>📐 الوحدة الثالثة: الزوايا في الدائرة</h3>
-                
-                <!-- الدرس 1: الزاوية المركزية -->
-                <div class="lesson">
-                    <h5>الدرس الأول: الزاوية المركزية</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 الزاوية المركزية:</strong> هي زاوية رأسها مركز الدائرة وضلعاها نصفا قطرين.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>قياس الزاوية المركزية = قياس القوس المقابل لها</strong>
-                    </div>
-                </div>
-
-                <!-- الدرس 2: الزاوية المحيطية -->
-                <div class="lesson">
-                    <h5>الدرس الثاني: الزاوية المحيطية</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 الزاوية المحيطية:</strong> هي زاوية رأسها على محيط الدائرة وضلعاها وتران في الدائرة.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>قياس الزاوية المحيطية = ½ قياس القوس المقابل لها</strong>
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 نظريات الزوايا المحيطية:</strong>
-                        <ul>
-                            <li>الزوايا المحيطية المشتركة في قوس واحد متساوية في القياس</li>
-                            <li>الزاوية المحيطية المرسومة في نصف دائرة = ٩٠°</li>
-                            <li>الزاوية المركزية = ٢ × الزاوية المحيطية المشتركة معها في نفس القوس</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> زاوية مركزية قياسها ١٢٠°. أوجد قياس الزاوية المحيطية المشتركة معها في نفس القوس.<br>
-                        <strong>الحل:</strong> الزاوية المحيطية = ½ × ١٢٠ = ٦٠°
-                    </div>
-                </div>
-
-                <!-- الدرس 3: الزاوية المماسية -->
-                <div class="lesson">
-                    <h5>الدرس الثالث: الزاوية المماسية</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 الزاوية المماسية:</strong> هي زاوية رأسها على الدائرة، أحد ضلعيها مماس والآخر وتر.
-                    </div>
-
-                    <div class="formula-box">
-                        <strong>قياس الزاوية المماسية = ½ قياس القوس المقابل لها</strong><br>
-                        <strong>وتساوي الزاوية المحيطية المشتركة معها في القوس البديل</strong>
-                    </div>
-                </div>
-
-                <div class="lesson">
-                    <h5>ملخص قياسات الزوايا في الدائرة</h5>
-                    
-                    <div class="formula-box">
-                        <strong>الزاوية المركزية:</strong> = قياس القوس<br>
-                        <strong>الزاوية المحيطية:</strong> = ½ القوس<br>
-                        <strong>الزاوية المماسية:</strong> = ½ القوس<br>
-                        <strong>الزاوية الداخلية:</strong> = ½ (مجموع القوسين المقابلين)<br>
-                        <strong>الزاوية الخارجية:</strong> = ½ (الفرق بين القوسين)
-                    </div>
-                </div>
-            </div>
-
-            <!-- الوحدة الرابعة: الشكل الرباعي الدائري -->
-            <div class="unit">
-                <h3>📐 الوحدة الرابعة: الشكل الرباعي الدائري</h3>
-                
-                <div class="lesson">
-                    <h5>تعريف وخصائص الشكل الرباعي الدائري</h5>
-                    
-                    <div class="definition">
-                        <strong>🔹 تعريف الشكل الرباعي الدائري:</strong> هو شكل رباعي رؤوسه الأربعة تقع على دائرة واحدة (يمكن إدراجه في دائرة).
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 خواص الشكل الرباعي الدائري:</strong>
-                        <ul>
-                            <li><strong>الخاصية الأساسية:</strong> مجموع كل زاويتين متقابلتين = ١٨٠°</li>
-                            <li><strong>الخاصية الثانية:</strong> الزاوية الخارجية = الزاوية الداخلية المقابلة لها</li>
-                            <li><strong>الخاصية الثالثة:</strong> الزوايا المتساوية تقابل أقواساً متساوية</li>
-                        </ul>
-                    </div>
-
-                    <div class="properties">
-                        <strong>📌 شروط كون الشكل الرباعي دائرياً:</strong>
-                        <ul>
-                            <li>إذا كان مجموع زاويتين متقابلتين = ١٨٠°</li>
-                            <li>إذا كانت الزاوية الخارجية = الزاوية الداخلية المقابلة</li>
-                            <li>المستطيل والمربع دائريان دائماً</li>
-                            <li>شبه المنحرف المتساوي الساقين دائري</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> ABCD شكل رباعي دائري، إذا كان ∠A = ٧٠°، ∠B = ١١٠°. أوجد ∠C و ∠D.<br>
-                        <strong>الحل:</strong><br>
-                        ∠A + ∠C = ١٨٠ → ٧٠ + ∠C = ١٨٠ → ∠C = ١١٠°<br>
-                        ∠B + ∠D = ١٨٠ → ١١٠ + ∠D = ١٨٠ → ∠D = ٧٠°
-                    </div>
-
-                    <div class="questions-section">
-                        <div class="question-item">
-                            <p>١) في الشكل الرباعي الدائري ABCD، إذا كان ∠A = ٨٥°، ∠B = ٩٥°. أوجد ∠C و ∠D.</p>
-                            <button class="show-answer-btn" onclick="toggleAnswer(this)">عرض الحل</button>
-                            <div class="answer">
-                                <strong>الحل:</strong><br>
-                                ∠C = ١٨٠ - ٨٥ = ٩٥°<br>
-                                ∠D = ١٨٠ - ٩٥ = ٨٥°
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- الوحدة الخامسة: التماس -->
-            <div class="unit">
-                <h3>📐 الوحدة الخامسة: التماس</h3>
-                
-                <div class="lesson">
-                    <h5>نظريات التماس</h5>
-                    
-                    <div class="properties">
-                        <ul>
-                            <li><strong>نظرية ١:</strong> المماس عمودي على نصف القطر عند نقطة التماس</li>
-                            <li><strong>نظرية ٢:</strong> إذا كان مستقيم عمودياً على نصف قطر عند نهايته، فهو مماس للدائرة</li>
-                            <li><strong>نظرية ٣:</strong> من نقطة خارج الدائرة يمكن رسم مماسين للدائرة</li>
-                            <li><strong>نظرية ٤:</strong> طولا المماسين المرسومين من نقطة خارجية إلى دائرة متساويان</li>
-                            <li><strong>نظرية ٥:</strong> الزاوية المماسية = الزاوية المحيطية المشتركة معها في القوس البديل</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> من نقطة خارج دائرة بعدها عن المركز ١٣ سم، رسم مماس للدائرة طوله ١٢ سم. أوجد طول نصف قطر الدائرة.<br>
-                        <strong>الحل:</strong> المماس عمودي على نصف القطر، إذن المثلث قائم الزاوية.<br>
-                        نق² + ١٢² = ١٣²<br>
-                        نق² + ١٤٤ = ١٦٩<br>
-                        نق² = ٢٥<br>
-                        نق = ٥ سم
-                    </div>
-                </div>
-            </div>
-
-            <!-- الوحدة السادسة: العلاقات بين الدوائر -->
-            <div class="unit">
-                <h3>📐 الوحدة السادسة: العلاقات بين الدوائر</h3>
-                
-                <div class="lesson">
-                    <h5>أوضاع دائرتين</h5>
-                    
-                    <div class="properties">
-                        <ul>
-                            <li><strong>دائرتان متباعدتان:</strong> المسافة بين المركزين > نق١ + نق٢</li>
-                            <li><strong>دائرتان متماستان خارجياً:</strong> المسافة بين المركزين = نق١ + نق٢</li>
-                            <li><strong>دائرتان متقاطعتان:</strong> |نق١ - نق٢| < المسافة < نق١ + نق٢</li>
-                            <li><strong>دائرتان متماستان داخلياً:</strong> المسافة بين المركزين = |نق١ - نق٢|</li>
-                            <li><strong>إحداهما داخل الأخرى:</strong> المسافة بين المركزين < |نق١ - نق٢|</li>
-                            <li><strong>دائرتان متحدتا المركز:</strong> المسافة بين المركزين = ٠</li>
-                        </ul>
-                    </div>
-
-                    <div class="example">
-                        <strong>✏️ مثال:</strong> دائرتان طولا نصفي قطريهما ٥ سم، ٣ سم. أوجد المسافة بين مركزيهما في الحالات التالية:
-                        <ul style="margin-top: 10px;">
-                            <li>متباعدتان: المسافة > ٨ سم</li>
-                            <li>متماستان خارجياً: المسافة = ٨ سم</li>
-                            <li>متقاطعتان: ٢ < المسافة < ٨</li>
-                            <li>متماستان داخلياً: المسافة = ٢ سم</li>
-                            <li>إحداهما داخل الأخرى: المسافة < ٢ سم</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="achievement-item">
+                <i class="fas fa-trophy"></i>
+                <span>معتمدة من وزارة التربية</span>
             </div>
         </div>
     </div>
 
-    <script>
-        // Switch between tabs
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
-
-        // Toggle answer visibility
-        function toggleAnswer(button) {
-            const answerDiv = button.nextElementSibling;
-            answerDiv.classList.toggle('show');
-            
-            if (answerDiv.classList.contains('show')) {
-                button.textContent = 'إخفاء الحل';
-            } else {
-                button.textContent = 'عرض الحل';
-            }
-        }
-
-        // Initialize - show first tab
-        document.addEventListener('DOMContentLoaded', function() {
-            switchTab('algebra');
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

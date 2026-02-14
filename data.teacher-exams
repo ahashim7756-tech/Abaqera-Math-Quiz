@@ -1,0 +1,114 @@
+{
+  "exams": [
+    {
+      "id": "T001",
+      "title": "امتحان الجبر الشهر الأول",
+      "teacher": "أحمد محمد",
+      "subject": "algebra",
+      "type": "monthly",
+      "date": "2026-02-15",
+      "file": "exam_001.pdf",
+      "views": 154,
+      "downloads": 89
+    },
+    {
+      "id": "T002",
+      "title": "اختبار الهندسة الأسبوعي",
+      "teacher": "سارة علي",
+      "subject": "geometry",
+      "type": "weekly",
+      "date": "2026-02-10",
+      "file": "exam_002.pdf",
+      "views": 98,
+      "downloads": 67
+    },
+    {
+      "id": "T003",
+      "title": "نموذج محاكاة نصف العام",
+      "teacher": "محمود حسن",
+      "subject": "both",
+      "type": "model",
+      "date": "2026-02-05",
+      "file": "exam_003.pdf",
+      "views": 321,
+      "downloads": 245
+    },
+    {
+      "id": "T004",
+      "title": "امتحان الهندسة الشهر الثاني",
+      "teacher": "أحمد محمد",
+      "subject": "geometry",
+      "type": "monthly",
+      "date": "2026-03-01",
+      "file": "exam_004.pdf",
+      "views": 87,
+      "downloads": 54
+    },
+    {
+      "id": "T005",
+      "title": "اختبار الجبر الأسبوعي (النسبة والتناسب)",
+      "teacher": "سارة علي",
+      "subject": "algebra",
+      "type": "weekly",
+      "date": "2026-03-05",
+      "file": "exam_005.pdf",
+      "views": 76,
+      "downloads": 43
+    },
+    {
+      "id": "T006",
+      "title": "امتحان نهاية الفصل التجريبي",
+      "teacher": "محمود حسن",
+      "subject": "both",
+      "type": "final",
+      "date": "2026-03-10",
+      "file": "exam_006.pdf",
+      "views": 412,
+      "downloads": 367
+    },
+    {
+      "id": "T007",
+      "title": "مراجعة ليلة الامتحان - جبر",
+      "teacher": "أحمد محمد",
+      "subject": "algebra",
+      "type": "review",
+      "date": "2026-03-15",
+      "file": "exam_007.pdf",
+      "views": 567,
+      "downloads": 489
+    },
+    {
+      "id": "T008",
+      "title": "مراجعة ليلة الامتحان - هندسة",
+      "teacher": "سارة علي",
+      "subject": "geometry",
+      "type": "review",
+      "date": "2026-03-16",
+      "file": "exam_008.pdf",
+      "views": 543,
+      "downloads": 478
+    },
+    {
+      "id": "T009",
+      "title": "امتحان محافظة القاهرة ٢٠٢٥",
+      "teacher": "محمود حسن",
+      "subject": "both",
+      "type": "past",
+      "date": "2026-03-20",
+      "file": "exam_009.pdf",
+      "views": 892,
+      "downloads": 756
+    },
+    {
+      "id": "T010",
+      "title": "امتحان محافظة الجيزة ٢٠٢٥",
+      "teacher": "أحمد محمد",
+      "subject": "both",
+      "type": "past",
+      "date": "2026-03-22",
+      "file": "exam_010.pdf",
+      "views": 845,
+      "downloads": 712
+    }
+  ]
+}
